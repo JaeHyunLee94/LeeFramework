@@ -6,3 +6,4 @@
 3. namespace??
 4. fetch content Eigen!!, assimp
 5. scene class??
+6. frame 짜 놨으면 branch 파서 할 것 ***
