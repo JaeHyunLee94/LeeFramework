@@ -7,7 +7,7 @@
 
 
 class Renderer {
-
+//TODO: all the responsible class for rendering. the most big class
 };
 
 

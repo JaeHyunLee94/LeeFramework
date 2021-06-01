@@ -1,0 +1,8 @@
+
+프로젝트의 목적의식부터 확립할것!!
+
+1. 프로젝트의 목적: LCP 를 공부하기 위해 position based rigid body engine
+2. rendering 부터 하기!  일단 뭐든 눈에 보여야 한다.
+3. namespace??
+4. fetch content Eigen!!, assimp
+5. scene class??
