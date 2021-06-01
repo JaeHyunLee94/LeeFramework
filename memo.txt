@@ -3,6 +3,8 @@
 
 ** 프로젝트의 목적: LCP 를 공부하기 위해 position based rigid body engine **
 
+
+2021/06/02
 1. rendering 부터 하기!  일단 뭐든 눈에 보여야 한다.
 2. namespace??
 3. fetch content Eigen!!, assimp
