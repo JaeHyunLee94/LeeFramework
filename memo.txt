@@ -11,3 +11,11 @@
 4. scene class??
 5. frame 짜 놨으면 branch 파서 할 것 ***
 6. phyengine 을 상속 받을까?
+7. unit test 를 아주 빠르게 만들었으면 좋겠어
+
+
+
+6월 첫째주까지 할 일
+
+1. renderer class 완성해서 화면부터 띄우기
+2. 각 third party 들 결합

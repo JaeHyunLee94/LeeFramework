@@ -3,3 +3,28 @@
 //
 
 #include "Shader.hpp"
+
+void Shader::use() {
+
+}
+
+Shader::Shader(std::string vtshader_path, std::string fgshader_path) {
+
+}
+
+int Shader::getProgramID() {
+    return 0;
+}
+
+
+int Shader::compile() {
+    return 0;
+}
+
+Shader::~Shader() {
+
+}
+
+int Shader::loadSource() {
+    return 0;
+}
