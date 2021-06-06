@@ -12,6 +12,7 @@
 5. frame 짜 놨으면 branch 파서 할 것 ***
 6. phyengine 을 상속 받을까?
 7. unit test 를 아주 빠르게 만들었으면 좋겠어
+8. git submodule 로 쉽게 할 수 있지 않을까?
 
 
 
