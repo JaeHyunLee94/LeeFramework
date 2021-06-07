@@ -20,3 +20,5 @@
 
 1. renderer class 완성해서 화면부터 띄우기
 2. 각 third party 들 결합
+
+6월 8일 드디어 third party 결함 성공!!! 좀 ㅄ같이 하긴했지만 어쨋든 성공 ㅅㅅ

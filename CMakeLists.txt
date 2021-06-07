@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.10)
 project(
         leeFramework
         VERSION 0.0
         DESCRIPTION "physics Engine project"
-        LANGUAGES CXX
+        LANGUAGES CXX C
 )
 
 set(CMAKE_CXX_STANDARD 14)
@@ -13,10 +13,12 @@ message("Processing top level CMakeLists.txt")
 
 find_package(OpenGL REQUIRED)
 
+include_directories(${OPENGL_INCLUDE_DIR}  ${GLUT_INCLUDE_DIRS})
+
 set(CMAKE_MODULE_PATH
+
         ${CMAKE_MODULE_PATH};
         ${CMAKE_SOURCE_DIR}/external/glfw/CMake;
-
         )
 
 ### GLFW
@@ -29,8 +31,8 @@ include_directories(${PROJECT_SOURCE_DIR}/external/glfw/include)
 
 #### GLEW
 #message("processing GLEW...")
-#include_directories(${PROJECT_SOURCE_DIR}/external/glew/include)
-#link_directories(${PROJECT_SOURCE_DIR}/external/glew/lib)
+include_directories(${PROJECT_SOURCE_DIR}/external/glew/include)
+link_directories(${PROJECT_SOURCE_DIR}/external/glew/lib)
 
 include_directories(${PROJECT_SOURCE_DIR}/external/GLAD/include)
 link_directories(${PROJECT_SOURCE_DIR}/external/GLAD/lib)
@@ -51,8 +53,10 @@ file(GLOB imgui_src  "src/Renderer/imgui/*.cpp" "src/Renderer/imgui/*.h")
 
 
 ## add target
-add_executable(leeFramework src/sampleScene.cpp src/Handler/Handler.cpp src/Handler/Handler.hpp src/Mesh/Mesh.cpp src/Mesh/Mesh.hpp src/Renderer/Shader.cpp src/Renderer/Shader.hpp src/Renderer/Light.cpp src/Renderer/Light.hpp src/utils/mathUtils.cpp src/utils/debugUtils.cpp ${imgui_src})
+add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} "external/glew/include/GL/glew.c" "external/glew/include/GL/glew.h")
 #add_executable(leeFramework ${helloworld_SRC})
 target_link_libraries(leeFramework ${OPENGL_LIBRARIES})
+#target_link_libraries(leeFramework${GLUT_LIBRARIES})
 target_link_libraries(leeFramework glfw ${GLFW_LIBRARIES})
-target_link_libraries(leeFramework libglad_lib.dylib)
+
+
