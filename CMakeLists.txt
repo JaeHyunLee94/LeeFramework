@@ -34,8 +34,6 @@ include_directories(${PROJECT_SOURCE_DIR}/external/glfw/include)
 include_directories(${PROJECT_SOURCE_DIR}/external/glew/include)
 link_directories(${PROJECT_SOURCE_DIR}/external/glew/lib)
 
-include_directories(${PROJECT_SOURCE_DIR}/external/GLAD/include)
-link_directories(${PROJECT_SOURCE_DIR}/external/GLAD/lib)
 
 ### glm
 message("include glm..")
