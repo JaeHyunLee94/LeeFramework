@@ -12,13 +12,12 @@ message("Processing top level CMakeLists.txt")
 
 
 find_package(OpenGL REQUIRED)
-
 include_directories(${OPENGL_INCLUDE_DIR}  ${GLUT_INCLUDE_DIRS})
 
 set(CMAKE_MODULE_PATH
-
         ${CMAKE_MODULE_PATH};
         ${CMAKE_SOURCE_DIR}/external/glfw/CMake;
+        ${CMAKE_SOURCE_DIR}/external/assimp/cmake-modules;
         )
 
 ### GLFW
@@ -30,9 +29,10 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 include_directories(${PROJECT_SOURCE_DIR}/external/glfw/include)
 
 #### GLEW
-#message("processing GLEW...")
+message("processing GLEW...")
+file(GLOB glew_src  "external/glew/include/GL/glew.h" "external/glew/include/GL/glew.c")
 include_directories(${PROJECT_SOURCE_DIR}/external/glew/include)
-link_directories(${PROJECT_SOURCE_DIR}/external/glew/lib)
+
 
 
 ### glm
@@ -45,16 +45,28 @@ include_directories(${PROJECT_SOURCE_DIR}/external/eigen-3.3.9/)
 
 
 ### imgui library
+file(GLOB imgui_src  "external/imgui/include/imgui/*.cpp" "external/imgui/include/imgui/*.h")
+include_directories(external/imgui/include)
 
-#find_package(imgui REQUIRED)
-file(GLOB imgui_src  "src/Renderer/imgui/*.cpp" "src/Renderer/imgui/*.h")
+
+### assimp
+message("Processing assimp")
+#find_package(ASSIMP REQUIRED)
+#if(ASSIMP_FOUND)
+#    message("assimp found")
+#    include_directories(${ASSIMP_INCLUDE_DIR})
+#endif()
+set(ASSIMP_BUILD_TESTS OFF)
+add_subdirectory("${PROJECT_SOURCE_DIR}/external/assimp")
+include_directories(${PROJECT_SOURCE_DIR}/external/assimp/include)
 
 
 ## add target
-add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} "external/glew/include/GL/glew.c" "external/glew/include/GL/glew.h")
-#add_executable(leeFramework ${helloworld_SRC})
+add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} src/Mesh/MeshIO.cpp src/Mesh/MeshIO.hpp src/Renderer/GUIwrapper.cpp src/Renderer/GUIwrapper.hpp)
+
 target_link_libraries(leeFramework ${OPENGL_LIBRARIES})
-#target_link_libraries(leeFramework${GLUT_LIBRARIES})
 target_link_libraries(leeFramework glfw ${GLFW_LIBRARIES})
+target_link_libraries(leeFramework ${ASSIMP_LIBRARIES})
+
 
 
