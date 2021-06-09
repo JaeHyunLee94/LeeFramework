@@ -28,3 +28,7 @@
 renderer class 작성중 --> cube로 시험 해볼것!!
 camera class 받는게 꽤 어려울수도 있음
 unit test 추가할것
+
+
+6월 10일 일단 임시적으로 shader class 작성 완료
+이제 unit test 로 시험해봐야함

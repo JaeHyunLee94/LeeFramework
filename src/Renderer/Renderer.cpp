@@ -3,3 +3,15 @@
 //
 
 #include "Renderer.hpp"
+
+Camera *Renderer::getCamera() {
+    return nullptr;
+}
+
+void Renderer::addEntity() {
+
+}
+
+void Renderer::render() {
+
+}
