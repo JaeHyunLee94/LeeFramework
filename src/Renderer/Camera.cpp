@@ -20,7 +20,8 @@ void Camera::rotatePitch(float dt) {
 
 }
 
-Camera::Camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up, float fovy, float aspect, float z_near,
-               float z_far) {
+void Camera::logCameraProperty() {
 
 }
+
+

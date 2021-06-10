@@ -13,14 +13,18 @@ class Renderer {
 //TODO: all the responsible class for rendering. the most big class
 public:
     Camera* getCamera();
+    Light* getLight();
     void addEntity();
     void render();
 
 private:
 
-    Camera camera_; //TODO: camera can be many?
-    Light light;
-    Shader shader;
+    Camera m_camera_; //TODO: camera can be many?
+    Light m_light;
+    Shader m_shader;
+
+    glm::vec3 m_default_color;
+
 
 
 
