@@ -32,3 +32,7 @@ unit test 추가할것
 
 6월 10일 일단 임시적으로 shader class 작성 완료
 이제 unit test 로 시험해봐야함
+
+6월 11일 연구실 빌드 성공!!
+amd, intel 에 따라 configuration 바꾸기!!
+
