@@ -58,7 +58,7 @@ message("Processing assimp")
 #    message("assimp found")
 #    include_directories(${ASSIMP_INCLUDE_DIR})
 #endif()
-set(ASSIMP_BUILD_TESTS OFF)
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "ASSIMP_BUILD_TESTS")
 add_subdirectory("${PROJECT_SOURCE_DIR}/external/assimp")
 include_directories(${PROJECT_SOURCE_DIR}/external/assimp/include)
 ###############
@@ -74,7 +74,6 @@ file(GLOB all_src  "src/Renderer/*.cpp" "src/Renderer/*.hpp")
 
 ## add target
 add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} ${all_src} test/CameraTest.cpp)
-
 target_link_libraries(leeFramework ${OPENGL_LIBRARIES})
 target_link_libraries(leeFramework glfw ${GLFW_LIBRARIES})
 target_link_libraries(leeFramework ${ASSIMP_LIBRARIES})
