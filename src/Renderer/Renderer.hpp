@@ -8,7 +8,7 @@
 #include "Camera.hpp"
 #include "Light.hpp"
 #include "Shader.hpp"
-
+#include "GUIwrapper.hpp"
 class Renderer {
 //TODO: all the responsible class for rendering. the most big class
 //TODO: made by java builder pattern
@@ -40,8 +40,17 @@ class RendererBuilder{
 public:
     RendererBuilder();//essential?
     RendererBuilder& camera(Camera camera);
+    RendererBuilder& light(Light light);
     RendererBuilder& gui();
     Renderer& build();
+
+
+    //TODO: essential member
+private:
+    Camera* m_camera;
+    Light* m_light;
+    GUIwrapper* m_gui;
+
 
 
 };

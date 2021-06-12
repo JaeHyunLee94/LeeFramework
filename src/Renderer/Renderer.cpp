@@ -26,3 +26,22 @@ Renderer::Renderer() {
 }
 
 
+RendererBuilder &RendererBuilder::camera(Camera camera) {
+    return *this;
+}
+
+RendererBuilder &RendererBuilder::gui() {
+    return *this;
+}
+
+RendererBuilder::RendererBuilder() {
+
+}
+
+Renderer &RendererBuilder::build() {
+    return <#initializer#>;
+}
+
+RendererBuilder &RendererBuilder::light(Light light) {
+    return <#initializer#>;
+}
