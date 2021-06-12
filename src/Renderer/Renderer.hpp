@@ -11,6 +11,7 @@
 
 class Renderer {
 //TODO: all the responsible class for rendering. the most big class
+//TODO: made by java builder pattern
 public:
 
     Camera* getCamera();
