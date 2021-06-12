@@ -15,3 +15,14 @@ void Renderer::addEntity() {
 void Renderer::render() {
 
 }
+
+
+void Renderer::init() {
+
+}
+
+Renderer::Renderer() {
+
+}
+
+
