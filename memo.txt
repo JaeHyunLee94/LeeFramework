@@ -36,3 +36,11 @@ unit test 추가할것
 6월 11일 연구실 빌드 성공!!
 amd, intel 에 따라 configuration 바꾸기!!
 
+6월 14일
+renderer class 를 빌더로 만들기
+마음 급하게 먹지 말고 하나하나 추가하기
+
+assert : 에러를 코드로 처리할 방법이 없을때
+static_assert : 컴파일 타임에 알수있는 변수들 assert 로 확인
+try catch : 에러를 코드로 충분이 처리할수있을때
+
