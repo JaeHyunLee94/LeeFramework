@@ -9,48 +9,62 @@
 #include "Light.hpp"
 #include "Shader.hpp"
 #include "GUIwrapper.hpp"
+#include <GL/glew.h>
+
+#include <GLFW/glfw3.h>
+
 class Renderer {
 //TODO: all the responsible class for rendering. the most big class
 //TODO: made by java builder pattern
 public:
 
-    Camera* getCamera();
-    void init();
+
+    class Builder {
+
+    public:
+        friend class Renderer;
+
+        Builder();//essential?
+        Builder &camera(Camera camera); // TODO: need camera explicitly?
+
+        Builder &light(Light light);
+
+        Builder &gui();
+
+        Builder &init();
+
+        Renderer *build();
+
+
+        //TODO: essential member
+    private:
+        Camera *m_builder_camera;
+        Light *m_builder_light;
+        GUIwrapper *m_builder_gui;
+        GLFWwindow *m_builder_window;
+
+
+
+    };
+
+
+
+
+    Camera *getCamera();
+    Light  *getLight();
+
     void addEntity();
+
     void render();
 
 
-
 private:
-    friend class RendererBuilder;
-    Renderer();
-    Camera* m_camera_; //TODO: camera can be many?
-    Shader* m_shader;
 
+    explicit Renderer(const Builder& builder);
+    Camera *m_camera_; //TODO: camera can be many?
+    Shader *m_shader;
+    GLFWwindow* m_window;
     glm::vec3 m_default_color;
-
-
-
-
-
-
-};
-class RendererBuilder{
-
-public:
-    RendererBuilder();//essential?
-    RendererBuilder& camera(Camera camera);
-    RendererBuilder& light(Light light);
-    RendererBuilder& gui();
-    Renderer& build();
-
-
-    //TODO: essential member
-private:
-    Camera* m_camera;
-    Light* m_light;
-    GUIwrapper* m_gui;
-
 
 
 };
