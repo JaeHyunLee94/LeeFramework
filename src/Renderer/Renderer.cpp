@@ -3,7 +3,8 @@
 //
 
 #include "Renderer.hpp"
-
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 Camera *Renderer::getCamera() {
     return nullptr;
 }
@@ -14,21 +15,30 @@ void Renderer::addEntity() {
 
 void Renderer::render() {
 
+    while (!glfwWindowShouldClose(m_window))
+    {
+
+
+
+        int display_w, display_h;
+        glfwGetFramebufferSize(m_window, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
+        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+
+        glfwSwapBuffers(m_window);
+    }
 }
 
 
-Renderer::Renderer(const Renderer::Builder &builder) {
 
-}
 
 Light *Renderer::getLight() {
     return nullptr;
 }
 
 
-Renderer::Builder::Builder() {
-
-}
 
 Renderer::Builder &Renderer::Builder::camera(Camera camera) {
 
@@ -45,13 +55,20 @@ Renderer::Builder &Renderer::Builder::gui() {
 
 Renderer *Renderer::Builder::build() {
 
-    return new Renderer(*this);
+    m_renderer=new Renderer(*this);
+
+
+    return m_renderer;
 }
 
 Renderer::Builder &Renderer::Builder::init() {
 
 
-    glfwInit(); //TODO: if statement add or try catch
+
+    m_is_glfw_init=glfwInit(); //TODO: if statement add or try catch
+    if(!m_is_glfw_init)
+        std::cout << "glfw init failed\n";
+
 
 #if defined(__APPLE__)
     // GL 3.2 + GLSL 150
@@ -83,7 +100,7 @@ Renderer::Builder &Renderer::Builder::init() {
 
     if (err) {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
-
+        m_is_glew_init=false;
     }
 
 

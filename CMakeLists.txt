@@ -74,9 +74,14 @@ file(GLOB all_src  "src/Renderer/*.cpp" "src/Renderer/*.hpp")
 
 ## add target
 add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} ${all_src} test/CameraTest.cpp src/Mesh/PrimitiveMesh.cpp src/Mesh/PrimitiveMesh.hpp)
+add_executable(sampleScene2 src/sampleScene2.cpp  ${glew_src} ${all_src})
 target_link_libraries(leeFramework ${OPENGL_LIBRARIES})
 target_link_libraries(leeFramework glfw ${GLFW_LIBRARIES})
 target_link_libraries(leeFramework ${ASSIMP_LIBRARIES})
+
+target_link_libraries(sampleScene2 ${OPENGL_LIBRARIES})
+target_link_libraries(sampleScene2 glfw ${GLFW_LIBRARIES})
+target_link_libraries(sampleScene2 ${ASSIMP_LIBRARIES})
 
 
 
