@@ -12,8 +12,8 @@
 class Shader {
 
 public:
-    Shader(const char* vt_shader_path, const char* fg_shader_path)
-             : m_is_source_loaded(false), m_is_source_compiled(false), m_is_program_made(false) {
+    Shader(const char *vt_shader_path, const char *fg_shader_path)
+            : m_is_source_loaded(false), m_is_source_compiled(false), m_is_program_made(false) {
         m_vertex_shader_path = vt_shader_path;
         m_fragment_shader_path = fg_shader_path;
 
@@ -25,7 +25,7 @@ public:
         this->m_is_program_made = makeProgram();
     };
 
-    ~Shader(){glDeleteProgram(m_program_id);};
+    ~Shader() { glDeleteProgram(m_program_id); };
 
 
     //public method

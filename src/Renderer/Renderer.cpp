@@ -5,8 +5,10 @@
 #include "Renderer.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-Camera *Renderer::getCamera() {
-    return nullptr;
+
+
+Camera &Renderer::getCamera() {
+    return *m_camera;
 }
 
 void Renderer::addEntity() {
@@ -15,33 +17,37 @@ void Renderer::addEntity() {
 
 void Renderer::render() {
 
-    while (!glfwWindowShouldClose(m_window))
-    {
-
-
-
+    while (!glfwWindowShouldClose(m_window)) {
+        glfwPollEvents();
         int display_w, display_h;
         glfwGetFramebufferSize(m_window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
         glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
         glClear(GL_COLOR_BUFFER_BIT);
-
-
         glfwSwapBuffers(m_window);
     }
 }
 
 
+Light &Renderer::getLight() {
+    return *m_light;
+}
 
-
-Light *Renderer::getLight() {
-    return nullptr;
+Shader &Renderer::getShader() {
+    return *m_shader;
 }
 
 
+Renderer::Builder &Renderer::Builder::camera(glm::vec3 camera_pos,
+                                             glm::vec3 lookat,
+                                             glm::vec3 up,
+                                             float fovy,
+                                             float aspect,
+                                             float z_near,
+                                             float z_far,
+                                             float camera_speed = 1.0f) {
 
-Renderer::Builder &Renderer::Builder::camera(Camera camera) {
-
+    m_builder_camera = new Camera(camera_pos, lookat, up, fovy, aspect, z_near, z_far, camera_speed);
     return *this;
 }
 
@@ -55,7 +61,7 @@ Renderer::Builder &Renderer::Builder::gui() {
 
 Renderer *Renderer::Builder::build() {
 
-    m_renderer=new Renderer(*this);
+    m_renderer = new Renderer(*this);
 
 
     return m_renderer;
@@ -63,10 +69,10 @@ Renderer *Renderer::Builder::build() {
 
 Renderer::Builder &Renderer::Builder::init() {
 
+#define GLEW_STATIC
 
-
-    m_is_glfw_init=glfwInit(); //TODO: if statement add or try catch
-    if(!m_is_glfw_init)
+    m_is_glfw_init = glfwInit(); //TODO: if statement add or try catch ??
+    if (!m_is_glfw_init)
         std::cout << "glfw init failed\n";
 
 
@@ -88,7 +94,9 @@ Renderer::Builder &Renderer::Builder::init() {
 
     // Create window with graphics context
     m_builder_window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
-    if (m_builder_window == NULL){}
+    if (m_builder_window == nullptr) {
+        std::cout << "window creation failed\n";
+    }
 
     glfwMakeContextCurrent(m_builder_window);
     glfwSwapInterval(1); // Enable vsync
@@ -100,10 +108,16 @@ Renderer::Builder &Renderer::Builder::init() {
 
     if (err) {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
-        m_is_glew_init=false;
+        m_is_glew_init = false;
     }
 
 
+    return *this;
+}
+
+Renderer::Builder &Renderer::Builder::shader(const char *vt_shader_path, const char *fg_shader_path) {
+    m_builder_shader = new Shader(vt_shader_path, fg_shader_path);
+    m_builder_shader->use();
     return *this;
 }
 

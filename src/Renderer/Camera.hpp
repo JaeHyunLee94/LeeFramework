@@ -11,7 +11,7 @@
 class Camera {
 
 public:
-    Camera(){};
+    //TODO: GenPD code reference 할것
     Camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up, float fovy, float aspect, float z_near, float z_far,
            float camera_speed) :
             m_camera_pos(camera_pos), m_camera_up(up), m_fovy(fovy), m_aspect(aspect), m_z_near(z_near), m_z_far(z_far),
@@ -34,7 +34,8 @@ public:
     inline void setCameraSpeed(float speed) { this->m_camera_speed = speed; };
 
     void logCameraProperty();
-    int sum(int a ,int b ){return a+b;}; // for google test
+
+    int sum(int a, int b) { return a + b; }; // for google test
 
 private:
 

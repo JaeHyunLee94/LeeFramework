@@ -15,7 +15,7 @@ void Shader::use() {
 
 
 GLuint Shader::getProgramID() {
-    return 0;
+    return m_program_id;
 }
 
 
