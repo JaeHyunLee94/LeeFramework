@@ -24,9 +24,9 @@ public:
         friend class Renderer;
 
         Builder() {};// TODO: essential parameter
-        Builder &camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up, float fovy, float aspect, float z_near,
-                        float z_far,
-                        float camera_speed); // TODO: need camera explicitly?
+        Builder &camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up={0.,1.,0.}, float fovy=45, float aspect=1, float z_near=0.1,
+                        float z_far=1000,
+                        float camera_speed=0.1); // TODO: need camera explicitly?
 
         Builder &light(Light light);
 
@@ -61,7 +61,7 @@ public:
         delete m_shader;
         glfwTerminate();
     }
-
+    GLFWwindow* getWindow();
     Camera& getCamera();
     Shader& getShader();
     Light& getLight();

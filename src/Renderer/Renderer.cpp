@@ -12,7 +12,7 @@ Camera &Renderer::getCamera() {
 }
 
 void Renderer::addEntity() {
-
+//TODO: add entity
 }
 
 void Renderer::render() {
@@ -37,6 +37,10 @@ Shader &Renderer::getShader() {
     return *m_shader;
 }
 
+GLFWwindow *Renderer::getWindow() {
+    return m_window;
+}
+
 
 Renderer::Builder &Renderer::Builder::camera(glm::vec3 camera_pos,
                                              glm::vec3 lookat,
@@ -45,7 +49,7 @@ Renderer::Builder &Renderer::Builder::camera(glm::vec3 camera_pos,
                                              float aspect,
                                              float z_near,
                                              float z_far,
-                                             float camera_speed = 1.0f) {
+                                             float camera_speed) {
 
     m_builder_camera = new Camera(camera_pos, lookat, up, fovy, aspect, z_near, z_far, camera_speed);
     return *this;

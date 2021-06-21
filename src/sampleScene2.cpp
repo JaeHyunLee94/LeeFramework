@@ -10,8 +10,10 @@ int main() {
 
     Renderer *renderer = Renderer::Builder()
             .init()
+            .camera(glm::vec3(1., 1., 1.),glm::vec3(0))
             .build();
 
+    renderer->getCamera().logCameraProperty();
     renderer->render();
 
 }

@@ -51,3 +51,10 @@ rendering 오류 해결!! builder 에서 포인터들 인수인계만 확실히 
 delete : 소멸자 호출해주고 메모리 해제
 new : 힙에 할당, 생성자 호출, 타입 변환
 따라서 각 클래스는 소멸자에서 각 멤버의 pointer 변수에 대한 소멸자 호출 책임을 가진다.
+
+6월 22일
+
+제주도 휴가중
+
+Camera class 큰 오류 없이 구현 완료 한듯?
+Shader class 하고 sample object 구현 한 후 rendering 해보자
