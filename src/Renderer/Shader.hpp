@@ -4,37 +4,64 @@
 
 #ifndef LEEFRAMEWORK_SHADER_HPP
 #define LEEFRAMEWORK_SHADER_HPP
+
 #include <string>
+#include <GL/glew.h>
 
 
 class Shader {
-//TODO: int -> GLuint
 
 public:
-    Shader(std::string vtshader_path, std::string fgshader_path); //TODO: member initialization
-    ~Shader();
+    Shader(const char *vt_shader_path, const char *fg_shader_path)
+            : m_is_source_loaded(false), m_is_source_compiled(false), m_is_program_made(false) {
+        m_vertex_shader_path = vt_shader_path;
+        m_fragment_shader_path = fg_shader_path;
+
+        m_vertex_shader_id = glCreateShader(GL_VERTEX_SHADER);
+        m_fragment_shader_id = glCreateShader(GL_FRAGMENT_SHADER);
+
+        this->m_is_source_loaded = loadSource();
+        this->m_is_source_compiled = compile();
+        this->m_is_program_made = makeProgram();
+    };
+
+    ~Shader() { glDeleteProgram(m_program_id); };
+
+
+    //public method
     void use();
-    int getProgramID();
+
+    GLuint getProgramID();
 
 
 private:
     //glsl file path
-    std::string vertex_shader_path;
-    std::string fragment_shader_path;
+
+    std::string m_vertex_shader_path;
+    std::string m_fragment_shader_path;
 
     //shader code in string form
-    std::string vertex_shader_code;
-    std::string fragment_shader_code;
+    std::string m_vertex_shader_code;
+    std::string m_fragment_shader_code;
 
-    int program_id;
-    int fragment_shader_id;
-    int vertex_shader_id;
+    GLuint m_program_id;
+    GLuint m_fragment_shader_id;
+    GLuint m_vertex_shader_id;
 
+    bool m_is_source_loaded;
+    bool m_is_source_compiled;
+    bool m_is_program_made;
+
+
+    //for initilaze shader
     int loadSource();
+
     int compile();
 
+    int makeProgram();
 
-
+    //TODO: set Uniform and texture
+    int setUniform();
 };
 
 

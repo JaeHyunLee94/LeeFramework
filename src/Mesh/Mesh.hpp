@@ -9,7 +9,7 @@
 class Mesh {
 // TODO: builder class
 // TODO: basic primitive build (boundary), mesh io obj file
-
+//TODO: mesh's renderable interface??
 public:
 
 private:

@@ -28,3 +28,26 @@
 renderer class 작성중 --> cube로 시험 해볼것!!
 camera class 받는게 꽤 어려울수도 있음
 unit test 추가할것
+
+
+6월 10일 일단 임시적으로 shader class 작성 완료
+이제 unit test 로 시험해봐야함
+
+6월 11일 연구실 빌드 성공!!
+amd, intel 에 따라 configuration 바꾸기!!
+
+6월 14일
+renderer class 를 빌더로 만들기
+마음 급하게 먹지 말고 하나하나 추가하기
+
+assert : 에러를 코드로 처리할 방법이 없을때
+static_assert : 컴파일 타임에 알수있는 변수들 assert 로 확인
+try catch : 에러를 코드로 충분이 처리할수있을때
+
+
+6월 17일
+
+rendering 오류 해결!! builder 에서 포인터들 인수인계만 확실히 할것!!
+delete : 소멸자 호출해주고 메모리 해제
+new : 힙에 할당, 생성자 호출, 타입 변환
+따라서 각 클래스는 소멸자에서 각 멤버의 pointer 변수에 대한 소멸자 호출 책임을 가진다.

@@ -49,24 +49,37 @@ file(GLOB imgui_src  "external/imgui/include/imgui/*.cpp" "external/imgui/includ
 include_directories(external/imgui/include)
 
 
-### assimp
+### assimp ###
 message("Processing assimp")
 #find_package(ASSIMP REQUIRED)
 #if(ASSIMP_FOUND)
 #    message("assimp found")
 #    include_directories(${ASSIMP_INCLUDE_DIR})
 #endif()
-set(ASSIMP_BUILD_TESTS OFF)
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "ASSIMP_BUILD_TESTS")
 add_subdirectory("${PROJECT_SOURCE_DIR}/external/assimp")
 include_directories(${PROJECT_SOURCE_DIR}/external/assimp/include)
+###############
 
+### google test ###
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/googletest)
+include_directories(${gtest_SOURCE_DIR}/include)
+include_directories(${gmock_SOURCE_DIR}/include)
+#add_subdirectory(${PROJECT_SOURCE_DIR}/test)
+
+
+file(GLOB all_src  "src/Renderer/*.cpp" "src/Renderer/*.hpp")
 
 ## add target
-add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} src/Mesh/MeshIO.cpp src/Mesh/MeshIO.hpp src/Renderer/GUIwrapper.cpp src/Renderer/GUIwrapper.hpp)
-
+add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} ${all_src} test/CameraTest.cpp src/Mesh/PrimitiveMesh.cpp src/Mesh/PrimitiveMesh.hpp)
+add_executable(sampleScene2 src/sampleScene2.cpp  ${glew_src} ${all_src})
 target_link_libraries(leeFramework ${OPENGL_LIBRARIES})
 target_link_libraries(leeFramework glfw ${GLFW_LIBRARIES})
 target_link_libraries(leeFramework ${ASSIMP_LIBRARIES})
+
+target_link_libraries(sampleScene2 ${OPENGL_LIBRARIES})
+target_link_libraries(sampleScene2 glfw ${GLFW_LIBRARIES})
+target_link_libraries(sampleScene2 ${ASSIMP_LIBRARIES})
 
 
 
