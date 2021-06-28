@@ -65,6 +65,7 @@ Renderer::Builder &Renderer::Builder::gui() {
 
 Renderer *Renderer::Builder::build() {
 
+    //TODO: check essential component
     m_renderer = new Renderer(*this);
 
 
@@ -75,7 +76,7 @@ Renderer::Builder &Renderer::Builder::init() {
 
 #define GLEW_STATIC
 
-    m_is_glfw_init = glfwInit(); //TODO: if statement add or try catch ??
+    int m_is_glfw_init = glfwInit(); //TODO: if statement add or try catch ??
     if (!m_is_glfw_init)
         std::cout << "glfw init failed\n";
 
@@ -112,7 +113,6 @@ Renderer::Builder &Renderer::Builder::init() {
 
     if (err) {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
-        m_is_glew_init = false;
     }
 
 

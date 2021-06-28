@@ -8,6 +8,8 @@
 
 class GUIwrapper {
 
+    //TODO: keybboard input 과 mouse input 도 책임질것!!
+
 };
 
 

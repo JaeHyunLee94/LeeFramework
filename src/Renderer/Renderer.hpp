@@ -48,8 +48,6 @@ public:
         GUIwrapper *m_builder_gui = nullptr;
         GLFWwindow *m_builder_window = nullptr;
 
-        bool m_is_glfw_init;
-        bool m_is_glew_init;
 
 
     };
@@ -59,6 +57,7 @@ public:
         glfwDestroyWindow(m_window);
         delete m_camera; //TODO: 각 클래스는 클래스가 가진 pointer 형 변수에 대해 delete 의 책임을 가질것!!
         delete m_shader;
+        delete m_light;
         glfwTerminate();
     }
     GLFWwindow* getWindow();
@@ -76,6 +75,7 @@ private:
     explicit Renderer(const Builder &builder)
             : m_window(builder.m_builder_window), m_camera(builder.m_builder_camera),
               m_shader(builder.m_builder_shader) {
+        //TODO: check essential component
 
     };
     Camera *m_camera = nullptr; //TODO: camera can be many?
