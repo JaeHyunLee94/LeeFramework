@@ -58,3 +58,8 @@ new : 힙에 할당, 생성자 호출, 타입 변환
 
 Camera class 큰 오류 없이 구현 완료 한듯?
 Shader class 하고 sample object 구현 한 후 rendering 해보자
+
+6월 30일
+mesh 는 컴포넌트 패턴으로 짜는게 좋아보임
+1차 목표: sample cube 만든 다음에 renderer class  로 렌더링
+2차 목표: camera interaction
