@@ -4,33 +4,52 @@
 
 #ifndef LEEFRAMEWORK_MESH_HPP
 #define LEEFRAMEWORK_MESH_HPP
-#include <glm/glm.hpp>
 
+#include <vector>
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include "Texture.hpp"
 
 //TODO: enum mesh type
 
-
-class Mesh {
-//TODO: Component pattern? no inheritance!!
-// TODO: basic primitive build (boundary), mesh io obj file
-//TODO: mesh's renderable interface??
 enum MESH_TYPE{
     TRIANGULAR,
     TETRA
 };
+
 enum BASICS{
     CUBE,
     SPHERE,
     GROUND
 };
 
+class Mesh {
+//TODO: Component pattern? no inheritance!!
+// TODO: basic primitive build (boundary), mesh io obj file
+//TODO: mesh's renderable interface??
+
+
 public:
 
+    explicit Mesh(BASICS basic_mesh);
+    explicit Mesh(const char * mesh_path);
+
     //Physics
-    vector<glm::vec3> m_position;
-    vector<glm::vec3> m_velocity;
-    vector<glm::vec3> m_force;
-    vector<unsigned int>m_face_index;
+    std::vector<glm::vec3> m_velocity;
+    std::vector<glm::vec3> m_force;
+    glm::vec3 m_world_pos; //center of mass pos
+    glm::quat m_rot;
+
+
+    //rendering data
+    std::vector<glm::vec3> m_vertices;
+    std::vector<glm::vec3> m_normal;
+    std::vector<glm::vec2> m_uv;
+    std::vector<unsigned int>m_face_index;
+
+    bool m_has_Texture;
+    bool m_has_normal;
+
     //meta data
 
     unsigned int m_vectice_num;
@@ -41,7 +60,11 @@ public:
 
 
 private:
-
+    Texture* m_texture= nullptr;
+    void makeGround();
+    void makeCube();
+    void makeSphere();
+    void computeNormal();
 
 
 };
