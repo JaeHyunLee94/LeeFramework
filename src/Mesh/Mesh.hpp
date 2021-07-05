@@ -17,12 +17,6 @@ enum MESH_TYPE{
     TETRA
 };
 
-enum BASICS{
-    CUBE,
-    SPHERE,
-    GROUND
-};
-
 class Mesh {
 //TODO: Component pattern? no inheritance!!
 // TODO: basic primitive build (boundary), mesh io obj file
@@ -31,7 +25,7 @@ class Mesh {
 
 public:
 
-    explicit Mesh(BASICS basic_mesh);
+
     explicit Mesh(const char * mesh_path);
 
     //Physics
@@ -57,15 +51,9 @@ public:
     virtual void update();
 
 
-
-
 private:
     Texture* m_texture= nullptr;
-    void makeGround();
-    void makeCube();
-    void makeSphere();
     void computeNormal();
-
 
 };
 

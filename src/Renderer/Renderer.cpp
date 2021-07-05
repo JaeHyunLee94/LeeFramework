@@ -11,9 +11,6 @@ Camera &Renderer::getCamera() {
     return *m_camera;
 }
 
-void Renderer::addEntity() {
-//TODO: add entity
-}
 
 void Renderer::render() {
 
@@ -41,6 +38,11 @@ GLFWwindow *Renderer::getWindow() {
     return m_window;
 }
 
+void Renderer::addEntity(Mesh *mesh) {
+    //TODO: Map
+    m_entity_list.push_back(mesh);
+}
+
 
 Renderer::Builder &Renderer::Builder::camera(glm::vec3 camera_pos,
                                              glm::vec3 lookat,
@@ -55,7 +57,8 @@ Renderer::Builder &Renderer::Builder::camera(glm::vec3 camera_pos,
     return *this;
 }
 
-Renderer::Builder &Renderer::Builder::light(Light light) {
+Renderer::Builder &Renderer::Builder::light(const glm::vec3& src_pos,const glm::vec3& light_dir,const glm::vec3& diff_color,const glm::vec3& spec_color,const glm::vec3& amb_color) {
+    m_builder_light = new Light(src_pos,light_dir,diff_color,spec_color,amb_color);
     return *this;
 }
 

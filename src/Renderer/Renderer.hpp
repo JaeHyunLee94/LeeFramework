@@ -9,6 +9,7 @@
 #include "Light.hpp"
 #include "Shader.hpp"
 #include "GUIwrapper.hpp"
+#include "../Mesh/Mesh.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -23,12 +24,12 @@ public:
     public:
         friend class Renderer;
 
-        Builder() {};// TODO: essential parameter
+        Builder() = default;// TODO: essential parameter
         Builder &camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up={0.,1.,0.}, float fovy=45, float aspect=1, float z_near=0.1,
                         float z_far=1000,
                         float camera_speed=0.1); // TODO: need camera explicitly?
 
-        Builder &light(Light light);
+        Builder &light(const glm::vec3& src_pos,const glm::vec3& light_dir,const glm::vec3& diff_color,const glm::vec3& spec_color,const glm::vec3& amb_color);
 
         Builder &shader(const char *vt_shader_path, const char *fg_shader_path);
 
@@ -49,7 +50,6 @@ public:
         GLFWwindow *m_builder_window = nullptr;
 
 
-
     };
 
 
@@ -65,7 +65,7 @@ public:
     Shader& getShader();
     Light& getLight();
 
-    void addEntity();
+    void addEntity(Mesh* mesh);
 
     void render();
 
@@ -73,7 +73,7 @@ public:
 private:
 
     explicit Renderer(const Builder &builder)
-            : m_window(builder.m_builder_window), m_camera(builder.m_builder_camera),
+            : m_window(builder.m_builder_window), m_camera(builder.m_builder_camera),m_light(builder.m_builder_light),
               m_shader(builder.m_builder_shader) {
         //TODO: check essential component
 
@@ -84,6 +84,8 @@ private:
     GLFWwindow *m_window = nullptr;
     glm::vec3 m_default_color;
 
+    //TODO: better if this list can be map
+    std::vector<Mesh*> m_entity_list;
 
 };
 

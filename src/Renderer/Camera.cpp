@@ -35,7 +35,7 @@ void Camera::rotatePitch(float dt) {
 }
 
 void Camera::logCameraProperty() const {
-    printf("---------------------------------\n");
+    printf("--------------[Camera Property]-------------------\n");
     printf("camera Position: [%f,%f,%f]\n", m_camera_pos.x, m_camera_pos.y, m_camera_pos.z);
     printf("cameraFront vector: [%f,%f,%f]\n", m_camera_front.x, m_camera_front.y, m_camera_front.z);
     printf("cameraUp vector: [%f,%f,%f]\n", m_camera_up.x, m_camera_up.y, m_camera_up.z);
@@ -44,7 +44,7 @@ void Camera::logCameraProperty() const {
     printf("aspect: %f\n", m_aspect);
     printf("z_near: %f\n", m_z_near);
     printf("z_far: %f\n", m_z_far);
-    printf("---------------------------------\n");
+    printf("-------------------------------------------------------\n");
 }
 
 void Camera::updateViewMatrix() {
