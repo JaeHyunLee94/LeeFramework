@@ -77,7 +77,9 @@ private:
               m_shader(builder.m_builder_shader) {
         //TODO: check essential component
 
+
     };
+
     Camera *m_camera = nullptr; //TODO: camera can be many?
     Shader *m_shader = nullptr;
     Light *m_light= nullptr;
@@ -86,6 +88,9 @@ private:
 
     //TODO: better if this list can be map
     std::vector<Mesh*> m_entity_list;
+
+    //GLuint m_vao_id;
+
 
 };
 

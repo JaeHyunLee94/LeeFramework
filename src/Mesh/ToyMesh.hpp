@@ -15,8 +15,14 @@ enum TOY_MESH_TYPE{
 
 class Ground : public Mesh{
 
-public:TOY_MESH_TYPE m_toy_mesh_type;
+public:
+    Ground();
 
+    TOY_MESH_TYPE m_toy_mesh_type;
+
+
+private:
+    void init();
 
 
 };

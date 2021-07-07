@@ -28,6 +28,8 @@ public:
 
     explicit Mesh(const char * mesh_path);
 
+    MESH_TYPE m_mesh_type;
+
     //Physics
     std::vector<glm::vec3> m_velocity;
     std::vector<glm::vec3> m_force;
