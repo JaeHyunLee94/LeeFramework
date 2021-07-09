@@ -6,7 +6,7 @@
 #define LEEFRAMEWORK_LIGHT_HPP
 #include <GL/glew.h>
 #include <glm/glm.hpp>
-
+#include <cstdio>
 class Light {
 
 public:
