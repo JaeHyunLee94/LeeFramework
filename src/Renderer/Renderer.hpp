@@ -13,9 +13,14 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+struct VBO{
+    GLuint m_VBO;
+    GLuint m_EBO;
+};
+
 class Renderer {
 //TODO: all the responsible class for rendering. the most big class
-//TODO: made by java builder pattern
+// TODO: add renderable entity interface class
 public:
 
 
@@ -48,6 +53,7 @@ public:
         Light *m_builder_light = nullptr;
         GUIwrapper *m_builder_gui = nullptr;
         GLFWwindow *m_builder_window = nullptr;
+        GLuint m_builder_vao_id=0;
 
 
     };
@@ -74,7 +80,7 @@ private:
 
     explicit Renderer(const Builder &builder)
             : m_window(builder.m_builder_window), m_camera(builder.m_builder_camera),m_light(builder.m_builder_light),
-              m_shader(builder.m_builder_shader) {
+              m_shader(builder.m_builder_shader), m_vao_id(builder.m_builder_vao_id){
         //TODO: check essential component
 
 
@@ -86,10 +92,13 @@ private:
     GLFWwindow *m_window = nullptr;
     glm::vec3 m_default_color;
 
+
+
     //TODO: better if this list can be map
     std::vector<Mesh*> m_entity_list;
+    std::vector<VBO> m_vbo_list;
 
-    //GLuint m_vao_id;
+    GLuint m_vao_id;
 
 
 };

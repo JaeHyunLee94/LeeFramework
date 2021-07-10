@@ -38,7 +38,7 @@ amd, intel 에 따라 configuration 바꾸기!!
 
 6월 14일
 renderer class 를 빌더로 만들기
-마음 급하게 먹지 말고 하나하나 추가하기
+하나하나 추가하기
 
 assert : 에러를 코드로 처리할 방법이 없을때
 static_assert : 컴파일 타임에 알수있는 변수들 assert 로 확인
@@ -63,3 +63,7 @@ Shader class 하고 sample object 구현 한 후 rendering 해보자
 mesh 는 컴포넌트 패턴으로 짜는게 좋아보임
 1차 목표: sample cube 만든 다음에 renderer class  로 렌더링
 2차 목표: camera interaction
+
+7월 10일
+
+renderer 와 world 가 통신할 수 있는 renderable Entity class 설계하기: vbo,ebo 가짐

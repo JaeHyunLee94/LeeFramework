@@ -20,9 +20,31 @@ public:
 
     TOY_MESH_TYPE m_toy_mesh_type;
 
+    int m_length=100;
+    float sh=200.f;
+    glm::vec3 Ka{0.0f,0.0f,0.0f};
+    glm::vec3 Ks{0.8f,0.8f,0.8f};
+    glm::vec3 Ke{0.1f,0.1f,0.1f};
+
+    glm::vec3 m_black_color;
+    glm::vec3 m_white_color;
+
 
 private:
-    void init();
+
+
+
+};
+
+
+
+
+class Cube: public Mesh{
+
+    Cube() = default;
+
+    TOY_MESH_TYPE m_toy_mesh_type;
+
 
 
 };

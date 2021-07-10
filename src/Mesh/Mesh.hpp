@@ -17,6 +17,7 @@ enum MESH_TYPE{
     TETRA
 };
 
+
 class Mesh {
 //TODO: Component pattern? no inheritance!!
 // TODO: basic primitive build (boundary), mesh io obj file
@@ -25,32 +26,37 @@ class Mesh {
 
 public:
 
-
+    Mesh()= default;
     explicit Mesh(const char * mesh_path);
+
+
 
     MESH_TYPE m_mesh_type;
 
     //Physics
+    std::vector<glm::vec3> m_world_pos;
     std::vector<glm::vec3> m_velocity;
     std::vector<glm::vec3> m_force;
-    glm::vec3 m_world_pos; //center of mass pos
-    glm::quat m_rot;
+    //glm::vec3 m_com_pos; //center of mass pos
+    //glm::quat m_rot;
 
 
     //rendering data
-    std::vector<glm::vec3> m_vertices;
+    //std::vector<glm::vec3> m_vertices;
     std::vector<glm::vec3> m_normal;
+    std::vector<glm::vec3> m_color;
     std::vector<glm::vec2> m_uv;
-    std::vector<unsigned int>m_face_index;
+    std::vector<glm::uvec3>m_face_index;
 
-    bool m_has_Texture;
-    bool m_has_normal;
+    bool m_has_Texture{};
+    bool m_has_normal{};
 
     //meta data
 
-    unsigned int m_vectice_num;
-    unsigned int m_face_num;
-    virtual void update();
+    unsigned int m_vertice_num{};
+    unsigned int m_face_num{};
+    virtual void update()=0;
+
 
 
 private:
