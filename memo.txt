@@ -67,3 +67,9 @@ mesh 는 컴포넌트 패턴으로 짜는게 좋아보임
 7월 10일
 
 renderer 와 world 가 통신할 수 있는 renderable Entity class 설계하기: vbo,ebo 가짐
+
+
+7월 11일
+
+class 설계하는데 어려운 이유는 해당 클래스를 왜 정의하는지에 대한 목적의식이 없기 때문
+Bullet 이나 PhysX, Box2d 코드구조 분석!!

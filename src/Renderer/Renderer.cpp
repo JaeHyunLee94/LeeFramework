@@ -18,10 +18,6 @@ void Renderer::render() {
 
     while (!glfwWindowShouldClose(m_window)) {
 
-
-
-
-
         glfwPollEvents();
         int display_w, display_h;
         glfwGetFramebufferSize(m_window, &display_w, &display_h);
@@ -47,27 +43,6 @@ Shader &Renderer::getShader() {
 
 GLFWwindow *Renderer::getWindow() {
     return m_window;
-}
-
-void Renderer::addEntity(Mesh *mesh) {
-    //TODO: Map
-
-    glBindVertexArray(m_vao_id);
-    m_entity_list.push_back(mesh);
-    GLuint vbo,ebo;
-    glGenBuffers(1,&vbo);
-    glBindBuffer(GL_ARRAY_BUFFER,vbo);
-    glBufferData(GL_ARRAY_BUFFER,mesh->m_world_pos.size()*sizeof(glm::vec3),&mesh->m_world_pos[0],GL_STATIC_DRAW);
-
-    glGenBuffers(1,&ebo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER,mesh->m_face_index.size()*sizeof(glm::uvec3),&mesh->m_face_index[0],GL_STATIC_DRAW);
-
-    m_vbo_list.push_back(VBO{vbo,ebo});
-    glBindVertexArray(0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 }
 
 

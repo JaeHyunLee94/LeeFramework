@@ -23,6 +23,8 @@ int main() {
     renderer->getLight().logLightProperty();
     renderer->render();
 
+
+
 }
 
 

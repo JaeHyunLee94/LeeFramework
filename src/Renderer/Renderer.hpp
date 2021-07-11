@@ -9,14 +9,10 @@
 #include "Light.hpp"
 #include "Shader.hpp"
 #include "GUIwrapper.hpp"
-#include "../Mesh/Mesh.hpp"
+#include "../Geometry/Shape.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-struct VBO{
-    GLuint m_VBO;
-    GLuint m_EBO;
-};
 
 class Renderer {
 //TODO: all the responsible class for rendering. the most big class
@@ -71,8 +67,6 @@ public:
     Shader& getShader();
     Light& getLight();
 
-    void addEntity(Mesh* mesh);
-
     void render();
 
 
@@ -95,8 +89,7 @@ private:
 
 
     //TODO: better if this list can be map
-    std::vector<Mesh*> m_entity_list;
-    std::vector<VBO> m_vbo_list;
+
 
     GLuint m_vao_id;
 
