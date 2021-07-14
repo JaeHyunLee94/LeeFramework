@@ -3,7 +3,3 @@
 //
 
 #include "Shape.hpp"
-
-void Shape::computeNormal() {
-
-}

@@ -12,13 +12,8 @@
 
 
 class Shape {
-//TODO: Component pattern? no inheritance!!
-// TODO: basic primitive build (boundary), mesh io obj file
+
 //TODO: mesh's renderable interface??
-
-
-
-
 public:
 
     enum SHAPE_DIM{
@@ -28,8 +23,17 @@ public:
     };
 
     Shape()= default;
+    std::vector<glm::vec3>* getShapeVertices(){return &m_vertices;};
+    std::vector<glm::uvec3>* getShapeVertexIndices(){return &m_face_index;};
+    std::vector<glm::vec3>* getNormal(){return &m_normal;};
+    std::vector<glm::vec3>* getColor(){return &m_color;};
+    std::vector<glm::vec2>* getUV(){return &m_uv;};
 
+
+
+protected:
     //rendering data
+    //object space data
     std::vector<glm::vec3> m_vertices;
     std::vector<glm::vec3> m_normal;
     std::vector<glm::vec3> m_color;
@@ -37,19 +41,18 @@ public:
     std::vector<glm::uvec3>m_face_index;
 
     //meta data
+    SHAPE_DIM m_shape_dim{SHAPE_DIM_3D_TRI};
+
     bool m_has_texture{false};
     bool m_has_normal{false};
-    bool m_has_shape{false};
 
     unsigned int m_vertices_num{0};
     unsigned int m_face_num{0};
 
 
-    SHAPE_DIM m_shape_dim;
 
 private:
-    Texture* m_texture= nullptr;
-    void computeNormal();
+
 
 };
 
@@ -57,8 +60,12 @@ private:
 class GeneralShape: public Shape{
     // Shape from .obj or mtl file
 
+public:
+    explicit GeneralShape(const char* t_file_path){};
 
+protected:
 
+private:
 
 
 
@@ -66,6 +73,17 @@ class GeneralShape: public Shape{
 
 
 class PlaneShape: public Shape{
+
+
+public:
+
+    PlaneShape()= default;
+
+
+protected:
+
+
+private:
 
 
 
@@ -76,15 +94,30 @@ class PlaneShape: public Shape{
 
 class BoxShape: public Shape{
 
+public:
+
+    BoxShape(float t_x_len, float t_y_len, float t_z_len):
+    m_x_len(t_x_len), m_y_len(t_y_len),m_z_len(t_z_len){
+        m_has_normal=false;
+        m_has_texture=false;
+        m_vertices_num=8;
+
+    };
+protected:
+
+private:
+
+    float m_x_len, m_y_len, m_z_len;
+
 
 };
 
 
 class SphereShape: public Shape{
 
-
-
-
+public:
+protected:
+private:
 
 };
 
