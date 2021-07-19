@@ -27,6 +27,8 @@ private:
 
     glm::vec3 m_pos;
     glm::quat m_rot;
+    glm::vec3 m_vel;
+    glm::quat m_rot_vel;
 
     Shape* shape;
 
