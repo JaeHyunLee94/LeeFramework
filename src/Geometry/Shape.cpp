@@ -3,3 +3,10 @@
 //
 
 #include "Shape.hpp"
+
+void Shape::computeNormal() {
+
+    //TODO: implementation
+    m_has_normal=true;
+
+}

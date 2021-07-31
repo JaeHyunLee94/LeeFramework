@@ -10,17 +10,19 @@
 #include <glm/gtc/quaternion.hpp>
 #include "Texture.hpp"
 
+enum SHAPE_TYPE{
+    SHAPE_TYPE_UNDEFINED,
+    SHAPE_TYPE_2D,
+    SHAPE_TYPE_3D_TRI,
+    SHAPE_TYPE_3D_TETRA,
+};
 
 class Shape {
 
 //TODO: mesh's renderable interface??
 public:
 
-    enum SHAPE_DIM{
-        SHAPE_DIM_2D,
-        SHAPE_DIM_3D_TRI,
-        SHAPE_DIM_3D_TETRA,
-    };
+
 
     Shape()= default;
     std::vector<glm::vec3>* getShapeVertices(){return &m_vertices;};
@@ -28,6 +30,8 @@ public:
     std::vector<glm::vec3>* getNormal(){return &m_normal;};
     std::vector<glm::vec3>* getColor(){return &m_color;};
     std::vector<glm::vec2>* getUV(){return &m_uv;};
+
+    void computeNormal();
 
 
 
@@ -41,7 +45,7 @@ protected:
     std::vector<glm::uvec3>m_face_index;
 
     //meta data
-    SHAPE_DIM m_shape_dim{SHAPE_DIM_3D_TRI};
+    SHAPE_TYPE m_shape_type{SHAPE_TYPE_UNDEFINED};
 
     bool m_has_texture{false};
     bool m_has_normal{false};
@@ -98,9 +102,42 @@ public:
 
     BoxShape(float t_x_len, float t_y_len, float t_z_len):
     m_x_len(t_x_len), m_y_len(t_y_len),m_z_len(t_z_len){
+
+        m_shape_type=SHAPE_TYPE_3D_TRI;
+
         m_has_normal=false;
         m_has_texture=false;
         m_vertices_num=8;
+        m_face_num = 12;
+
+        m_vertices.emplace_back(t_x_len,t_y_len,t_z_len);
+        m_vertices.emplace_back(-t_x_len,t_y_len,t_z_len);
+        m_vertices.emplace_back(-t_x_len,-t_y_len,t_z_len);
+        m_vertices.emplace_back(t_x_len,-t_y_len,t_z_len);
+
+        m_vertices.emplace_back(t_x_len,t_y_len,-t_z_len);
+        m_vertices.emplace_back(-t_x_len,t_y_len,-t_z_len);
+        m_vertices.emplace_back(-t_x_len,-t_y_len,-t_z_len);
+        m_vertices.emplace_back(t_x_len,-t_y_len,-t_z_len);
+
+        m_face_index.emplace_back(0,1,2);
+        m_face_index.emplace_back(2,3,0);
+
+        m_face_index.emplace_back(5,1,0);
+        m_face_index.emplace_back(0,4,5);
+
+        m_face_index.emplace_back(7,4,0);
+        m_face_index.emplace_back(0,3,7);
+
+        m_face_index.emplace_back(3,2,6);
+        m_face_index.emplace_back(6,7,3);
+
+        m_face_index.emplace_back(5,4,7);
+        m_face_index.emplace_back(7,6,5);
+
+        m_face_index.emplace_back(5,6,2);
+        m_face_index.emplace_back(2,1,5);
+
 
     };
 protected:
