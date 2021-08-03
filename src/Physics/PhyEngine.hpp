@@ -13,19 +13,24 @@ class World {
 
 
 public:
-    World();
-    void addEntity();
+    World(){};
+    void create();
+    void addEntity(PhysicsEntity* t_p_entity);
 
-    void getPhysicsEntity() const;
-    void getGraphicsEntity() const; // communicate with renderer
 
-    void update(float t_timeStep);
-    void collisionSolve();
+//    void getPhysicsEntity() const;
+//
+//    void update(float t_timeStep);
+
+
+
 
 private:
 
-    std::vector<PhysicsEntity*> m_actor_list; //Physical entity
-    std::vector<GraphicsEntity*> m_graphics_entity_list; // Graphics Entity
+//    void detectCollision();
+//    void collisionSolve();
+    bool is_created{false};
+    std::vector<PhysicsEntity*> m_entity_list; //Physical entity
 
 
 };

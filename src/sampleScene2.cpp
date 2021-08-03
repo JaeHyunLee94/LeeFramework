@@ -4,9 +4,16 @@
 #define GLEW_STATIC
 
 #include "Renderer/Renderer.hpp"
+#include "Geometry/PhysicsEntity.hpp"
 #include <iostream>
 
 int main() {
+
+    PhysicsEntity pe;
+
+    pe.setShapeBox(2,2,2);
+
+
 
     Renderer *renderer = Renderer::Builder()
             .init() //TODO: window parameter

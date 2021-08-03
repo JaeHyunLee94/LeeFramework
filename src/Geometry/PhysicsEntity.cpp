@@ -22,3 +22,10 @@ void PhysicsEntity::setShapePlane() {
 void PhysicsEntity::setShapeFromFile(const char *t_file_path) {
 
 }
+
+void PhysicsEntity::logPhysicsEntity() const {
+
+    printf("position: (%f,%f,%f)\n",m_pos.x,m_pos.y,m_pos.z);
+    printf("hasShape: %d\n",m_has_shape);
+
+}
