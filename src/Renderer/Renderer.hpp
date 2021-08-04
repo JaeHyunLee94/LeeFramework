@@ -10,6 +10,8 @@
 #include "Shader.hpp"
 #include "GUIwrapper.hpp"
 #include "../Geometry/Shape.hpp"
+#include "GraphicsEntity.hpp"
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -95,6 +97,8 @@ private:
 
 
 };
+
+
 
 
 #endif //LEEFRAMEWORK_RENDERER_HPP
