@@ -5,7 +5,8 @@
 #include "Renderer.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
+#include "GraphicsEntity.hpp"
+#include "../Geometry/PhysicsEntity.hpp"
 
 Camera &Renderer::getCamera() {
     return *m_camera;
@@ -17,6 +18,10 @@ void Renderer::render() {
     glBindVertexArray(m_vao_id);
 
     while (!glfwWindowShouldClose(m_window)) {
+
+        for(auto& g_data : m_graphics_data){
+            renderEach(g_data);
+        }
 
         glfwPollEvents();
         int display_w, display_h;
@@ -43,6 +48,68 @@ Shader &Renderer::getShader() {
 
 GLFWwindow *Renderer::getWindow() {
     return m_window;
+}
+
+void Renderer::registerGraphicsEntity(GraphicsData t_graphics_data) {
+    m_graphics_data.push_back(t_graphics_data);
+}
+
+void Renderer::registerGraphicsEntity(PhysicsEntity* t_physics_entity) {
+
+    glBindVertexArray(m_vao_id);
+    t_physics_entity->getShape()->getShapeVertices();
+
+
+    GraphicsData tmp_graphics_data;
+    GLuint vbo;
+    GLuint ebo;
+    glGenBuffers(1,&vbo);
+    glGenBuffers(1,&ebo);
+
+    //TODO: Graphics data add more eg) m_has_normal
+    tmp_graphics_data.m_VBO=vbo;
+    tmp_graphics_data.m_EBO=ebo;
+
+
+    tmp_graphics_data.m_position=t_physics_entity->getShape()->getShapeVertices();
+    glBindBuffer(GL_ARRAY_BUFFER,vbo);
+    glBufferData(GL_ARRAY_BUFFER,sizeof(glm::vec3)*tmp_graphics_data.m_position->size(),tmp_graphics_data.m_position,GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(glm::vec3),nullptr);
+    glEnableVertexAttribArray(0);
+
+
+
+
+    tmp_graphics_data.m_indices=t_physics_entity->getShape()->getShapeVertexIndices();
+    glBindBuffer(GL_ARRAY_BUFFER,ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(glm::uvec3)*tmp_graphics_data.m_indices->size(),tmp_graphics_data.m_indices,GL_STATIC_DRAW);
+    //TODO: indice : 1
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(glm::vec3), nullptr);
+    glEnableVertexAttribArray(1);
+
+    tmp_graphics_data.m_uv=t_physics_entity->getShape()->getUV();
+    tmp_graphics_data.m_normal=t_physics_entity->getShape()->getNormal();
+    tmp_graphics_data.m_mirror_pe=t_physics_entity;
+
+    auto t_translateMatrix= glm::translate(t_physics_entity->getPos());
+    auto t_rotateMatrix = glm::mat4 (1);//TODO
+    tmp_graphics_data.m_model_matrix =t_translateMatrix*t_rotateMatrix;
+
+
+    m_graphics_data.push_back(tmp_graphics_data);
+
+
+}
+
+void Renderer::renderEach(GraphicsData &t_graphics_data) {
+
+    //TODO: glbufferdata 로 넣어주기
+    glBindBuffer(GL_ARRAY_BUFFER,t_graphics_data.m_VBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,t_graphics_data.m_EBO);
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+
+    glDrawElements(GL_TRIANGLES,t_graphics_data.m_indices->size()*3,GL_UNSIGNED_INT, nullptr);
 }
 
 

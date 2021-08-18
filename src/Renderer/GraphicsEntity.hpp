@@ -9,7 +9,7 @@
 #include <vector>
 
 
-class PhysicalEntity;
+class PhysicsEntity;
 
 struct GraphicsData{
     GLuint m_VBO;
@@ -18,7 +18,9 @@ struct GraphicsData{
     std::vector<glm::uvec3>* m_indices;
     std::vector<glm::vec2>* m_uv;
     std::vector<glm::vec3>* m_normal;
-    PhysicalEntity* m_mirror_pe;
+    std::vector<glm::vec3>* m_color;
+    glm::mat4 m_model_matrix;
+    PhysicsEntity* m_mirror_pe;
     bool m_has_nomal{false};
     bool m_has_texture{false};
     GLuint m_attrib_num;
@@ -42,7 +44,7 @@ public:
         glDeleteVertexArrays(1,&m_VAO);
         //m_list delete
     }
-    void registerEntity(PhysicalEntity* t_pe);
+    void registerEntity(PhysicsEntity* t_pe);
 
     inline GLuint getVAO() const{return m_VAO;};
     inline void bind() const{glBindVertexArray(m_VAO);};

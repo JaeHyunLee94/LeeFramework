@@ -5,7 +5,7 @@
 #include "GraphicsEntity.hpp"
 #include "../Geometry/PhysicsEntity.hpp"
 
-void GraphicsEntityManager::registerEntity(PhysicalEntity *t_pe) {
+void GraphicsEntityManager::registerEntity(PhysicsEntity *t_pe) {
 
     bind();
     GraphicsData temp;

@@ -8,33 +8,42 @@
 #include "../Geometry/PhysicsEntity.hpp"
 #include "../Renderer/GraphicsEntity.hpp"
 
-class World {
+namespace Engine {
+
+    class World {
 //TODO: this class only depends on Geometry class and other physics solver
 
 
-public:
-    World(){};
-    void create();
-    void addEntity(PhysicsEntity* t_p_entity);
+    public:
+        World() {};
+
+        void create();
+
+        void addEntity(PhysicsEntity *t_p_entity);
+        void step(float dt);
 
 
 
-    //void getPhysicsEntity() const;
+
+        //void getPhysicsEntity() const;
 //
 //    void update(float t_timeStep);
 
 
 
 
-private:
+    private:
 
 //    void detectCollision();
 //    void collisionSolve();
-    bool is_created{false};
-    std::vector<PhysicsEntity*> m_entity_list; //Physical entity
+        bool is_created{false};
+        std::vector<PhysicsEntity *> m_entity_list; //Physical entity
 
 
-};
+    };
+
+
+}
 
 
 #endif //LEEFRAMEWORK_PHYENGINE_HPP

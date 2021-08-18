@@ -10,7 +10,6 @@
 #include <vector>
 
 #include "Shape.hpp"
-#include "../Renderer/GraphicsEntity.hpp"
 class PhysicsEntity {
 
     //TODO: refactor to Physics directory
@@ -28,7 +27,7 @@ public:
 
     inline void setPos(glm::vec3 t_pos){this->m_pos=t_pos;};
     inline void setRot(glm::quat t_rot){this->m_rot=t_rot;};
-    inline void setVel(glm::vec3 t_vel){this->m_vel=m_vel;};
+    inline void setVel(glm::vec3 t_vel){this->m_vel=t_vel;};
     inline void setRotVel(glm::vec3 t_rot_vel){this->m_rot_vel=t_rot_vel;};
 
     void setShapeFromFile(const char* t_file_path);

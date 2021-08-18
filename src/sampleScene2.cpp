@@ -6,12 +6,14 @@
 #include "Renderer/Renderer.hpp"
 #include "Geometry/PhysicsEntity.hpp"
 #include <iostream>
+#include "utils/debugUtils.cpp"
 
 int main() {
 
     PhysicsEntity pe;
 
     pe.setShapeBox(2,2,2);
+
 
 
 
@@ -28,6 +30,11 @@ int main() {
 
     renderer->getCamera().logCameraProperty();
     renderer->getLight().logLightProperty();
+    renderer->registerGraphicsEntity(&pe);
+
+
+    debug_glCheckError(36);
+
     renderer->render();
 
 

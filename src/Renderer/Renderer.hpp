@@ -4,16 +4,17 @@
 
 #ifndef LEEFRAMEWORK_RENDERER_HPP
 #define LEEFRAMEWORK_RENDERER_HPP
-
+#include <vector>
+#include "GraphicsEntity.hpp"
 #include "Camera.hpp"
 #include "Light.hpp"
 #include "Shader.hpp"
 #include "GUIwrapper.hpp"
-#include "../Geometry/Shape.hpp"
-#include "GraphicsEntity.hpp"
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+
+class PhysicsEntity;
 
 
 class Renderer {
@@ -69,10 +70,14 @@ public:
     Shader& getShader();
     Light& getLight();
 
-    void render();
 
+    void render();
+    void registerGraphicsEntity(GraphicsData t_graphics_data);
+    void registerGraphicsEntity(PhysicsEntity* t_physics_entity);
 
 private:
+
+    void renderEach(GraphicsData& t_graphics_data);
 
     explicit Renderer(const Builder &builder)
             : m_window(builder.m_builder_window), m_camera(builder.m_builder_camera),m_light(builder.m_builder_light),
@@ -88,6 +93,7 @@ private:
     GLFWwindow *m_window = nullptr;
     glm::vec3 m_default_color;
 
+    std::vector<GraphicsData> m_graphics_data;
 
 
     //TODO: better if this list can be map
