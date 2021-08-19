@@ -2,9 +2,12 @@
 // Created by test on 2021-06-04.
 //
 
+#ifndef LEEFRAMEWORK_DEBUGUTILS_CPP
+#define LEEFRAMEWORK_DEBUGUTILS_CPP
+
 #include <iostream>
 #include <GL/glew.h>
-
+#include "UtilHeader.h"
 
 
 GLenum debug_glCheckError(int line)
@@ -27,5 +30,5 @@ GLenum debug_glCheckError(int line)
     }
     return errorCode;
 }
-
+#endif
 

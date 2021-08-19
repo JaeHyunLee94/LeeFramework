@@ -6,7 +6,7 @@
 #include "Renderer/Renderer.hpp"
 #include "Geometry/PhysicsEntity.hpp"
 #include <iostream>
-#include "utils/debugUtils.cpp"
+#include "utils/UtilHeader.h"
 
 int main() {
 
@@ -30,6 +30,7 @@ int main() {
 
     renderer->getCamera().logCameraProperty();
     renderer->getLight().logLightProperty();
+
     renderer->registerGraphicsEntity(&pe);
 
 

@@ -68,7 +68,7 @@ include_directories(${gmock_SOURCE_DIR}/include)
 #add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 
 
-file(GLOB all_src  "src/Renderer/*.cpp" "src/Renderer/*.hpp" "src/Geometry/*.cpp" "src/Geometry/*.hpp" "src/Physics/*.hpp" "src/Physics/*.cpp")
+file(GLOB all_src  "src/Renderer/*.cpp" "src/Renderer/*.hpp" "src/Geometry/*.cpp" "src/Geometry/*.hpp" "src/Physics/*.hpp" "src/Physics/*.cpp" "src/utils/*.h" "src/utils/*.cpp")
 
 ## add target
 add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} ${all_src} test/CameraTest.cpp)

@@ -31,8 +31,8 @@ void main(){
 
     vec3 ambi=Ka*Sa;
 
-    //    frag_color=vec4(0.9,0.2,0.1,1.0);
+    frag_color=vec4(0.9,0.2,0.1,1.0);
 
-    frag_color=vec4(diff+spec+ambi+Ke,1.0);
+    //frag_color=vec4(diff+spec+ambi+Ke,1.0);
 
 }

@@ -8,13 +8,14 @@
 #include "GraphicsEntity.hpp"
 #include "../Geometry/PhysicsEntity.hpp"
 
+
 Camera &Renderer::getCamera() {
     return *m_camera;
 }
 
 
 void Renderer::render() {
-
+    debug_glCheckError(18);
     glBindVertexArray(m_vao_id);
 
     while (!glfwWindowShouldClose(m_window)) {
@@ -55,11 +56,11 @@ void Renderer::registerGraphicsEntity(GraphicsData t_graphics_data) {
 }
 
 void Renderer::registerGraphicsEntity(PhysicsEntity* t_physics_entity) {
-
+    debug_glCheckError(59);
     glBindVertexArray(m_vao_id);
     t_physics_entity->getShape()->getShapeVertices();
 
-
+    debug_glCheckError(63);
     GraphicsData tmp_graphics_data;
     GLuint vbo;
     GLuint ebo;
@@ -81,9 +82,11 @@ void Renderer::registerGraphicsEntity(PhysicsEntity* t_physics_entity) {
 
 
     tmp_graphics_data.m_indices=t_physics_entity->getShape()->getShapeVertexIndices();
-    glBindBuffer(GL_ARRAY_BUFFER,ebo);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(glm::uvec3)*tmp_graphics_data.m_indices->size(),tmp_graphics_data.m_indices,GL_STATIC_DRAW);
     //TODO: indice : 1
+
     glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(glm::vec3), nullptr);
     glEnableVertexAttribArray(1);
 
@@ -102,7 +105,7 @@ void Renderer::registerGraphicsEntity(PhysicsEntity* t_physics_entity) {
 }
 
 void Renderer::renderEach(GraphicsData &t_graphics_data) {
-
+    debug_glCheckError(108);
     //TODO: glbufferdata 로 넣어주기
     glBindBuffer(GL_ARRAY_BUFFER,t_graphics_data.m_VBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,t_graphics_data.m_EBO);
@@ -110,6 +113,7 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
     glEnableVertexAttribArray(1);
 
     glDrawElements(GL_TRIANGLES,t_graphics_data.m_indices->size()*3,GL_UNSIGNED_INT, nullptr);
+    debug_glCheckError(116);
 }
 
 
