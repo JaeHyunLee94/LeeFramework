@@ -157,6 +157,41 @@ private:
 
 };
 
+class Triangle:public Shape{
+
+public:
+
+    Triangle(float t_x1, float t_y1, float t_z1,
+             float t_x2, float t_y2, float t_z2,
+             float t_x3, float t_y3, float t_z3
+             ):x1(t_x1),y1(t_y1),z1(t_z1),x2(t_x2),y2(t_y2),z2(t_z2),x3(t_x3),y3(t_y3),z3(t_z3)
+
+             {
+        m_shape_type=SHAPE_TYPE_2D;
+
+        m_has_normal=false;
+        m_has_texture=false;
+        m_vertices_num=3;
+        m_face_num = 1;
+
+        m_vertices.emplace_back(glm::vec3(x1,y1,z1));
+        m_vertices.emplace_back(glm::vec3(x2,y2,z2));
+        m_vertices.emplace_back(glm::vec3(x3,y3,z3));
+        ;
+        m_face_index.emplace_back(glm::uvec3(0,1,2));
+
+
+    };
+
+
+private:
+    float x1,y1,z1;
+    float x2,y2,z2;
+    float x3,y3,z3;
+
+
+};
+
 
 
 

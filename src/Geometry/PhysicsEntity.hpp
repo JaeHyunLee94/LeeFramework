@@ -32,6 +32,9 @@ public:
 
     void setShapeFromFile(const char* t_file_path);
     void setShapeBox(float t_len_x,float t_len_y,float t_len_z);
+    void setShapeTriangle(float t_x1, float t_y1,float t_z1,
+                          float t_x2, float t_y2,float t_z2,
+                          float t_x3, float t_y3,float t_z3);
     void setShapeSphere();
     void setShapePlane();
     inline bool hasShape() const{return m_has_shape;};

@@ -29,3 +29,14 @@ void PhysicsEntity::logPhysicsEntity() const {
     printf("hasShape: %d\n",m_has_shape);
 
 }
+
+void PhysicsEntity::setShapeTriangle(float t_x1, float t_y1, float t_z1, float t_x2, float t_y2, float t_z2, float t_x3,
+                                     float t_y3, float t_z3) {
+
+    m_shape=new Triangle(t_x1,t_y1,t_z1,
+                         t_x2,t_y2,t_z2,
+                         t_x3,t_y3,t_z3
+                         );
+    m_has_shape=true;
+
+}
