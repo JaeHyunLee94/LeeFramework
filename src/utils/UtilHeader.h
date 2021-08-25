@@ -12,8 +12,6 @@
 GLenum debug_glCheckError(int line);
 
 void glm2eigen();
-
-
 void eigen2glm();
 
 #endif //LEEFRAMEWORK_UTILHEADER_H
