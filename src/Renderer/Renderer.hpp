@@ -69,7 +69,7 @@ public:
     Camera& getCamera();
     Shader& getShader();
     Light& getLight();
-    GLuint getVAO(){return m_vao_id;};
+    GLuint getVAO() const{return m_vao_id;};
 
     void render();
     void registerGraphicsEntity(GraphicsData t_graphics_data);
