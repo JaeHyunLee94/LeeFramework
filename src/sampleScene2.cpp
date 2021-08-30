@@ -18,9 +18,8 @@ int main() {
             0.0f,  1.0f, 0.0f
             );
 
-
-    auto m =pe.getShape()->getShapeVertices();
-    auto e= pe.getShape()->getShapeVertexIndices();
+    PhysicsEntity pe2;
+    pe2.setShapeBox(0.2,0.2,0.2);
 
 
 
@@ -38,13 +37,13 @@ int main() {
     renderer->getCamera().logCameraProperty();
     renderer->getLight().logLightProperty();
 
-    renderer->registerGraphicsEntity(&pe);
-
+    renderer->registerGraphicsEntity(&pe2);
+    debug_glCheckError(41);
     renderer->getShader().use();
-
+    debug_glCheckError(43);
 
     renderer->render();
-
+    debug_glCheckError(46);
 
 
 }
