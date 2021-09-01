@@ -126,6 +126,26 @@ int Shader::makeProgram() {
     return 1;
 }
 
-int Shader::setUniform() {
-    return 0;
+GLuint Shader::getUniformLocation(const char *t_name) const {
+    return glGetUniformLocation(m_program_id,t_name);
+}
+
+void Shader::setUniform(const char *t_name, glm::vec3 t_v3) {
+    GLint loc= glGetUniformLocation(m_program_id,t_name);
+    glUniform3f(loc,t_v3.x,t_v3.y,t_v3.z);
+}
+
+void Shader::setUniform(const char *t_name, glm::mat4 t_m4) {
+    GLint loc= glGetUniformLocation(m_program_id,t_name);
+    glUniformMatrix4fv(loc,1,GL_FALSE,&t_m4[0][0]);
+}
+
+void Shader::setUniform(const char *t_name, glm::mat3 t_m3) {
+    GLint loc= glGetUniformLocation(m_program_id,t_name);
+    glUniformMatrix3fv(loc,1,GL_FALSE,&t_m3[0][0]);
+}
+
+void Shader::setUniform(const char *t_name, float t_f) {
+    GLint loc= glGetUniformLocation(m_program_id,t_name);
+    glUniform1f(loc,t_f);
 }

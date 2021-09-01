@@ -7,6 +7,7 @@
 
 #include <string>
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 
 class Shader {
@@ -32,6 +33,16 @@ public:
     void use();
 
     GLuint getProgramID();
+    GLuint getUniformLocation(const char* t_name) const;
+    void setUniform(const char* t_name,glm::vec3 t_v3);
+    void setUniform(const char* t_name, glm::mat4 t_m4);
+    void setUniform(const char* t_name, glm::mat3 t_m3);
+    void setUniform(const char* t_name, float t_f);
+
+    //TODO: sampler setUniform
+
+
+
 
 
 private:
