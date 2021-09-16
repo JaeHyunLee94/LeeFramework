@@ -10,17 +10,32 @@
 
 int main() {
 
-    PhysicsEntity pe;
+    PhysicsEntity pe1;
 
-    pe.setShapeTriangle(
+    pe1.setShapeTriangle(
             -1.0f, -1.0f, 0.0f,
             1.0f, -1.0f, 0.0f,
             0.0f,  1.0f, 0.0f
             );
 
     PhysicsEntity pe2;
-    pe2.setShapeBox(0.2,0.2,0.2);
+    pe2.setShapeTriangle(
+            -1.0f, -1.0f, 0.0f,
+            1.0f, -1.0f, 0.0f,
+            0.0f,  1.0f, 0.0f
+    );
+    pe2.setPos(glm::vec3(0,0,1));
+    PhysicsEntity pe3;
+    pe3.setShapeTriangle(
+            -1.0f, -1.0f, 0.0f,
+            1.0f, -1.0f, 0.0f,
+            0.0f,  1.0f, 0.0f
+    );
+    pe3.setPos(glm::vec3(0,0,2));
 
+
+    PhysicsEntity pe4;
+    pe2.setShapeBox(0.2,0.2,0.2);
 
 
     Renderer *renderer = Renderer::Builder()
@@ -37,13 +52,11 @@ int main() {
     renderer->getCamera().logCameraProperty();
     renderer->getLight().logLightProperty();
 
+    renderer->registerGraphicsEntity(&pe1);
     renderer->registerGraphicsEntity(&pe2);
-    debug_glCheckError(41);
-    renderer->getShader().use();
-    debug_glCheckError(43);
+    renderer->registerGraphicsEntity(&pe3);
 
     renderer->render();
-    debug_glCheckError(46);
 
 
 }

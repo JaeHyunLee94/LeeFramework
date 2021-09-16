@@ -29,7 +29,7 @@ public:
         friend class Renderer;
 
         Builder() = default;// TODO: essential parameter
-        Builder &camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up={0.,1.,0.}, float fovy=45, float aspect=1, float z_near=0.1,
+        Builder &camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up={0.,0.,1.}, float fovy=45, float aspect=1, float z_near=0.1,
                         float z_far=1000,
                         float camera_speed=0.1); // TODO: need camera explicitly?
 

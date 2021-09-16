@@ -56,9 +56,7 @@ void Renderer::registerGraphicsEntity(GraphicsData t_graphics_data) {
 }
 
 void Renderer::registerGraphicsEntity(PhysicsEntity* t_physics_entity) {
-    debug_glCheckError(59);
     glBindVertexArray(m_vao_id);
-    debug_glCheckError(63);
     GraphicsData tmp_graphics_data;
     GLuint vbo;
     GLuint ebo;
@@ -89,7 +87,7 @@ void Renderer::registerGraphicsEntity(PhysicsEntity* t_physics_entity) {
     tmp_graphics_data.m_normal=t_physics_entity->getShape()->getNormal();
     tmp_graphics_data.m_mirror_pe=t_physics_entity;
 
-    auto t_translateMatrix= glm::translate(t_physics_entity->getPos());
+    auto t_translateMatrix= glm::translate(glm::mat4(1.0f),t_physics_entity->getPos());
     auto t_rotateMatrix = glm::mat4 (1);//TODO
     tmp_graphics_data.m_model_matrix =t_translateMatrix*t_rotateMatrix;
 
@@ -103,7 +101,9 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
 
     //t_graphics_data.logGraphicsData();
     //TODO: glbufferdata 로 넣어주기
-
+    m_shader->setUniform("modelMat",t_graphics_data.m_model_matrix);
+    m_shader->setUniform("viewMat",m_camera->getViewMatrix());
+    m_shader->setUniform("projMat",m_camera->getProjectionMatrix());
     glBindBuffer(GL_ARRAY_BUFFER,t_graphics_data.m_VBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,t_graphics_data.m_EBO);
     glDrawElements(GL_TRIANGLES,t_graphics_data.m_indices->size()*3,GL_UNSIGNED_INT, (void*)0);

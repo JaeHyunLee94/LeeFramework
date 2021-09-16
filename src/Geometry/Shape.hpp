@@ -8,6 +8,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <iostream>
 #include "Texture.hpp"
 
 enum SHAPE_TYPE{
@@ -177,9 +178,9 @@ public:
         m_vertices.emplace_back(glm::vec3(x1,y1,z1));
         m_vertices.emplace_back(glm::vec3(x2,y2,z2));
         m_vertices.emplace_back(glm::vec3(x3,y3,z3));
-        ;
-        m_face_index.emplace_back(glm::uvec3(0,1,2));
 
+        m_face_index.emplace_back(glm::uvec3(0,1,2));
+        computeNormal();
 
     };
 

@@ -1,19 +1,18 @@
 #version 330 core
 
 // Interpolated values from the vertex shaders
-//in vec3 v_color;
-//in vec3 v_normal;
-//in vec3 v_view;
+in vec3 v_color;
+in vec3 v_normal;
+in vec3 v_view;
 
 // Ouput data
 out vec4 frag_color;
 
-
 //// parameter for phong shader
-//uniform vec3 Ka,Ks,Ke;
-//uniform vec3 Sa,Ss,Sd;
-//uniform vec3 lightdir;
-//uniform float sh;
+uniform vec3 Ka,Ks,Ke;
+uniform vec3 Sa,Ss,Sd;
+uniform vec3 lightdir;
+uniform float sh;
 
 
 

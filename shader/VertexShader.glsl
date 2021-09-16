@@ -1,26 +1,23 @@
 #version 330 core
 
 layout(location = 0) in vec3 position;
-//layout(location = 1) in vec3 color;
-//layout(location = 2) in vec3 normal;
+layout(location = 1) in vec3 color;
+layout(location = 2) in vec3 normal;
 
-//out vec3 v_normal;
-//out vec3 v_view;
-//out vec3 v_color;
+out vec3 v_normal;
+out vec3 v_view;
+out vec3 v_color;
 
-
-//uniform mat4 worldMat,viewMat,projMat;
-//uniform vec3 eyepos;
+uniform mat4 modelMat,viewMat,projMat;
+uniform vec3 eyepos;
 
 void main(){
 
 
-//    v_normal=normalize(transpose(inverse(mat3(worldMat)))*normal); //world normal
-//    vec3 worldPos=(worldMat*vec4(position,1.0)).xyz; // world pos
-//    v_view=normalize(eyepos-worldPos); //view vector
-//    v_color=color;
-//    //gl_Position=projMat*viewMat*vec4(worldPos,1.0);
-    gl_Position = vec4(position.x, position.y, position.z, 1.0);
-
+    v_normal=normalize(transpose(inverse(mat3(modelMat)))*normal); //world normal
+    vec3 worldPos=(modelMat*vec4(position,1.0)).xyz; // world pos
+    v_view=normalize(eyepos-worldPos); //view vector
+    v_color=color;
+    gl_Position=projMat*viewMat*vec4(worldPos,1.0);
 
 }
