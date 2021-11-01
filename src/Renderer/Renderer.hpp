@@ -121,6 +121,30 @@ private:
 
         });
 
+//        glfwSetMouseButtonCallback(m_window, [](GLFWwindow *window, int key, int scancode, int action, int mode) {
+//
+//            auto &self = *static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+//            if (key == GLFW_KEY_W) {
+//                self.m_camera->moveFront(1);
+//            }
+//            if (key == GLFW_KEY_S) {
+//                self.m_camera->moveBack(1);
+//            }
+//            if (key == GLFW_KEY_A) {
+//                self.m_camera->moveLeft(1);
+//            }
+//            if (key == GLFW_KEY_D) {
+//                self.m_camera->moveRight(1);
+//            }
+//            if (key == GLFW_KEY_SPACE) {
+//                self.m_camera->moveUp(1);
+//            }
+//            if (key == GLFW_KEY_X) {
+//                self.m_camera->moveDown(1);
+//            }
+//
+//        });
+
     };
 
 
