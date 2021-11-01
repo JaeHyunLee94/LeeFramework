@@ -5,19 +5,32 @@
 #include "Camera.hpp"
 
 void Camera::moveUp(float dt) {
-    m_camera_pos = m_camera_pos + m_camera_up * dt * m_camera_up;
+    m_camera_pos = m_camera_pos + m_camera_speed * dt * m_camera_up;
     updateViewMatrix();
 }
+void Camera::moveDown(float dt) {
+    m_camera_pos = m_camera_pos - m_camera_speed * dt * m_camera_up;
+    updateViewMatrix();
+}
+
 
 void Camera::moveFront(float dt) {
     m_camera_pos = m_camera_pos + m_camera_speed * dt * m_camera_front;
     updateViewMatrix();
 }
 void Camera::moveRight(float dt) {
-    m_camera_pos = m_camera_pos + m_camera_up * dt * m_camera_right;
+    m_camera_pos = m_camera_pos + m_camera_speed * dt * m_camera_right;
+    updateViewMatrix();
+}
+void Camera::moveBack(float dt) {
+    m_camera_pos = m_camera_pos - m_camera_speed * dt * m_camera_front;
     updateViewMatrix();
 }
 
+void Camera::moveLeft(float dt) {
+    m_camera_pos = m_camera_pos - m_camera_speed * dt * m_camera_right;
+    updateViewMatrix();
+}
 void Camera::rotateYaw(float dt) {
     float theta=glm::radians(m_camera_speed*dt);
     m_camera_front=(m_camera_front*glm::cos(theta)) - (m_camera_up*glm::sin(theta));
@@ -50,8 +63,8 @@ void Camera::logCameraProperty() const {
 void Camera::updateViewMatrix() {
     m_view_matrix = glm::lookAt(
             m_camera_pos,
-            m_camera_front,
-            m_camera_right
+            m_camera_pos+m_camera_front,
+            m_camera_up
     );
 
 }
@@ -64,6 +77,59 @@ void Camera::updateProjectionMatrix() {
             m_z_far
     );
 }
+
+
+
+
+//void Camera::move(Camera::MOVE cam_dir,float dt) {
+//
+//    float theta=glm::radians(m_camera_speed*dt);
+//    switch (cam_dir) {
+//        case FRONT:
+//            m_camera_pos = m_camera_pos + m_camera_speed * dt * m_camera_front;
+//            updateViewMatrix();
+//            break;
+//        case BACK:
+//            m_camera_pos = m_camera_pos - m_camera_speed * dt * m_camera_front;
+//            updateViewMatrix();
+//            break;
+//
+//        case RIGHT:
+//            m_camera_pos = m_camera_pos + m_camera_speed * dt * m_camera_right;
+//            updateViewMatrix();
+//            break;
+//
+//        case LEFT:
+//            m_camera_pos = m_camera_pos - m_camera_speed * dt * m_camera_right;
+//            updateViewMatrix();
+//            break;
+//
+//        case UP:
+//            m_camera_pos = m_camera_pos + m_camera_speed * dt * m_camera_up;
+//            updateViewMatrix();
+//            break;
+//
+//        case DOWN:
+//            m_camera_pos = m_camera_pos - m_camera_speed * dt * m_camera_up;
+//            updateViewMatrix();
+//            break;
+//        case YAW:
+//
+//            m_camera_front=(m_camera_front*glm::cos(theta)) - (m_camera_up*glm::sin(theta));
+//            m_camera_right=glm::normalize(glm::cross(m_camera_right,m_camera_front));
+//            updateViewMatrix();
+//
+//            break;
+//        case PITCH:
+//
+//            m_camera_front=(m_camera_front*glm::cos(theta)) + (m_camera_up*glm::sin(theta));
+//            m_camera_up=glm::normalize(glm::cross(m_camera_right,m_camera_front));
+//            updateViewMatrix();
+//
+//            break;
+//    }
+//
+//}
 
 
 

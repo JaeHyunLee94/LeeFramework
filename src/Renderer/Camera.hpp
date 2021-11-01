@@ -11,7 +11,19 @@
 
 class Camera {
 
+
 public:
+//    enum MOVE{
+//        FRONT,
+//        BACK,
+//        RIGHT,
+//        LEFT,
+//        UP,
+//        DOWN,
+//        YAW,
+//        PITCH
+//    };
+
     //TODO: GenPD code reference 할것
     Camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up, float fovy, float aspect,
            float z_near, float z_far,
@@ -47,11 +59,13 @@ public:
 
     inline glm::vec3 getCameraPos() { return m_camera_pos; };
 
+    //void move(MOVE cam_dir,float dt);
     void moveUp(float dt);
-
+    void moveDown(float dt);
     void moveFront(float dt);
-
+    void moveBack(float dt);
     void moveRight(float dt);
+    void moveLeft(float dt);
 
     void rotateYaw(float dt);
 
