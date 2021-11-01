@@ -4,6 +4,7 @@
 
 #ifndef LEEFRAMEWORK_RENDERER_HPP
 #define LEEFRAMEWORK_RENDERER_HPP
+
 #include <vector>
 #include "GraphicsEntity.hpp"
 #include "Camera.hpp"
@@ -29,11 +30,14 @@ public:
         friend class Renderer;
 
         Builder() = default;// TODO: essential parameter
-        Builder &camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up={0.,0.,1.}, float fovy=45, float aspect=1, float z_near=0.1,
-                        float z_far=1000,
-                        float camera_speed=0.1); // TODO: need camera explicitly?
+        Builder &
+        camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up = {0., 0., 1.}, float fovy = 45, float aspect = 1,
+               float z_near = 0.1,
+               float z_far = 1000,
+               float camera_speed = 0.1); // TODO: need camera explicitly?
 
-        Builder &light(const glm::vec3& src_pos,const glm::vec3& light_dir,const glm::vec3& diff_color,const glm::vec3& spec_color,const glm::vec3& amb_color);
+        Builder &light(const glm::vec3 &src_pos, const glm::vec3 &light_dir, const glm::vec3 &diff_color,
+                       const glm::vec3 &spec_color, const glm::vec3 &amb_color);
 
         Builder &shader(const char *vt_shader_path, const char *fg_shader_path);
 
@@ -52,7 +56,7 @@ public:
         Light *m_builder_light = nullptr;
         GUIwrapper *m_builder_gui = nullptr;
         GLFWwindow *m_builder_window = nullptr;
-        GLuint m_builder_vao_id=0;
+        GLuint m_builder_vao_id = 0;
 
 
     };
@@ -65,46 +69,60 @@ public:
         delete m_light;
         glfwTerminate();
     }
-    GLFWwindow* getWindow();
-    Camera& getCamera();
-    Shader& getShader();
-    Light& getLight();
-    GLuint getVAO() const{return m_vao_id;};
+
+    GLFWwindow *getWindow();
+
+    Camera &getCamera();
+
+    Shader &getShader();
+
+    Light &getLight();
+
+    GLuint getVAO() const { return m_vao_id; };
 
     void render();
+
     void registerGraphicsEntity(GraphicsData t_graphics_data);
-    void registerGraphicsEntity(PhysicsEntity* t_physics_entity);
+
+    void registerGraphicsEntity(PhysicsEntity *t_physics_entity);
+
 
 private:
 
-    void renderEach(GraphicsData& t_graphics_data);
+    void renderEach(GraphicsData &t_graphics_data);
 
     explicit Renderer(const Builder &builder)
-            : m_window(builder.m_builder_window), m_camera(builder.m_builder_camera),m_light(builder.m_builder_light),
-              m_shader(builder.m_builder_shader), m_vao_id(builder.m_builder_vao_id){
+            : m_window(builder.m_builder_window), m_camera(builder.m_builder_camera), m_light(builder.m_builder_light),
+              m_shader(builder.m_builder_shader), m_vao_id(builder.m_builder_vao_id) {
         //TODO: check essential component
+        glfwSetWindowUserPointer(m_window, this);
 
+        glfwSetKeyCallback(m_window,[](GLFWwindow* window, int key, int scancode, int action, int mode){
+            if(GLFW_KEY_W){
+                //TODO:
+            }
+
+        });
 
     };
 
-    Camera *m_camera = nullptr; //TODO: camera can be many?
+
+    Camera *m_camera = nullptr; //TODO: multiple camera
     Shader *m_shader = nullptr;
-    Light *m_light= nullptr;
+    Light *m_light = nullptr;
     GLFWwindow *m_window = nullptr;
     glm::vec3 m_default_color;
 
     std::vector<GraphicsData> m_graphics_data;
 
 
-    //TODO: better if this list can be map
+    //TODO: better if this list can be mapped
 
 
     GLuint m_vao_id;
 
 
 };
-
-
 
 
 #endif //LEEFRAMEWORK_RENDERER_HPP
