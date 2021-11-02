@@ -99,7 +99,7 @@ private:
 
         glfwSetKeyCallback(m_window, [](GLFWwindow *window, int key, int scancode, int action, int mode) {
 
-            auto &self = *static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+            auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
             if (key == GLFW_KEY_W) {
                 self.m_camera->moveFront(1);
             }
@@ -121,29 +121,35 @@ private:
 
         });
 
-//        glfwSetMouseButtonCallback(m_window, [](GLFWwindow *window, int key, int scancode, int action, int mode) {
-//
-//            auto &self = *static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-//            if (key == GLFW_KEY_W) {
-//                self.m_camera->moveFront(1);
-//            }
-//            if (key == GLFW_KEY_S) {
-//                self.m_camera->moveBack(1);
-//            }
-//            if (key == GLFW_KEY_A) {
-//                self.m_camera->moveLeft(1);
-//            }
-//            if (key == GLFW_KEY_D) {
-//                self.m_camera->moveRight(1);
-//            }
-//            if (key == GLFW_KEY_SPACE) {
-//                self.m_camera->moveUp(1);
-//            }
-//            if (key == GLFW_KEY_X) {
-//                self.m_camera->moveDown(1);
-//            }
-//
-//        });
+
+        glfwSetCursorPosCallback(m_window, [](GLFWwindow *window, double xpos, double ypos) {
+
+            auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
+
+            static bool is_first=true;
+            static double prev_xpos,prev_ypos;
+            if(is_first){
+                prev_xpos=xpos;
+                prev_ypos=ypos;
+
+                is_first=false;
+            }
+            if(glfwGetMouseButton(self.m_window,GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
+
+                double xoffset=xpos-prev_xpos;
+                double yoffset=prev_ypos-ypos;
+                self.m_camera->rotateYaw(0.1*xoffset);
+                self.m_camera->rotatePitch(0.1*yoffset);
+
+
+
+                prev_xpos=xpos;
+                prev_ypos=ypos;
+
+            }
+
+
+        });
 
     };
 

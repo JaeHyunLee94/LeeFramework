@@ -33,6 +33,8 @@ void Camera::moveLeft(float dt) {
 }
 void Camera::rotateYaw(float dt) {
     float theta=glm::radians(m_camera_speed*dt);
+    //std::cout << "theta: " << theta<<"\n";
+    std::cout << "degree: " << m_camera_speed*dt<<"\n";
     m_camera_front=(m_camera_front*glm::cos(theta)) - (m_camera_up*glm::sin(theta));
     m_camera_right=glm::normalize(glm::cross(m_camera_right,m_camera_front));
     updateViewMatrix();
