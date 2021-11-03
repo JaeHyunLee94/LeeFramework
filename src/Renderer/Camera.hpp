@@ -74,7 +74,7 @@ public:
 
     void logCameraProperty() const; //cannot change class member, only can call other const function
 
-    int sum(int a, int b) { return a + b; }; // for google test
+    //int sum(int a, int b) { return a + b; }; // for google test
 
 private:
 
