@@ -33,18 +33,26 @@ void Camera::moveLeft(float dt) {
 }
 void Camera::rotateYaw(float dt) {
     float theta=glm::radians(m_camera_speed*dt);
+    glm::quat q = glm::angleAxis(theta,m_camera_up);
+
     //std::cout << "theta: " << theta<<"\n";
     std::cout << "degree: " << m_camera_speed*dt<<"\n";
-    m_camera_front=(m_camera_front*glm::cos(theta)) - (m_camera_up*glm::sin(theta));
-    m_camera_right=glm::normalize(glm::cross(m_camera_right,m_camera_front));
+//    m_camera_front=(m_camera_front*glm::cos(theta)) - (m_camera_up*glm::sin(theta));
+//    m_camera_right=glm::normalize(glm::cross(m_camera_right,m_camera_front));
+    m_camera_front=q*m_camera_front;
+    m_camera_right=q*m_camera_right;//TODO: cor
     updateViewMatrix();
 }
 
 void Camera::rotatePitch(float dt) {
 
     float theta=glm::radians(m_camera_speed*dt);
-    m_camera_front=(m_camera_front*glm::cos(theta)) + (m_camera_up*glm::sin(theta));
-    m_camera_up=glm::normalize(glm::cross(m_camera_right,m_camera_front));
+    glm::quat q = glm::angleAxis(theta,m_camera_right);
+//    m_camera_front=(m_camera_front*glm::cos(theta)) + (m_camera_up*glm::sin(theta));
+//    m_camera_up=glm::normalize(glm::cross(m_camera_right,m_camera_front));
+
+    m_camera_front=q*m_camera_front;
+    m_camera_up=q*m_camera_up;
     updateViewMatrix();
 
 }

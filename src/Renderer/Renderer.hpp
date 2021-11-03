@@ -96,58 +96,89 @@ private:
               m_shader(builder.m_builder_shader), m_vao_id(builder.m_builder_vao_id) {
         //TODO: check essential component
         glfwSetWindowUserPointer(m_window, this);
-
+        //TODO: use input handler
         glfwSetKeyCallback(m_window, [](GLFWwindow *window, int key, int scancode, int action, int mode) {
 
             auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
+            static bool pressed[349] = {false};
+
+            if (action == GLFW_PRESS) {
+                pressed[key] = true;
+            } else if (action == GLFW_RELEASE) {
+                pressed[key] = false;
+            }
+
             if (key == GLFW_KEY_W) {
+
                 self.m_camera->moveFront(1);
+
             }
             if (key == GLFW_KEY_S) {
+
                 self.m_camera->moveBack(1);
+
             }
             if (key == GLFW_KEY_A) {
+
                 self.m_camera->moveLeft(1);
+
             }
             if (key == GLFW_KEY_D) {
+
                 self.m_camera->moveRight(1);
+
             }
             if (key == GLFW_KEY_SPACE) {
+
                 self.m_camera->moveUp(1);
+
             }
             if (key == GLFW_KEY_X) {
+
                 self.m_camera->moveDown(1);
+
             }
 
         });
-
 
         glfwSetCursorPosCallback(m_window, [](GLFWwindow *window, double xpos, double ypos) {
 
             auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
 
-            static bool is_first=true;
-            static double prev_xpos,prev_ypos;
-            if(is_first){
-                prev_xpos=xpos;
-                prev_ypos=ypos;
+            static bool is_first = true;
+            static double prev_xpos, prev_ypos;
+            if (is_first) {
+                prev_xpos = xpos;
+                prev_ypos = ypos;
 
-                is_first=false;
+                is_first = false;
             }
-            if(glfwGetMouseButton(self.m_window,GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
+            if (glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
 
-                double xoffset=xpos-prev_xpos;
-                double yoffset=prev_ypos-ypos;
-                self.m_camera->rotateYaw(0.1*xoffset);
-                self.m_camera->rotatePitch(0.1*yoffset);
+                double xoffset = prev_xpos - xpos;
+                double yoffset = prev_ypos - ypos;
+                self.m_camera->rotateYaw( 0.5*xoffset);
+                self.m_camera->rotatePitch(0.5*yoffset);
 
 
+                prev_xpos = xpos;
+                prev_ypos = ypos;
 
-                prev_xpos=xpos;
-                prev_ypos=ypos;
-
+            }else if(glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE){
+                is_first = true;
             }
 
+
+        });
+        glfwSetScrollCallback(m_window,[](GLFWwindow* window,double xoffset,double yoffset){
+
+            auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
+            float fovy= self.m_camera->getFovy() -yoffset;
+            if (fovy < 1.0f)
+                fovy = 1.0f;
+            if (fovy > 45.0f)
+                fovy = 45.0f;
+            self.m_camera->setFovy(fovy);
 
         });
 

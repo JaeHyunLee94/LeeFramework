@@ -7,22 +7,14 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
+#include <glm/gtc/quaternion.hpp>
 #include <iostream>
 
 class Camera {
 
 
 public:
-//    enum MOVE{
-//        FRONT,
-//        BACK,
-//        RIGHT,
-//        LEFT,
-//        UP,
-//        DOWN,
-//        YAW,
-//        PITCH
-//    };
+
 
     //TODO: GenPD code reference 할것
     Camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up, float fovy, float aspect,
@@ -53,25 +45,32 @@ public:
 
 
     }; //TODO: set default value and camera member
+
+    //get set func
+
     inline glm::mat4 getViewMatrix() { return m_view_matrix; };
-
     inline glm::mat4 getProjectionMatrix() { return m_projection_matrix; };
-
     inline glm::vec3 getCameraPos() { return m_camera_pos; };
+    inline float getFovy(){return m_fovy;};
 
-    //void move(MOVE cam_dir,float dt);
+    inline void setCameraSpeed(float speed) { this->m_camera_speed = speed; };
+    inline void setFovy(float fovy){
+        this->m_fovy = fovy;
+        updateProjectionMatrix();
+    };
+
+
+    //camera move
     void moveUp(float dt);
     void moveDown(float dt);
     void moveFront(float dt);
     void moveBack(float dt);
     void moveRight(float dt);
     void moveLeft(float dt);
-
     void rotateYaw(float dt);
-
     void rotatePitch(float dt);
 
-    inline void setCameraSpeed(float speed) { this->m_camera_speed = speed; };
+    //set function
 
     void logCameraProperty() const; //cannot change class member, only can call other const function
 
