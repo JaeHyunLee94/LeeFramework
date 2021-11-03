@@ -12,6 +12,8 @@ class InputHandler {
 
 
 public:
+
+    //TODO: all the input processed here
     void handleInput();//run every frame + mouse moved
 
     std::vector<bool> m_pressed(349);
