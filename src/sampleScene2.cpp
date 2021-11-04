@@ -39,6 +39,10 @@ int main() {
     PhysicsEntity pe4;
 
     pe4.setShapeBox(0.2,0.2,0.2);
+    pe4.setShapeTriangle(-1.0f, -1.0f, 0.0f,
+                         1.0f, -1.0f, 0.0f,
+                         0.0f,  1.0f, 0.0f);
+    pe4.setShapeBox(0.2,0.2,0.2);
 
 
     Renderer *renderer = Renderer::Builder()
@@ -55,10 +59,10 @@ int main() {
     renderer->getCamera().logCameraProperty();
     renderer->getLight().logLightProperty();
 
-    renderer->registerGraphicsEntity(&pe1);
-    renderer->registerGraphicsEntity(&pe2);
-    renderer->registerGraphicsEntity(&pe3);
-//    renderer->registerGraphicsEntity(&pe4);
+//    renderer->registerGraphicsEntity(&pe1);
+//    renderer->registerGraphicsEntity(&pe2);
+//    renderer->registerGraphicsEntity(&pe3);
+    renderer->registerGraphicsEntity(&pe4);
 
     renderer->render();
 

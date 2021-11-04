@@ -73,3 +73,16 @@ renderer 와 world 가 통신할 수 있는 renderable Entity class 설계하기
 
 class 설계하는데 어려운 이유는 해당 클래스를 왜 정의하는지에 대한 목적의식이 없기 때문
 Bullet 이나 PhysX, Box2d 코드구조 분석!!
+
+
+11월 5일:
+camera movement 구현 완료
+camera 클래스 torsion 문제 해결!! : camera right vector 를 항상 xy 와 평행시킬것!!
+fps 식으로 구현 안하면 world sphere 를 회전 시키는 방식 -> pd framework
+
+TODO:
+1. ground
+2. 좌표 축
+3. input handler
+4. 중력 주기
+5. phong lighting
