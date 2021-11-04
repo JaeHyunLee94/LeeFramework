@@ -13,7 +13,6 @@
 int main() {
 
     PhysicsEntity pe1;
-
     pe1.setShapeTriangle(
             -1.0f, -1.0f, 0.0f,
             1.0f, -1.0f, 0.0f,
@@ -27,6 +26,7 @@ int main() {
             0.0f,  1.0f, 0.0f
     );
     pe2.setPos(glm::vec3(0,0,1));
+
     PhysicsEntity pe3;
     pe3.setShapeTriangle(
             -1.0f, -1.0f, 0.0f,
@@ -37,12 +37,13 @@ int main() {
 
 
     PhysicsEntity pe4;
-    pe2.setShapeBox(0.2,0.2,0.2);
+
+    pe4.setShapeBox(0.2,0.2,0.2);
 
 
     Renderer *renderer = Renderer::Builder()
             .init() //TODO: window parameter
-            .camera(glm::vec3(3., 2., 3.),glm::vec3(0))
+            .camera(glm::vec3(0., -1., 1.),glm::vec3(0,0,1))
             .shader("../shader/VertexShader.glsl",  "../shader/FragmentShader.glsl")
             .light(glm::vec3(5.,5.,5.),
                    glm::vec3(0.,1.,1.),
@@ -57,6 +58,7 @@ int main() {
     renderer->registerGraphicsEntity(&pe1);
     renderer->registerGraphicsEntity(&pe2);
     renderer->registerGraphicsEntity(&pe3);
+//    renderer->registerGraphicsEntity(&pe4);
 
     renderer->render();
 

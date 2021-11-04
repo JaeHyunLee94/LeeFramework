@@ -5,11 +5,11 @@
 #include "Camera.hpp"
 
 void Camera::moveUp(float dt) {
-    m_camera_pos = m_camera_pos + m_camera_speed * dt * m_camera_up;
+    m_camera_pos = m_camera_pos + m_camera_speed * dt *  glm::vec3(0,0,1);
     updateViewMatrix();
 }
 void Camera::moveDown(float dt) {
-    m_camera_pos = m_camera_pos - m_camera_speed * dt * m_camera_up;
+    m_camera_pos = m_camera_pos - m_camera_speed * dt * glm::vec3(0,0,1);
     updateViewMatrix();
 }
 
@@ -34,8 +34,12 @@ void Camera::moveLeft(float dt) {
 void Camera::rotateYaw(float dt) {
     float theta=glm::radians(m_camera_speed*dt);
     glm::quat q = glm::angleAxis(theta,m_camera_up);
-    m_camera_front=q*m_camera_front;
+
     m_camera_right=q*m_camera_right;
+    m_camera_right.z=0;
+    m_camera_up=glm::normalize(m_camera_up);
+    m_camera_front=glm::cross(m_camera_up,m_camera_right);
+
     updateViewMatrix();
 }
 
@@ -44,7 +48,7 @@ void Camera::rotatePitch(float dt) {
     float theta=glm::radians(m_camera_speed*dt);
     glm::quat q = glm::angleAxis(theta,m_camera_right);
     m_camera_front=q*m_camera_front;
-    m_camera_up=q*m_camera_up;
+    m_camera_up=glm::cross(m_camera_right,m_camera_front);
     updateViewMatrix();
 
 }
