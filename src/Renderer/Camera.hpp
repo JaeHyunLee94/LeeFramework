@@ -93,7 +93,7 @@ private:
     float m_aspect;
     float m_fovy;
 
-    float m_t_sensitivity=0.01;
+    float m_t_sensitivity=0.001;
     float m_r_sensitivity=0.05;
 
     glm::mat4 m_projection_matrix;
