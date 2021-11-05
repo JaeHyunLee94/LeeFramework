@@ -13,16 +13,13 @@
 
 class Camera {
 
-
 public:
 
 
     //TODO: GenPD code reference 할것
     Camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up, float fovy, float aspect,
-           float z_near, float z_far,
-           float camera_speed) :
-            m_camera_pos(camera_pos), m_fovy(fovy), m_aspect(aspect), m_z_near(z_near), m_z_far(z_far),
-            m_camera_speed(camera_speed) {
+           float z_near, float z_far) :
+            m_camera_pos(camera_pos), m_fovy(fovy), m_aspect(aspect), m_z_near(z_near), m_z_far(z_far) {
 
 
         //set camera space basis
@@ -48,30 +45,36 @@ public:
     }; //TODO: set default value and camera member
 
     //get set func
-
     inline glm::mat4 getViewMatrix() { return m_view_matrix; };
     inline glm::mat4 getProjectionMatrix() { return m_projection_matrix; };
     inline glm::vec3 getCameraPos() { return m_camera_pos; };
-    inline float getFovy(){return m_fovy;};
+    inline float getFovy() { return m_fovy; };
 
-    inline void setCameraSpeed(float speed) { this->m_camera_speed = speed; };
-    inline void setFovy(float fovy){
+    //setFunc
+    inline void setCameraTranslationalSensitivity(float s) { this->m_t_sensitivity = s; };
+    inline void setCameraRotationalSensitivity(float s) { this->m_r_sensitivity = s; };
+    inline void setFovy(float fovy) {
         this->m_fovy = fovy;
         updateProjectionMatrix();
     };
 
 
     //camera move
-    void moveUp(float dt);
-    void moveDown(float dt);
-    void moveFront(float dt);
-    void moveBack(float dt);
-    void moveRight(float dt);
-    void moveLeft(float dt);
-    void rotateYaw(float dt);
-    void rotatePitch(float dt);
+    void moveUp();
 
-    //set function
+    void moveDown();
+
+    void moveFront();
+
+    void moveBack();
+
+    void moveRight();
+
+    void moveLeft();
+
+    void rotateYaw(float degree);
+
+    void rotatePitch(float degree);
 
     void logCameraProperty() const; //cannot change class member, only can call other const function
 
@@ -89,7 +92,9 @@ private:
     float m_z_far;
     float m_aspect;
     float m_fovy;
-    float m_camera_speed;
+
+    float m_t_sensitivity=0.01;
+    float m_r_sensitivity=0.05;
 
     glm::mat4 m_projection_matrix;
     glm::mat4 m_view_matrix;
