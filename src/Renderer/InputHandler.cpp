@@ -72,6 +72,7 @@ void InputHandler::handleInput() {
         fovy = 45.0f;
     camera.setFovy(fovy);
 
+
 }
 
 

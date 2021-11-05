@@ -78,6 +78,7 @@ public:
 
     void logCameraProperty() const; //cannot change class member, only can call other const function
 
+
     //int sum(int a, int b) { return a + b; }; // for google test
 
 private:
@@ -95,6 +96,7 @@ private:
 
     float m_t_sensitivity=0.001;
     float m_r_sensitivity=0.05;
+
 
     glm::mat4 m_projection_matrix;
     glm::mat4 m_view_matrix;
