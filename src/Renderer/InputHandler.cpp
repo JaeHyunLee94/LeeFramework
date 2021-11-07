@@ -2,9 +2,7 @@
 // Created by Lee on 2021-11-04.
 //
 
-#include "InputHandler.h"
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "InputHandler.hpp"
 #include "Renderer.hpp"
 
 void InputHandler::handleInput() {

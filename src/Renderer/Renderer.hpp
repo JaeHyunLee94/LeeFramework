@@ -14,7 +14,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "../utils/UtilHeader.h"
-#include "InputHandler.h"
+#include "InputHandler.hpp"
 
 class PhysicsEntity;
 
