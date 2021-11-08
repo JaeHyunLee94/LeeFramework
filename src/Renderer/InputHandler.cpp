@@ -69,6 +69,7 @@ void InputHandler::handleInput() {
     if (fovy > 45.0f)
         fovy = 45.0f;
     camera.setFovy(fovy);
+    m_scroll_y_offset=0;
 
 
 }
