@@ -50,7 +50,7 @@ int main() {
             .camera(glm::vec3(0., -2., 0.),glm::vec3(0,0,0))
             .shader("../shader/VertexShader.glsl",  "../shader/FragmentShader.glsl")
             .light(glm::vec3(5.,5.,5.),
-                   glm::vec3(0.,1.,1.),
+                   glm::vec3(1.,1.,-1.),
                    glm::vec3(1.,1.,1.),
                    glm::vec3(1.,1.,1.),
                    glm::vec3(0,0,0))
@@ -59,9 +59,9 @@ int main() {
     renderer->getCamera().logCameraProperty();
     renderer->getLight().logLightProperty();
 
-//    renderer->registerGraphicsEntity(&pe1);
-//    renderer->registerGraphicsEntity(&pe2);
-//    renderer->registerGraphicsEntity(&pe3);
+    renderer->registerGraphicsEntity(&pe1);
+    renderer->registerGraphicsEntity(&pe2);
+    renderer->registerGraphicsEntity(&pe3);
     renderer->registerGraphicsEntity(&pe4);
 
     renderer->render();

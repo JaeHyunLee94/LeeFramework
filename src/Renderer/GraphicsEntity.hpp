@@ -24,10 +24,10 @@ struct GraphicsData{
     bool m_has_nomal{false};
     bool m_has_texture{false};
     GLuint m_attrib_num;
-    void logGraphicsData() const{
-        printf("vertice number: %d\n",m_position->size());
-        printf("indices number: %d\n",m_indices->size());
-    };
+//    void logGraphicsData() const{
+//        printf("vertice number: %d\n",m_position->size());
+//        printf("indices number: %d\n",m_indices->size());
+//    };
 };
 
 //
