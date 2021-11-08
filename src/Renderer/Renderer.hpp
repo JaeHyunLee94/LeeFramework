@@ -140,7 +140,6 @@ private:
             }
 
         });
-
         glfwSetCursorPosCallback(m_window, [](GLFWwindow *window, double xpos, double ypos) {
 
             auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
