@@ -121,9 +121,9 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
 
     //light property
     m_shader->setUniform("lightdir",m_light->m_direction);
-    m_shader->setUniform("Sd",glm::vec3(1,1,1));
-    m_shader->setUniform("Ss",glm::vec3(0.4,0.4,0.4));
-    m_shader->setUniform("Sa",glm::vec3(0,0,0));
+    m_shader->setUniform("Sd",m_light->m_diffColor);
+    m_shader->setUniform("Ss",m_light->m_specColor);
+    m_shader->setUniform("Sa",m_light->m_ambColor);
 
     //material property
     m_shader->setUniform("Kd",glm::vec3(0.3,0.3,0.5));

@@ -1,7 +1,6 @@
 #version 330 core
 
 // Interpolated values from the vertex shaders
-in vec3 v_color;
 in vec3 v_normal;
 in vec3 v_view;
 

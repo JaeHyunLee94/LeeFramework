@@ -6,6 +6,7 @@
 #include "../utils/UtilHeader.h"
 void Shape::computeNormal() {
 
+    //TODO: bug fix
     if(m_has_normal) return;
     std::cout << "computing normal...\n";
 
@@ -22,7 +23,9 @@ void Shape::computeNormal() {
     }
     for(auto & i : m_vertices){
         i=glm::normalize(i);
+        printf("normal value: %f,%f,%f \n", i.x,i.y,i.z);
     }
+
     std::cout << "computing normal ended\n";
 
     m_has_normal=true;
