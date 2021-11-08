@@ -47,7 +47,7 @@ int main() {
 
     Renderer *renderer = Renderer::Builder()
             .init() //TODO: window parameter
-            .camera(glm::vec3(0., -1., 1.),glm::vec3(0,0,1))
+            .camera(glm::vec3(0., -2., 0.),glm::vec3(0,0,0))
             .shader("../shader/VertexShader.glsl",  "../shader/FragmentShader.glsl")
             .light(glm::vec3(5.,5.,5.),
                    glm::vec3(0.,1.,1.),

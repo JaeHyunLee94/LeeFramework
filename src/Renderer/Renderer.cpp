@@ -26,9 +26,11 @@ void Renderer::render() {
         }
 
         glfwPollEvents();
+        m_input_handler.handleInput();
         int display_w, display_h;
         glfwGetFramebufferSize(m_window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
+        m_input_handler.handleInput();
 
         glfwSwapBuffers(m_window);
     }
@@ -118,10 +120,9 @@ Renderer::Builder &Renderer::Builder::camera(glm::vec3 camera_pos,
                                              float fovy,
                                              float aspect,
                                              float z_near,
-                                             float z_far,
-                                             float camera_speed) {
+                                             float z_far) {
 
-    m_builder_camera = new Camera(camera_pos, lookat, up, fovy, aspect, z_near, z_far, camera_speed);
+    m_builder_camera = new Camera(camera_pos, lookat, up, fovy, aspect, z_near, z_far);
     return *this;
 }
 
@@ -169,7 +170,7 @@ Renderer::Builder &Renderer::Builder::init() {
 #endif
 
     // Create window with graphics context
-    m_builder_window = glfwCreateWindow(1280, 1280, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
+    m_builder_window = glfwCreateWindow(1280, 1280, "Physics Engine", NULL, NULL);
     if (m_builder_window == nullptr) {
         std::cout << "window creation failed\n";
     }

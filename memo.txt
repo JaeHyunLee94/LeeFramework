@@ -80,9 +80,14 @@ camera movement 구현 완료
 camera 클래스 torsion 문제 해결!! : camera right vector 를 항상 xy 와 평행시킬것!!
 fps 식으로 구현 안하면 world sphere 를 회전 시키는 방식 -> pd framework
 
+
+
+11월 6일:
+1. camera input handler 구현 완료
+
 TODO:
 1. ground
 2. 좌표 축
-3. input handler
+3. input handler //완료
 4. 중력 주기
 5. phong lighting

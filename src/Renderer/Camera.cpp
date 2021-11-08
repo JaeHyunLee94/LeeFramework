@@ -4,35 +4,35 @@
 
 #include "Camera.hpp"
 
-void Camera::moveUp(float dt) {
-    m_camera_pos = m_camera_pos + m_camera_speed * dt *  glm::vec3(0,0,1);
+void Camera::moveUp() {
+    m_camera_pos = m_camera_pos + m_t_sensitivity *  glm::vec3(0,0,1);
     updateViewMatrix();
 }
-void Camera::moveDown(float dt) {
-    m_camera_pos = m_camera_pos - m_camera_speed * dt * glm::vec3(0,0,1);
-    updateViewMatrix();
-}
-
-
-void Camera::moveFront(float dt) {
-    m_camera_pos = m_camera_pos + m_camera_speed * dt * m_camera_front;
-    updateViewMatrix();
-}
-void Camera::moveRight(float dt) {
-    m_camera_pos = m_camera_pos + m_camera_speed * dt * m_camera_right;
-    updateViewMatrix();
-}
-void Camera::moveBack(float dt) {
-    m_camera_pos = m_camera_pos - m_camera_speed * dt * m_camera_front;
+void Camera::moveDown() {
+    m_camera_pos = m_camera_pos - m_t_sensitivity * glm::vec3(0,0,1);
     updateViewMatrix();
 }
 
-void Camera::moveLeft(float dt) {
-    m_camera_pos = m_camera_pos - m_camera_speed * dt * m_camera_right;
+
+void Camera::moveFront() {
+    m_camera_pos = m_camera_pos + m_t_sensitivity* m_camera_front;
     updateViewMatrix();
 }
-void Camera::rotateYaw(float dt) {
-    float theta=glm::radians(m_camera_speed*dt);
+void Camera::moveRight() {
+    m_camera_pos = m_camera_pos + m_t_sensitivity * m_camera_right;
+    updateViewMatrix();
+}
+void Camera::moveBack() {
+    m_camera_pos = m_camera_pos - m_t_sensitivity* m_camera_front;
+    updateViewMatrix();
+}
+
+void Camera::moveLeft() {
+    m_camera_pos = m_camera_pos - m_t_sensitivity * m_camera_right;
+    updateViewMatrix();
+}
+void Camera::rotateYaw(float degree) {
+    float theta=glm::radians(m_r_sensitivity*degree);
     glm::quat q = glm::angleAxis(theta,m_camera_up);
 
     m_camera_right=q*m_camera_right;
@@ -43,9 +43,9 @@ void Camera::rotateYaw(float dt) {
     updateViewMatrix();
 }
 
-void Camera::rotatePitch(float dt) {
+void Camera::rotatePitch(float degree ) {
 
-    float theta=glm::radians(m_camera_speed*dt);
+    float theta=glm::radians(m_r_sensitivity*degree);
     glm::quat q = glm::angleAxis(theta,m_camera_right);
     m_camera_front=q*m_camera_front;
     m_camera_up=glm::cross(m_camera_right,m_camera_front);
