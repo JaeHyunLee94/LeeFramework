@@ -10,7 +10,7 @@
 #include "UtilHeader.h"
 
 
-GLenum debug_glCheckError(int line)
+GLenum debug_glCheckError(const char* message)
 {
     GLenum errorCode;
     while ((errorCode = glGetError()) != GL_NO_ERROR)
@@ -26,7 +26,7 @@ GLenum debug_glCheckError(int line)
             case GL_OUT_OF_MEMORY:                 error = "OUT_OF_MEMORY"; break;
             case GL_INVALID_FRAMEBUFFER_OPERATION: error = "INVALID_FRAMEBUFFER_OPERATION"; break;
         }
-        std::cout << error << " | " << " (" << line << ")" << std::endl;
+        std::cout << error << " | " << " (" << message << ")" << std::endl;
     }
     return errorCode;
 }

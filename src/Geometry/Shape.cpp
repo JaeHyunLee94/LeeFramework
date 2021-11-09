@@ -21,7 +21,7 @@ void Shape::computeNormal() {
         m_normal[i.z] +=tri_normal;
 
     }
-    for(auto & i : m_vertices){
+    for(auto & i : m_normal){
         i=glm::normalize(i);
         printf("normal value: %f,%f,%f \n", i.x,i.y,i.z);
     }

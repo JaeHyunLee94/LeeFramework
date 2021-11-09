@@ -9,7 +9,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-GLenum debug_glCheckError(int line);
+GLenum debug_glCheckError(const char* message);
 
 
 

@@ -138,6 +138,7 @@ public:
 
         m_face_index.emplace_back(5,6,2);
         m_face_index.emplace_back(2,1,5);
+        computeNormal();
 
     };
 protected:

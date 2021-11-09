@@ -20,10 +20,10 @@ void Renderer::render() {
     while (!glfwWindowShouldClose(m_window)) {
         glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
         glClear(GL_COLOR_BUFFER_BIT);
-        for(auto& g_data : m_graphics_data){
+        for (auto &g_data : m_graphics_data) {
 
             renderEach(g_data);
-            debug_glCheckError(26);
+
         }
 
         glfwPollEvents();
@@ -59,54 +59,53 @@ void Renderer::registerGraphicsEntity(GraphicsData t_graphics_data) {
     //TODO: bind buffer
 }
 
-void Renderer::registerGraphicsEntity(PhysicsEntity* t_physics_entity) {
+void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
 
-    auto t_translateMatrix= glm::translate(glm::mat4(1.0f),t_physics_entity->getPos());
-    auto t_rotateMatrix = glm::mat4 (1);//TODO
+    auto t_translateMatrix = glm::translate(glm::mat4(1.0f), t_physics_entity->getPos());
+    auto t_rotateMatrix = glm::mat4(1);//TODO
 
     GraphicsData tmp_graphics_data;
     GLuint vbo;
     GLuint ebo;
-    debug_glCheckError(69);
+    debug_glCheckError("df");
     glBindVertexArray(m_vao_id);
-    glGenBuffers(1,&vbo);
-    glGenBuffers(1,&ebo);
-    tmp_graphics_data.m_VBO=vbo;
-    tmp_graphics_data.m_EBO=ebo;
+    glGenBuffers(1, &vbo);
+    glGenBuffers(1, &ebo);
+    tmp_graphics_data.m_VBO = vbo;
+    tmp_graphics_data.m_EBO = ebo;
 
-    tmp_graphics_data.m_position=t_physics_entity->getShape()->getShapeVertices();
-    tmp_graphics_data.m_uv=t_physics_entity->getShape()->getUV();
-    tmp_graphics_data.m_normal=t_physics_entity->getShape()->getNormal();
-    tmp_graphics_data.m_indices=t_physics_entity->getShape()->getShapeVertexIndices();
-    tmp_graphics_data.m_mirror_pe=t_physics_entity;
-    tmp_graphics_data.m_model_matrix =t_translateMatrix*t_rotateMatrix;
+    tmp_graphics_data.m_position = t_physics_entity->getShape()->getShapeVertices();
+    tmp_graphics_data.m_uv = t_physics_entity->getShape()->getUV();
+    tmp_graphics_data.m_normal = t_physics_entity->getShape()->getNormal();
+    tmp_graphics_data.m_indices = t_physics_entity->getShape()->getShapeVertexIndices();
+    tmp_graphics_data.m_mirror_pe = t_physics_entity;
+    tmp_graphics_data.m_model_matrix = t_translateMatrix * t_rotateMatrix;
     m_graphics_data.push_back(tmp_graphics_data);
 
-    auto v_position_size = sizeof(glm::vec3)*tmp_graphics_data.m_position->size();
-    auto v_uv_size = sizeof(glm::vec3)*tmp_graphics_data.m_uv->size();
-    auto v_normal_size = sizeof(glm::vec3)*tmp_graphics_data.m_normal->size();
+    auto v_position_size = sizeof(glm::vec3) * tmp_graphics_data.m_position->size();
+    auto v_uv_size = sizeof(glm::vec3) * tmp_graphics_data.m_uv->size();
+    auto v_normal_size = sizeof(glm::vec3) * tmp_graphics_data.m_normal->size();
     //TODO: Graphics data add more eg) m_has_normal
 
-    glBindBuffer(GL_ARRAY_BUFFER,vbo);
-    glBufferData(GL_ARRAY_BUFFER,v_position_size+v_uv_size+v_normal_size, nullptr,GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, v_position_size + v_uv_size + v_normal_size, nullptr, GL_STATIC_DRAW);
 
-    glBufferSubData(GL_ARRAY_BUFFER,0,v_position_size,tmp_graphics_data.m_position->data());
-    glBufferSubData(GL_ARRAY_BUFFER,v_position_size,v_uv_size,tmp_graphics_data.m_uv->data());
-    glBufferSubData(GL_ARRAY_BUFFER,v_position_size+v_uv_size,v_normal_size,tmp_graphics_data.m_normal->data());
+    glBufferSubData(GL_ARRAY_BUFFER, 0, v_position_size, tmp_graphics_data.m_position->data());
+    glBufferSubData(GL_ARRAY_BUFFER, v_position_size, v_uv_size, tmp_graphics_data.m_uv->data());
+    glBufferSubData(GL_ARRAY_BUFFER, v_position_size + v_uv_size, v_normal_size, tmp_graphics_data.m_normal->data());
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE, 3 * sizeof(float),(void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE, 2 * sizeof(float),(void*)v_position_size);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void *) v_position_size);
     glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2,3,GL_FLOAT,GL_FALSE, 3 * sizeof(float),(void*)(v_position_size+v_normal_size));
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(glm::uvec3)*tmp_graphics_data.m_indices->size(),tmp_graphics_data.m_indices->data() ,GL_STATIC_DRAW);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) (v_position_size + v_uv_size));
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::uvec3) * tmp_graphics_data.m_indices->size(),
+                 tmp_graphics_data.m_indices->data(), GL_STATIC_DRAW);
     //TODO: indice : 1
 
-    debug_glCheckError(186);
-
-
-
+    debug_glCheckError("107 line");
 
 
 }
@@ -117,29 +116,29 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
     //TODO: glbufferdata 로 넣어주기
 
     //camera property
-    m_shader->setUniform("eyepos",m_camera->getCameraPos());
-
+    m_shader->setUniform("eyepos", m_camera->getCameraPos());
+    debug_glCheckError("shader camera pos error");
     //light property
-    m_shader->setUniform("lightdir",m_light->m_direction);
-    m_shader->setUniform("Sd",m_light->m_diffColor);
-    m_shader->setUniform("Ss",m_light->m_specColor);
-    m_shader->setUniform("Sa",m_light->m_ambColor);
+    m_shader->setUniform("lightdir", m_light->m_direction);
+    m_shader->setUniform("Sd", m_light->m_diffColor);
+    m_shader->setUniform("Ss", m_light->m_specColor);
+    m_shader->setUniform("Sa", m_light->m_ambColor);
 
+    debug_glCheckError("shader light property error");
     //material property
-    m_shader->setUniform("Kd",glm::vec3(0.3,0.3,0.5));
-    m_shader->setUniform("Ka",glm::vec3(0.1,0.1,0.1));
-    m_shader->setUniform("Ks",glm::vec3(0.4,0.4,0.4));
-    m_shader->setUniform("Ke",glm::vec3(0,0,0));
-    m_shader->setUniform("sh",0.1);
+    m_shader->setUniform("Kd", glm::vec3(0.3, 0.3, 0.5));
+    m_shader->setUniform("Ka", glm::vec3(0., 0., 0.0));
+    m_shader->setUniform("Ks", glm::vec3(0.1, 0.1, 0.1));
+    m_shader->setUniform("Ke", glm::vec3(0, 0, 0));
+    m_shader->setUniform("sh", 0.01);
 
-
-    m_shader->setUniform("modelMat",t_graphics_data.m_model_matrix);
-    m_shader->setUniform("viewMat",m_camera->getViewMatrix());
-    m_shader->setUniform("projMat",m_camera->getProjectionMatrix());
-    glBindBuffer(GL_ARRAY_BUFFER,t_graphics_data.m_VBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,t_graphics_data.m_EBO);
-    glDrawElements(GL_TRIANGLES,t_graphics_data.m_indices->size()*3,GL_UNSIGNED_INT, (void*)0);
-
+    debug_glCheckError("shader material property error");
+    m_shader->setUniform("modelMat", t_graphics_data.m_model_matrix);
+    m_shader->setUniform("viewMat", m_camera->getViewMatrix());
+    m_shader->setUniform("projMat", m_camera->getProjectionMatrix());
+    glBindBuffer(GL_ARRAY_BUFFER, t_graphics_data.m_VBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, t_graphics_data.m_EBO);
+    glDrawElements(GL_TRIANGLES, t_graphics_data.m_indices->size() * 3, GL_UNSIGNED_INT, (void *) 0);
 
 }
 
@@ -156,8 +155,10 @@ Renderer::Builder &Renderer::Builder::camera(glm::vec3 camera_pos,
     return *this;
 }
 
-Renderer::Builder &Renderer::Builder::light(const glm::vec3& src_pos,const glm::vec3& light_dir,const glm::vec3& diff_color,const glm::vec3& spec_color,const glm::vec3& amb_color) {
-    m_builder_light = new Light(src_pos,light_dir,diff_color,spec_color,amb_color);
+Renderer::Builder &
+Renderer::Builder::light(const glm::vec3 &src_pos, const glm::vec3 &light_dir, const glm::vec3 &diff_color,
+                         const glm::vec3 &spec_color, const glm::vec3 &amb_color) {
+    m_builder_light = new Light(src_pos, light_dir, diff_color, spec_color, amb_color);
     return *this;
 }
 
@@ -217,8 +218,10 @@ Renderer::Builder &Renderer::Builder::init() {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
     }
 
-    glGenVertexArrays(1,&m_builder_vao_id);
+    glGenVertexArrays(1, &m_builder_vao_id);
     glBindVertexArray(m_builder_vao_id);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
 
     return *this;
 }
