@@ -98,3 +98,8 @@ compute normal 함수에 문제가 잇는듯? 자꾸 검은색으로 렌더링�
 제대로 안들어가는 값이 있는듯
 
 glbuffersubdata 호출 전에 반드시 glbuffer data 로 공간 미리 확보해놓기
+
+11월 10일:
+1. phong shading 완료
+
+glsl 디버깅: frag_color 로 비주얼 디버깅 하기
