@@ -7,7 +7,8 @@
 
 #include <GL/glew.h>
 #include <string>
-
+#include <vector>
+#include <glm/glm.hpp>
 class Texture {
 public:
 
@@ -17,9 +18,10 @@ public:
 private:
     GLuint m_textureID;
     int m_width, m_height, m_channels;
+    std::vector<glm::vec2> m_uv;
 
-    std::string typeName;
-    std::string fileName;
+    std::string m_typeName;
+    std::string m_fileName;
 };
 
 

@@ -16,9 +16,6 @@ void PhysicsEntity::setShapeSphere() {
 }
 
 
-void PhysicsEntity::setShapeFromFile(const char *t_file_path) {
-
-}
 
 void PhysicsEntity::logPhysicsEntity() const {
 
@@ -42,6 +39,12 @@ void PhysicsEntity::setShapePlane(float t_w, float t_h, unsigned int t_res_w, un
 
     m_shape=new PlaneShape(t_w,t_h,t_res_w,t_res_h);
 
+    m_has_shape=true;
+
+}
+
+void PhysicsEntity::setShape(Shape &t_shape) {
+    m_shape = new Shape();
     m_has_shape=true;
 
 }

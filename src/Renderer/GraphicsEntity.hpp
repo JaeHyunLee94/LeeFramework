@@ -23,6 +23,8 @@ struct GraphicsData{
     PhysicsEntity* m_mirror_pe;
     bool m_has_nomal{false};
     bool m_has_texture{false};
+
+
     GLuint m_attrib_num;
 //    void logGraphicsData() const{
 //        printf("vertice number: %d\n",m_position->size());

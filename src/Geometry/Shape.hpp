@@ -41,9 +41,11 @@ protected:
     //object space data
     std::vector<glm::vec3> m_vertices;
     std::vector<glm::vec3> m_normal;
+    std::vector<glm::uvec3>m_face_index;
+    //TODO: uv,color -> move to Texture, material class
     std::vector<glm::vec3> m_color;
     std::vector<glm::vec2> m_uv;
-    std::vector<glm::uvec3>m_face_index;
+
 
     //meta data
     SHAPE_TYPE m_shape_type{SHAPE_TYPE_UNDEFINED};
@@ -62,19 +64,19 @@ private:
 };
 
 
-class GeneralShape: public Shape{
-    // Shape from .obj or mtl file
-
-public:
-    explicit GeneralShape(const char* t_file_path){};
-
-protected:
-
-private:
-
-
-
-};
+//class GeneralShape: public Shape{
+//    // Shape from .obj or mtl file
+//
+//public:
+//    explicit GeneralShape(const char* t_file_path){};
+//
+//protected:
+//
+//private:
+//
+//
+//
+//};
 
 
 class PlaneShape: public Shape{

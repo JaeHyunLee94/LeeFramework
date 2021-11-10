@@ -80,12 +80,15 @@ void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
     tmp_graphics_data.m_indices = t_physics_entity->getShape()->getShapeVertexIndices();
     tmp_graphics_data.m_mirror_pe = t_physics_entity;
     tmp_graphics_data.m_model_matrix = t_translateMatrix * t_rotateMatrix;
+    //TODO: Graphics data add more eg) m_has_normal
+    tmp_graphics_data.m_has_nomal=true;
+    tmp_graphics_data.m_has_texture=false;
     m_graphics_data.push_back(tmp_graphics_data);
 
     auto v_position_size = sizeof(glm::vec3) * tmp_graphics_data.m_position->size();
     auto v_uv_size = sizeof(glm::vec3) * tmp_graphics_data.m_uv->size();
     auto v_normal_size = sizeof(glm::vec3) * tmp_graphics_data.m_normal->size();
-    //TODO: Graphics data add more eg) m_has_normal
+
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, v_position_size + v_uv_size + v_normal_size, nullptr, GL_STATIC_DRAW);

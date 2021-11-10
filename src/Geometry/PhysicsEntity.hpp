@@ -30,7 +30,7 @@ public:
     inline void setVel(glm::vec3 t_vel){this->m_vel=t_vel;};
     inline void setRotVel(glm::vec3 t_rot_vel){this->m_rot_vel=t_rot_vel;};
 
-    void setShapeFromFile(const char* t_file_path);
+    void setShape(Shape& t_shape);
     void setShapeBox(float t_len_x,float t_len_y,float t_len_z);
     void setShapeTriangle(float t_x1, float t_y1,float t_z1,
                           float t_x2, float t_y2,float t_z2,

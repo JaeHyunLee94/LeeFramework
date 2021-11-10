@@ -104,3 +104,17 @@ glbuffersubdata 호출 전에 반드시 glbuffer data 로 공간 미리 확보�
 1. phong shading 완료
 
 glsl 디버깅: frag_color 로 비주얼 디버깅 하기
+
+11월 11일:
+chess board ground 를 만드는 과정에서 설계에 관한 의문점이 들었음
+1. physics entity 가 uv, color 정보를 가지고 있는게 맞는가? (물리 코드는 최대한 렌더링에 관한 정보를 몰라야 한다)
+2. 아니라면 color 정보와 uv 정보는 어떻게 이용하여 렌더링 하는가?
+3. assimp 를 통해 load 한 mesh 정보에는 position,normal,index,color,uv 가 같이 들어가 있을텐데 이는 어떻게 하는가?
+
+해결책:
+Mesh Loader 클래스를 만들어서 assimp 로 processing 후 Texture, Material, Shape 클래스로 나누어서 return. 그 후에 register graphics entity 에서 세 정보를 따로 넣어준다.
+여기서 model loading 은 shape 클래스가 아닌 mesh loader 클래스가 책임지기!!
+chessboard와 같이 vertex마다 는 따로 util 로 빼는 방법도 있음.
+아니면 physics entity 가 shape 를 여러개 가질 수 있도록 하는 방법도 있음
+
+
