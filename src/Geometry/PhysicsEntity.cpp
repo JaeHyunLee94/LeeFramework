@@ -15,9 +15,6 @@ void PhysicsEntity::setShapeSphere() {
 
 }
 
-void PhysicsEntity::setShapePlane() {
-
-}
 
 void PhysicsEntity::setShapeFromFile(const char *t_file_path) {
 
@@ -37,6 +34,14 @@ void PhysicsEntity::setShapeTriangle(float t_x1, float t_y1, float t_z1, float t
                          t_x2,t_y2,t_z2,
                          t_x3,t_y3,t_z3
                          );
+    m_has_shape=true;
+
+}
+
+void PhysicsEntity::setShapePlane(float t_w, float t_h, unsigned int t_res_w, unsigned int t_res_h) {
+
+    m_shape=new PlaneShape(t_w,t_h,t_res_w,t_res_h);
+
     m_has_shape=true;
 
 }

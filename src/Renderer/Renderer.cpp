@@ -138,6 +138,7 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
     m_shader->setUniform("projMat", m_camera->getProjectionMatrix());
     glBindBuffer(GL_ARRAY_BUFFER, t_graphics_data.m_VBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, t_graphics_data.m_EBO);
+
     glDrawElements(GL_TRIANGLES, t_graphics_data.m_indices->size() * 3, GL_UNSIGNED_INT, (void *) 0);
 
 }

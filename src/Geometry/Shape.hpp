@@ -82,7 +82,12 @@ class PlaneShape: public Shape{
 
 public:
 
-    PlaneShape()= default;
+    PlaneShape(float t_w,float t_h,unsigned int t_res_w, unsigned int t_res_h){
+
+
+
+    };
+
 
 
 protected:

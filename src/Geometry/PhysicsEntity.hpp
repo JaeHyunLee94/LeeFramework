@@ -36,7 +36,7 @@ public:
                           float t_x2, float t_y2,float t_z2,
                           float t_x3, float t_y3,float t_z3);
     void setShapeSphere();
-    void setShapePlane();
+    void setShapePlane(float t_w,float t_h,unsigned int resolution_w,unsigned int resolution_h);
     inline bool hasShape() const{return m_has_shape;};
 
     void logPhysicsEntity() const;
@@ -53,6 +53,8 @@ private:
     Shape* m_shape{nullptr};
 
 };
+
+
 
 
 #endif //LEEFRAMEWORK_PHYSICSENTITY_HPP

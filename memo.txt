@@ -91,6 +91,7 @@ TODO:
 3. input handler //완료
 4. 중력 주기
 5. phong lighting
+6. imgui camera sensitivity
 
 11월 9일
 phong lighting 구현중
