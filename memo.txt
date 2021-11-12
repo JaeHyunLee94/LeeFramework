@@ -117,4 +117,13 @@ Mesh Loader 클래스를 만들어서 assimp 로 processing 후 Texture, Materia
 chessboard와 같이 vertex마다 는 따로 util 로 빼는 방법도 있음.
 아니면 physics entity 가 shape 를 여러개 가질 수 있도록 하는 방법도 있음
 
+11월12일:
+assimp 가 계속 애먹임
+find_package 로 하면 assimp_found 가 true 가 안됨 자꾸
+그리고 config.h 파일은 cmake 로 직접 빌드를 해서 include 파일에 가져다 놔야 하는듯(mac에서 확인)
+add_subdirectory 만 먹히는데 왜 이러는지 모르겠음
+그리고 link library 이름이 assimp_LIBRARIES 가 아니라 assimp로 해야 된다...왜 이러는지..
+
+
+
 
