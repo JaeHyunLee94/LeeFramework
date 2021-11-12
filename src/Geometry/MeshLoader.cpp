@@ -7,6 +7,11 @@
 
 void MeshLoader::load(const char *t_file_path) {
 
+    //TODO: add library
+    Assimp::Importer importer;
+    const aiScene* scene = importer.ReadFile("../../assets/ChessKing.obj",aiProcess_Triangulate| aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+
+
 }
 
 void MeshLoader::destroy() {

@@ -1,5 +1,5 @@
 //
-// Created by 이재현 on 2021/07/11.
+// Created by Lee on 2021/07/11.
 //
 
 #ifndef LEEFRAMEWORK_GRAPHICSENTITY_HPP

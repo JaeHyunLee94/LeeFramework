@@ -1,5 +1,5 @@
 //
-// Created by 이재현 on 2021/05/29.
+// Created by Lee on 2021/05/29.
 //
 
 #ifndef LEEFRAMEWORK_CAMERA_HPP
