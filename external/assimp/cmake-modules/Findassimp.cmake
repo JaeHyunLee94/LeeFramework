@@ -3,7 +3,8 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
 	set(ASSIMP_ARCHITECTURE "32")
 endif(CMAKE_SIZEOF_VOID_P EQUAL 8)
-	
+
+
 if(WIN32)
 	set(ASSIMP_ROOT_DIR CACHE PATH "ASSIMP root directory")
 
@@ -49,7 +50,6 @@ if(WIN32)
 		ENDFUNCTION(ASSIMP_COPY_BINARIES)
 	
 	endif()
-	
 else(WIN32)
 
 	find_path(

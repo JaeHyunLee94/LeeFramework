@@ -53,11 +53,10 @@ include_directories(external/imgui/include)
 
 ### assimp ###
 message("Processing assimp")
-find_package(ASSIMP REQUIRED)
-if(ASSIMP_FOUND)
-    message("assimp found")
-endif()
-
+#find_package(ASSIMP REQUIRED)
+#if(ASSIMP_FOUND)
+#    message("assimp found")
+#endif()
 #if(ASSIMP_FOUND)
 #    message("assimp found")
 #    include_directories(${ASSIMP_INCLUDE_DIR})
@@ -73,11 +72,8 @@ endif()
 #else()
 #    message("assimp not found!!")
 #endif(assimp_FOUND)
-
-
 set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "ASSIMP_BUILD_TESTS")
 add_subdirectory("${PROJECT_SOURCE_DIR}/external/assimp")
-message(STATUS "ASSIMP_INCLUDE include dir: ${ASSIMP_INCLUDE}")
 include_directories(${PROJECT_SOURCE_DIR}/external/assimp/include)
 ##############
 
