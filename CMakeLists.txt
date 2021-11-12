@@ -96,7 +96,7 @@ target_link_libraries(leeFramework ${ASSIMP_LIBRARIES})
 
 target_link_libraries(sampleScene2 ${OPENGL_LIBRARIES})
 target_link_libraries(sampleScene2 glfw ${GLFW_LIBRARIES})
-target_link_libraries(sampleScene2 assimp::assimp)
+target_link_libraries(sampleScene2 assimp)
 
 get_target_property(OUT sampleScene2 LINK_LIBRARIES)
 message(STATUS ${OUT})
