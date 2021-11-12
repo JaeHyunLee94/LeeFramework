@@ -13,6 +13,16 @@ class Texture {
 public:
 
     Texture();
+    void gen();
+    void bind();
+    void setWrapping();
+    std::vector<glm::vec2>* getUV();
+    int getWidth();
+    int getHeight();
+    GLuint getTextureID();
+
+
+
 //    Texture(const char* fileName,GLenum type);
 //    void load(const char* fileName,GLenum type);
 private:
@@ -21,7 +31,7 @@ private:
     std::vector<glm::vec2> m_uv;
 
     std::string m_typeName;
-    std::string m_fileName;
+    std::string m_image_path;
 };
 
 

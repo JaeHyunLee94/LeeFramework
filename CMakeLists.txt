@@ -15,10 +15,12 @@ find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR}  ${GLUT_INCLUDE_DIRS})
 
 set(CMAKE_MODULE_PATH
-        ${CMAKE_MODULE_PATH};
-        ${CMAKE_SOURCE_DIR}/external/glfw/CMake;
-        ${CMAKE_SOURCE_DIR}/external/assimp/cmake-modules;
+        ${CMAKE_MODULE_PATH}
+        ${CMAKE_SOURCE_DIR}/external/glfw/CMake
+        ${PROJECT_SOURCE_DIR}/external/assimp/cmake-modules
+#        ${CMAKE_CURRENT_SOURCE_DIR}/external/assimp/cmake-modules
         )
+
 
 ### GLFW
 message("processing GLFW...")
@@ -51,15 +53,33 @@ include_directories(external/imgui/include)
 
 ### assimp ###
 message("Processing assimp")
-#find_package(ASSIMP REQUIRED)
+find_package(ASSIMP REQUIRED)
+if(ASSIMP_FOUND)
+    message("assimp found")
+endif()
+
 #if(ASSIMP_FOUND)
 #    message("assimp found")
 #    include_directories(${ASSIMP_INCLUDE_DIR})
+#    else()
+#    message("assimp not found")
 #endif()
+#find_package(assimp REQUIRED)
+#if (assimp_FOUND)
+#    message("assimp found")
+#    set(ASSIMP_LIBRARY "assimp")
+#    add_library(${ASSIMP_LIBRARY} SHARED IMPORTED)
+#    set_target_properties(${ASSIMP_LIBRARY} PROPERTIES IMPORTED_LOCATION "${ASSIMP_LIBRARY_DIRS}/libassimp.so")
+#else()
+#    message("assimp not found!!")
+#endif(assimp_FOUND)
+
+
 set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "ASSIMP_BUILD_TESTS")
 add_subdirectory("${PROJECT_SOURCE_DIR}/external/assimp")
+message(STATUS "ASSIMP_INCLUDE include dir: ${ASSIMP_INCLUDE}")
 include_directories(${PROJECT_SOURCE_DIR}/external/assimp/include)
-###############
+##############
 
 ### google test ###
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/googletest)

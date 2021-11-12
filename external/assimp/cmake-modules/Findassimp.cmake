@@ -68,6 +68,7 @@ else(WIN32)
 	  PATHS /usr/lib/
 	)
 
+
 	if (assimp_INCLUDE_DIRS AND assimp_LIBRARIES)
 	  SET(assimp_FOUND TRUE)
 	ENDIF (assimp_INCLUDE_DIRS AND assimp_LIBRARIES)

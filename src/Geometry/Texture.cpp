@@ -67,3 +67,31 @@ Texture::Texture() {
 
 }
 
+void Texture::bind() {
+
+}
+
+void Texture::setWrapping() {
+
+}
+
+std::vector<glm::vec2> *Texture::getUV() {
+    return nullptr;
+}
+
+int Texture::getWidth() {
+    return 0;
+}
+
+int Texture::getHeight() {
+    return 0;
+}
+
+GLuint Texture::getTextureID() {
+    return 0;
+}
+
+void Texture::gen() {
+
+}
+
