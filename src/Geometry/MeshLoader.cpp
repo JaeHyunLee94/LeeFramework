@@ -9,7 +9,85 @@ void MeshLoader::load(const char *t_file_path) {
 
     //TODO: add library
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile("../../assets/ChessKing.obj",aiProcess_Triangulate| aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+    std::cout << "model loading....\n";
+    const aiScene *scene = importer.ReadFile(t_file_path,
+                                             aiProcess_Triangulate |
+                                             aiProcess_GenSmoothNormals |
+                                             aiProcess_FlipUVs |
+                                             aiProcess_CalcTangentSpace |
+                                             aiProcess_OptimizeMeshes |
+                                             aiProcess_OptimizeGraph);
+
+    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
+        std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
+        return;
+    }
+
+
+    auto rootNode = scene->mRootNode;
+    for (int i = 0; i < rootNode->mNumMeshes; i++) {
+        aiMesh *mesh = scene->mMeshes[i];
+
+        Shape t_shape;
+        Material t_mat;
+
+        if (mesh->HasPositions()) {
+
+            for (int j = 0; j < mesh->mNumVertices; j++) {
+
+                t_shape.getShapeVertices()->push_back(
+                        glm::vec3(mesh->mVertices[j].x, mesh->mVertices[j].y, mesh->mVertices[j].z));
+
+            }
+
+
+        }
+        if (mesh->HasFaces()) {
+            for (int j = 0; j < mesh->mNumFaces; j++) {
+                glm::uvec3 index;
+                index.x = j < mesh->mFaces->mIndices[0];
+                index.y = j < mesh->mFaces->mIndices[1];
+                index.z = j < mesh->mFaces->mIndices[2];
+
+                t_shape.getShapeVertexIndices()->push_back(index);
+
+            }
+
+        }
+        if (mesh->HasNormals()) {
+            for (int j = 0; j < mesh->mNumVertices; j++) {
+                t_shape.getNormal()->push_back(
+                        glm::vec3(mesh->mNormals[j].x, mesh->mNormals[j].y, mesh->mNormals[j].z));
+
+            }
+
+        }
+        if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
+        {
+            for (int j = 0; j < mesh->mNumVertices; j++) {
+
+                glm::vec2 vec;
+                // a vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't
+                // use models where a vertex can have multiple texture coordinates so we always take the first set (0).
+                vec.x = mesh->mTextureCoords[0][i].x;
+                vec.y = mesh->mTextureCoords[0][i].y;
+                t_mat.m_diffuse_uv.push_back(vec);
+
+
+            }
+
+        } else {
+            t_mat.m_has_diffuse_texture = false;
+        }
+
+
+        m_loaded_shape.push_back(t_shape);
+        m_loaded_material.push_back(t_mat);
+
+
+    }
+
+    std::cout << "model loading ended !\n";
 
 
 }
@@ -22,14 +100,11 @@ Shape MeshLoader::getShape() {
     return Shape();
 }
 
-Texture MeshLoader::getTexture() {
-    return Texture();
-}
 
 Material MeshLoader::getMaterial() {
     return Material();
 }
-
-void MeshLoader::processMesh(aiMesh *mesh, const aiScene *pscene) {
-
-}
+//
+//void MeshLoader::processMesh(aiMesh *mesh, const aiScene *pscene) {
+//
+//}
