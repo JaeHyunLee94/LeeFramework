@@ -45,9 +45,10 @@ void MeshLoader::load(const char *t_file_path) {
         if (mesh->HasFaces()) {
             for (int j = 0; j < mesh->mNumFaces; j++) {
                 glm::uvec3 index;
-                index.x = j < mesh->mFaces->mIndices[0];
-                index.y = j < mesh->mFaces->mIndices[1];
-                index.z = j < mesh->mFaces->mIndices[2];
+                mesh->mFaces[j].mIndices[0];
+                index.x = mesh->mFaces[j].mIndices[0];
+                index.y =  mesh->mFaces[j].mIndices[1];
+                index.z =  mesh->mFaces[j].mIndices[2];
 
                 t_shape.getShapeVertexIndices()->push_back(index);
 
@@ -69,8 +70,8 @@ void MeshLoader::load(const char *t_file_path) {
                 glm::vec2 vec;
                 // a vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't
                 // use models where a vertex can have multiple texture coordinates so we always take the first set (0).
-                vec.x = mesh->mTextureCoords[0][i].x;
-                vec.y = mesh->mTextureCoords[0][i].y;
+                vec.x = mesh->mTextureCoords[0][j].x;
+                vec.y = mesh->mTextureCoords[0][j].y;
                 t_mat.m_diffuse_uv.push_back(vec);
 
 

@@ -6,7 +6,6 @@
 #include "Renderer/Renderer.hpp"
 #include "Geometry/PhysicsEntity.hpp"
 #include <iostream>
-#include <libc.h>
 #include "utils/UtilHeader.h"
 #include "Geometry/MeshLoader.hpp"
 
@@ -45,10 +44,6 @@ int main() {
                          0.0f,  1.0f, 0.0f);
     pe4.setShapeBox(0.2,0.2,0.2);
 
-
-    char tmp[256];
-    getcwd(tmp, 256);
-    std::cout << "Current working directory: " << tmp << std::endl;
 
     MeshLoader loader;
     loader.load("../assets/ChessKing.obj");
