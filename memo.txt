@@ -124,6 +124,11 @@ find_package 로 하면 assimp_found 가 true 가 안됨 자꾸
 add_subdirectory 만 먹히는데 왜 이러는지 모르겠음
 그리고 link library 이름이 assimp_LIBRARIES 가 아니라 assimp로 해야 된다...왜 이러는지..
 
+11월 15일:
+mesh load 거의 완료
+Texture 를 Material 의 하위 class 로 재 설계함
+이로써 loaded mesh = shape + material 로 분할
+
 
 
 
