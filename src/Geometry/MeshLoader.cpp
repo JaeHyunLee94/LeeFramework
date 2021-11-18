@@ -13,10 +13,7 @@ void MeshLoader::load(const char *t_file_path) {
     const aiScene *scene = importer.ReadFile(t_file_path,
                                              aiProcess_Triangulate |
                                              aiProcess_GenSmoothNormals |
-                                             aiProcess_FlipUVs |
-                                             aiProcess_CalcTangentSpace |
-                                             aiProcess_OptimizeMeshes |
-                                             aiProcess_OptimizeGraph);
+                                             aiProcess_FlipUVs);
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
