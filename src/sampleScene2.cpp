@@ -8,6 +8,7 @@
 #include <iostream>
 #include "utils/UtilHeader.h"
 #include "Geometry/MeshLoader.hpp"
+#include "Physics/PhyEngine.hpp"
 
 
 int main() {
@@ -37,6 +38,7 @@ int main() {
 
 
     PhysicsEntity pe4;
+    pe4.setMass(1);
 
     pe4.setShapeBox(0.2,0.2,0.2);
     pe4.setShapeTriangle(-1.0f, -1.0f, 0.0f,
@@ -66,7 +68,25 @@ int main() {
     renderer->registerGraphicsEntity(&pe3);
     renderer->registerGraphicsEntity(&pe4);
 
-    renderer->render();
+    Engine::World world;
+    world.create();
+
+    world.addEntity(&pe4);
+    world.setGravity(glm::vec3(0,0,-0.098));
+    world.setTimeStep(1.f/600);
+    glBindVertexArray(renderer->getVAO());
+
+
+    //TODO: no loop in render function
+    while (!glfwWindowShouldClose(renderer->getWindow())) {
+        renderer->render();
+        world.stepWorld();
+
+    }
+
+    glBindVertexArray(0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 
 }

@@ -19,11 +19,14 @@ public:
       delete m_shape;
     };
 
+    void transport(float dt);
+
     inline Shape* getShape() const {return m_shape;};
     inline glm::vec3 getPos() const {return m_pos;};
     inline glm::quat getRotation() const{return m_rot;};
     inline glm::vec3 getVel() const{return m_vel;};
     inline glm::vec3 getRotVel() const{return m_rot_vel;};
+    inline float getMass()const{return m_mass;};
 
     inline void setPos(glm::vec3 t_pos){this->m_pos=t_pos;};
     inline void setRot(glm::quat t_rot){this->m_rot=t_rot;};
@@ -31,12 +34,17 @@ public:
     inline void setRotVel(glm::vec3 t_rot_vel){this->m_rot_vel=t_rot_vel;};
 
     void setShape(Shape& t_shape);
+    inline void setMass(float t_mass){this->m_mass= t_mass;};
     void setShapeBox(float t_len_x,float t_len_y,float t_len_z);
     void setShapeTriangle(float t_x1, float t_y1,float t_z1,
                           float t_x2, float t_y2,float t_z2,
                           float t_x3, float t_y3,float t_z3);
     void setShapeSphere();
     void setShapePlane(float t_w,float t_h,unsigned int resolution_w,unsigned int resolution_h);
+
+    void applyForce(float dt, glm::vec3 t_force);
+
+
     inline bool hasShape() const{return m_has_shape;};
 
     void logPhysicsEntity() const;
@@ -52,6 +60,7 @@ private:
 
     Shape* m_shape{nullptr};
 
+    float m_mass{0.1};
 };
 
 

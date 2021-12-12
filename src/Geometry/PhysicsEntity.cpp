@@ -48,3 +48,18 @@ void PhysicsEntity::setShape(Shape &t_shape) {
     m_has_shape=true;
 
 }
+
+void PhysicsEntity::transport(float dt) {
+    m_pos+=dt*m_vel;
+    printf("m_pos: %f,%f,%f\n", m_pos.x,m_pos.y,m_pos.z);
+}
+
+void PhysicsEntity::applyForce(float dt,glm::vec3 t_force) {
+    glm::vec3 impulse = dt*t_force;
+    printf("m_impulse: %f,%f,%f\n", impulse.x,impulse.y,impulse.z);
+    printf("t_force: %f,%f,%f\n", t_force.x,t_force.y,t_force.z);
+    printf("dt: %f\n",dt);
+
+    m_vel+=impulse/m_mass;
+    transport(dt);
+}

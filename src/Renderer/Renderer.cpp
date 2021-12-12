@@ -17,24 +17,26 @@ Camera &Renderer::getCamera() {
 void Renderer::render() {
     glBindVertexArray(m_vao_id);
 
-    while (!glfwWindowShouldClose(m_window)) {
-        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        for (auto &g_data : m_graphics_data) {
 
-            renderEach(g_data);
+    //TODO: no loop in render function
 
-        }
+    glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    for (auto &g_data : m_graphics_data) {
 
-        glfwPollEvents();
-        m_input_handler.handleInput();
-        int display_w, display_h;
-        glfwGetFramebufferSize(m_window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        m_input_handler.handleInput();
+        renderEach(g_data);
 
-        glfwSwapBuffers(m_window);
     }
+
+    glfwPollEvents();
+    m_input_handler.handleInput();
+    int display_w, display_h;
+    glfwGetFramebufferSize(m_window, &display_w, &display_h);
+    glViewport(0, 0, display_w, display_h);
+    m_input_handler.handleInput();
+
+    glfwSwapBuffers(m_window);
+
 
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -79,10 +81,12 @@ void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
     tmp_graphics_data.m_normal = t_physics_entity->getShape()->getNormal();
     tmp_graphics_data.m_indices = t_physics_entity->getShape()->getShapeVertexIndices();
     tmp_graphics_data.m_mirror_pe = t_physics_entity;
+
+    //TODO: tmp_graphics_data.m_model_matrix is it really need?
     tmp_graphics_data.m_model_matrix = t_translateMatrix * t_rotateMatrix;
     //TODO: Graphics data add more eg) m_has_normal
-    tmp_graphics_data.m_has_nomal=true;
-    tmp_graphics_data.m_has_texture=false;
+    tmp_graphics_data.m_has_nomal = true;
+    tmp_graphics_data.m_has_texture = false;
     m_graphics_data.push_back(tmp_graphics_data);
 
     auto v_position_size = sizeof(glm::vec3) * tmp_graphics_data.m_position->size();
@@ -135,8 +139,13 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
     m_shader->setUniform("Ke", glm::vec3(0, 0, 0));
     m_shader->setUniform("sh", 0.01);
 
+
+    auto t_translateMatrix = glm::translate(glm::mat4(1.0f), t_graphics_data.m_mirror_pe->getPos());
+    auto t_rotateMatrix = glm::mat4(1);//TODO
+
+
     debug_glCheckError("shader material property error");
-    m_shader->setUniform("modelMat", t_graphics_data.m_model_matrix);
+    m_shader->setUniform("modelMat", t_translateMatrix * t_rotateMatrix);
     m_shader->setUniform("viewMat", m_camera->getViewMatrix());
     m_shader->setUniform("projMat", m_camera->getProjectionMatrix());
     glBindBuffer(GL_ARRAY_BUFFER, t_graphics_data.m_VBO);
@@ -190,7 +199,7 @@ Renderer::Builder &Renderer::Builder::init() {
 
 #if defined(__APPLE__)
     // GL 3.2 + GLSL 150
-    const char* glsl_version = "#version 150";
+    const char *glsl_version = "#version 150";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
