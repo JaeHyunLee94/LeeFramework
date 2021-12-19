@@ -135,6 +135,9 @@ Texture 를 Material 의 하위 class 로 재 설계함
 mesh loader 는 나중에 짜도 됌
 gravity, collision, resolution, ground 부터 짜자
 
+12월 19일:
+system 에 따라 일정한 frame으로 하기
+
 
 
 
