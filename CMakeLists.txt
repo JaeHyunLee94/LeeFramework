@@ -87,7 +87,7 @@ include_directories(${gmock_SOURCE_DIR}/include)
 file(GLOB all_src  "src/Renderer/*.cpp" "src/Renderer/*.hpp" "src/Geometry/*.cpp" "src/Geometry/*.hpp" "src/Physics/*.hpp" "src/Physics/*.cpp" "src/utils/*.h" "src/utils/*.cpp")
 
 ## add target
-add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} ${all_src} test/CameraTest.cpp)
+add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} ${all_src} test/CameraTest.cpp src/Physics/Constraint.cpp src/Physics/Constraint.hpp src/Physics/Collision/CollisionHandler.cpp src/Physics/Collision/CollisionHandler.hpp)
 add_executable(sampleScene2 src/sampleScene2.cpp  ${glew_src} ${all_src})
 
 target_link_libraries(leeFramework ${OPENGL_LIBRARIES})
