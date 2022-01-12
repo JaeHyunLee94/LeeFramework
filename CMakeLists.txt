@@ -46,9 +46,6 @@ message("include Eigen...")
 include_directories(${PROJECT_SOURCE_DIR}/external/eigen-3.3.9/)
 
 
-### imgui library
-file(GLOB imgui_src  "external/imgui/include/imgui/*.cpp" "external/imgui/include/imgui/*.h")
-include_directories(external/imgui/include)
 
 
 ### assimp ###
@@ -75,24 +72,35 @@ message("Processing assimp")
 set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "ASSIMP_BUILD_TESTS")
 add_subdirectory("${PROJECT_SOURCE_DIR}/external/assimp")
 include_directories(${PROJECT_SOURCE_DIR}/external/assimp/include)
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 ##############
 
 ### google test ###
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/googletest)
 include_directories(${gtest_SOURCE_DIR}/include)
 include_directories(${gmock_SOURCE_DIR}/include)
-#add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 
+add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 
-file(GLOB all_src  "src/Renderer/*.cpp" "src/Renderer/*.hpp" "src/Geometry/*.cpp" "src/Geometry/*.hpp" "src/Physics/*.hpp" "src/Physics/*.cpp" "src/utils/*.h" "src/utils/*.cpp")
+file(GLOB_RECURSE RENDERER_SRC "src/Renderer/*.cpp" "src/Renderer/*.hpp"  )
+file(GLOB_RECURSE PHYSICS_SRC  "src/Physics/*.cpp" "src/Physics/*.hpp" "src/Physics/*.h"  )
+file(GLOB_RECURSE GEOMETRY_SRC  "src/Geometry/*.cpp" "src/Geometry/*.hpp" )
+file(GLOB_RECURSE UTIL_SRC  "src/utils/*.cpp" "src/utils/*.hpp" )
+file(GLOB  all_src  "src/Geometry/*.cpp" "src/Geometry/*.hpp" "src/Physics/*.hpp" "src/Physics/*.cpp" "src/utils/*.h" "src/utils/*.cpp")
 
 ## add target
-add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} ${all_src} test/CameraTest.cpp src/Physics/Constraint.cpp src/Physics/Constraint.hpp src/Physics/Collision/CollisionHandler.cpp src/Physics/Collision/CollisionHandler.hpp)
-add_executable(sampleScene2 src/sampleScene2.cpp  ${glew_src} ${all_src})
+#add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} ${all_src} test/CameraTest.cpp src/Physics/Constraint.cpp src/Physics/Constraint.hpp src/Physics/Collision/CollisionHandler.cpp src/Physics/Collision/CollisionHandler.hpp)
+add_executable(sampleScene2
+        src/sampleScene2.cpp
+        ${glew_src}
+        ${RENDERER_SRC}
+        ${PHYSICS_SRC}
+        ${GEOMETRY_SRC}
+        ${UTIL_SRC})
 
-target_link_libraries(leeFramework ${OPENGL_LIBRARIES})
-target_link_libraries(leeFramework glfw ${GLFW_LIBRARIES})
-target_link_libraries(leeFramework ${ASSIMP_LIBRARIES})
+#target_link_libraries(leeFramework ${OPENGL_LIBRARIES})
+#target_link_libraries(leeFramework glfw ${GLFW_LIBRARIES})
+#target_link_libraries(leeFramework ${ASSIMP_LIBRARIES})
 
 target_link_libraries(sampleScene2 ${OPENGL_LIBRARIES})
 target_link_libraries(sampleScene2 glfw ${GLFW_LIBRARIES})

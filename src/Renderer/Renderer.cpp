@@ -235,6 +235,9 @@ Renderer::Builder &Renderer::Builder::init() {
     glBindVertexArray(m_builder_vao_id);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
 
     return *this;
 }
