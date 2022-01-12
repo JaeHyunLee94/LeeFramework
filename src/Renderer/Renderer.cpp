@@ -29,12 +29,9 @@ void Renderer::render() {
     }
 
     glfwPollEvents();
-    m_input_handler.handleInput();
     int display_w, display_h;
     glfwGetFramebufferSize(m_window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
-    m_input_handler.handleInput();
-
     glfwSwapBuffers(m_window);
 
 
@@ -175,9 +172,6 @@ Renderer::Builder::light(const glm::vec3 &src_pos, const glm::vec3 &light_dir, c
     return *this;
 }
 
-Renderer::Builder &Renderer::Builder::gui() {
-    return *this;
-}
 
 Renderer *Renderer::Builder::build() {
 
@@ -235,8 +229,8 @@ Renderer::Builder &Renderer::Builder::init() {
     glBindVertexArray(m_builder_vao_id);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+//    glEnable(GL_DEPTH_TEST);
+//    glDepthFunc(GL_LESS);
 
 
     return *this;

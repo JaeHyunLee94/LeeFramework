@@ -60,6 +60,8 @@ int main() {
                    glm::vec3(0,0,0))
             .build();
 
+    auto handler = new InputHandler(renderer,renderer->getWindow());
+
     renderer->getCamera().logCameraProperty();
     renderer->getLight().logLightProperty();
 
@@ -74,12 +76,15 @@ int main() {
     world.addEntity(&pe4);
     world.setGravity(glm::vec3(0,0,-0.098));
     world.setTimeStep(1.f/600);
+
+
     glBindVertexArray(renderer->getVAO());
 
 
     //TODO: no loop in render function
     while (!glfwWindowShouldClose(renderer->getWindow())) {
         renderer->render();
+        handler->handleInput();
         world.stepWorld();
 
     }

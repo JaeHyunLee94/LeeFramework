@@ -72,15 +72,14 @@ message("Processing assimp")
 set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "ASSIMP_BUILD_TESTS")
 add_subdirectory("${PROJECT_SOURCE_DIR}/external/assimp")
 include_directories(${PROJECT_SOURCE_DIR}/external/assimp/include)
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 ##############
 
 ### google test ###
-add_subdirectory(${PROJECT_SOURCE_DIR}/external/googletest)
-include_directories(${gtest_SOURCE_DIR}/include)
-include_directories(${gmock_SOURCE_DIR}/include)
+#add_subdirectory(${PROJECT_SOURCE_DIR}/external/googletest)
+#include_directories(${gtest_SOURCE_DIR}/include)
+#include_directories(${gmock_SOURCE_DIR}/include)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/test)
+#add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 
 file(GLOB_RECURSE RENDERER_SRC "src/Renderer/*.cpp" "src/Renderer/*.hpp"  )
 file(GLOB_RECURSE PHYSICS_SRC  "src/Physics/*.cpp" "src/Physics/*.hpp" "src/Physics/*.h"  )
@@ -103,7 +102,7 @@ add_executable(sampleScene2
 #target_link_libraries(leeFramework ${ASSIMP_LIBRARIES})
 
 target_link_libraries(sampleScene2 ${OPENGL_LIBRARIES})
-target_link_libraries(sampleScene2 glfw ${GLFW_LIBRARIES})
+target_link_libraries(sampleScene2 glfw )
 target_link_libraries(sampleScene2 assimp)
 
 get_target_property(OUT sampleScene2 LINK_LIBRARIES)

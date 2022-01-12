@@ -7,6 +7,9 @@
 
 
 #include <vector>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 #define KEYS 349
 
 class Renderer;
@@ -15,9 +18,9 @@ class InputHandler {
 
 
 public:
-    InputHandler(Renderer* renderer):m_pressed(KEYS,false){
-        this->m_parent_renderer=renderer;
-    };
+    InputHandler(Renderer* renderer,GLFWwindow* m_window);
+
+
 
     //TODO: all the input processed here
     void handleInput();//run every frame + mouse moved
@@ -40,6 +43,7 @@ private:
     bool is_left_mouse_released=false;
     std::vector<bool> m_pressed;
     Renderer* m_parent_renderer;
+    GLFWwindow* m_window;
 
 
 };
