@@ -138,6 +138,11 @@ gravity, collision, resolution, ground 부터 짜자
 12월 19일:
 system 에 따라 일정한 frame으로 하기
 
+1월 13일:
+1. light 바꾸기
+2. system 에 따라 일정한 frame으로 바꾸기
+3. 1차 마일스톤: Renderer 구조 완성하기
+
 
 
 
