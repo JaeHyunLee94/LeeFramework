@@ -81,7 +81,7 @@ include_directories(${PROJECT_SOURCE_DIR}/external/assimp/include)
 
 #add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 
-file(GLOB_RECURSE RENDERER_SRC "src/Renderer/*.cpp" "src/Renderer/*.hpp"  )
+file(GLOB_RECURSE RENDERER_SRC "src/Renderer/*.cpp" "src/Renderer/*.hpp" "src/Renderer/*.h")
 file(GLOB_RECURSE PHYSICS_SRC  "src/Physics/*.cpp" "src/Physics/*.hpp" "src/Physics/*.h"  )
 file(GLOB_RECURSE GEOMETRY_SRC  "src/Geometry/*.cpp" "src/Geometry/*.hpp" )
 file(GLOB_RECURSE UTIL_SRC  "src/utils/*.cpp" "src/utils/*.hpp" )

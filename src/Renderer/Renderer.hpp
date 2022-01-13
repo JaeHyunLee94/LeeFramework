@@ -78,6 +78,7 @@ public:
     GLuint getVAO() const { return m_vao_id;};
 
     void render();
+    void render(GUIwrapper& gui);
 
 
 //    void bindVAO(GLuint vao);

@@ -4,6 +4,7 @@
 #define GLEW_STATIC
 
 #include "Renderer/Renderer.hpp"
+#include "Renderer/GUIwrapper.hpp"
 #include "Geometry/PhysicsEntity.hpp"
 #include <iostream>
 #include "utils/UtilHeader.h"
@@ -61,6 +62,19 @@ int main() {
             .build();
 
     auto handler = new InputHandler(renderer,renderer->getWindow());
+    GUIwrapper guiwrapper;
+
+    float col[3] ={0.2,0.2,0.2};
+    float slider=0.0;
+
+    guiwrapper
+    .init(renderer->getWindow())
+        .startGroup("start group")
+        .addWidgetText("Application average %.3f ms/frame (%.1f FPS)",1000.0f/guiwrapper.getIO().Framerate,guiwrapper.getIO().Framerate)
+        .addWidgetColorEdit3("color Edit pallete",col)
+        .addWidgetSliderFloat("slider float",&slider,0.1,1)
+        .endGroup()
+    .build();
 
     renderer->getCamera().logCameraProperty();
     renderer->getLight().logLightProperty();
@@ -83,8 +97,9 @@ int main() {
 
     //TODO: no loop in render function
     while (!glfwWindowShouldClose(renderer->getWindow())) {
-        renderer->render();
+        renderer->render(guiwrapper); //render with GUI
         handler->handleInput();
+
         world.stepWorld();
 
     }

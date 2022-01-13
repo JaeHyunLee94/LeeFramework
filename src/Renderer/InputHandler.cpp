@@ -42,11 +42,11 @@ void InputHandler::handleInput() {
 
     //mouse process
 
-    if (is_left_mouse_pressed && m_pressed[GLFW_KEY_LEFT_ALT]) {
-        if(is_click_first) {
+    if (is_right_mouse_pressed) {
+        if(is_right_mouse_click_first) {
             m_cursor_previous_x_pos=m_cursor_x_pos;
             m_cursor_previous_y_pos=m_cursor_y_pos;
-            is_click_first=false;
+            is_right_mouse_click_first=false;
         }
 
         double xoffset = m_cursor_previous_x_pos - m_cursor_x_pos;
@@ -59,7 +59,7 @@ void InputHandler::handleInput() {
 
 
     }else{
-        is_click_first=true;
+        is_right_mouse_click_first=true;
     }
 
 
@@ -101,16 +101,17 @@ InputHandler::InputHandler(Renderer *renderer,GLFWwindow* m_window):m_pressed(KE
 
         auto &self = *static_cast<InputHandler *>(glfwGetWindowUserPointer(window));
 
-        if (glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+        if (glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
 
             self.setCursorPos(xpos,ypos);
-            self.setIsLeftMouseClicked(true);
+            self.setIsRightMouseClicked(true);
 
 
-        }else if(glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE){
+        }else if(glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE){
             self.setCursorPos(xpos,ypos);
-            self.setIsClickedFirst(true);
+            self.setIsRightMouseClickedFirst(true);
         }
+
 
 
     });

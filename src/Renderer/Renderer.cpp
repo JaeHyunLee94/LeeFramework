@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 #include "GraphicsEntity.hpp"
 #include "../Geometry/PhysicsEntity.hpp"
+#include "GUIwrapper.hpp"
 
 
 Camera &Renderer::getCamera() {
@@ -17,17 +18,39 @@ Camera &Renderer::getCamera() {
 void Renderer::render() {
     glBindVertexArray(m_vao_id);
 
+    //TODO: no loop in render function
+
+    glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    for (auto &g_data : m_graphics_data) {
+        renderEach(g_data);
+    }
+
+    glfwPollEvents();
+    int display_w, display_h;
+    glfwGetFramebufferSize(m_window, &display_w, &display_h);
+    glViewport(0, 0, display_w, display_h);
+    glfwSwapBuffers(m_window);
+
+
+    glBindVertexArray(0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void Renderer::render(GUIwrapper& gui) {
+    glBindVertexArray(m_vao_id);
+
 
     //TODO: no loop in render function
 
     glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
     glClear(GL_COLOR_BUFFER_BIT);
     for (auto &g_data : m_graphics_data) {
-
         renderEach(g_data);
-
     }
 
+    gui.render();
     glfwPollEvents();
     int display_w, display_h;
     glfwGetFramebufferSize(m_window, &display_w, &display_h);
@@ -66,7 +89,7 @@ void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
     GraphicsData tmp_graphics_data;
     GLuint vbo;
     GLuint ebo;
-    debug_glCheckError("df");
+    debug_glCheckError("before register");
     glBindVertexArray(m_vao_id);
     glGenBuffers(1, &vbo);
     glGenBuffers(1, &ebo);
@@ -214,6 +237,7 @@ Renderer::Builder &Renderer::Builder::init() {
     }
 
     glfwMakeContextCurrent(m_builder_window);
+    //TODO:
     glfwSwapInterval(1); // Enable vsync
 
     // Initialize OpenGL loader
