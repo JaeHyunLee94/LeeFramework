@@ -31,7 +31,8 @@ public:
         friend class Renderer;
 
         Builder() = default;// TODO: essential parameter
-        Builder &camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up = {0., 0., 1.}, float fovy = 45, float aspect = 1,
+        Builder &
+        camera(glm::vec3 camera_pos, glm::vec3 lookat, glm::vec3 up = {0., 0., 1.}, float fovy = 45, float aspect = 1,
                float z_near = 0.1,
                float z_far = 1000); // TODO: need camera explicitly?
 
@@ -39,8 +40,6 @@ public:
                        const glm::vec3 &spec_color, const glm::vec3 &amb_color);
 
         Builder &shader(const char *vt_shader_path, const char *fg_shader_path);
-
-        Builder &gui();
 
         Builder &init();
 
@@ -53,10 +52,8 @@ public:
         Shader *m_builder_shader = nullptr;
         Camera *m_builder_camera = nullptr;
         Light *m_builder_light = nullptr;
-        GUIwrapper *m_builder_gui = nullptr;
         GLFWwindow *m_builder_window = nullptr;
         GLuint m_builder_vao_id = 0;
-
 
 
     };
@@ -78,11 +75,16 @@ public:
 
     Light &getLight();
 
-    GLuint getVAO() const { return m_vao_id; };
+    GLuint getVAO() const { return m_vao_id;};
 
     void render();
+    void render(GUIwrapper& gui);
 
+
+//    void bindVAO(GLuint vao);
+//    void bindVBO();
     void registerGraphicsEntity(GraphicsData t_graphics_data);
+
     void registerGraphicsEntity(PhysicsEntity *t_physics_entity);
 
 
@@ -92,66 +94,13 @@ private:
 
     explicit Renderer(const Builder &builder)
             : m_window(builder.m_builder_window), m_camera(builder.m_builder_camera), m_light(builder.m_builder_light),
-              m_shader(builder.m_builder_shader), m_vao_id(builder.m_builder_vao_id), m_input_handler(this) {
-
-        //set callback function
-        glfwSetWindowUserPointer(m_window, this);
-        glfwSetKeyCallback(m_window, [](GLFWwindow *window, int key, int scancode, int action, int mode) {
-
-            auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
-
-            if (action == GLFW_PRESS) {
-                self.m_input_handler.setIsKeyPressed(key,true);
-
-            } else if (action == GLFW_RELEASE) {
-                self.m_input_handler.setIsKeyPressed(key,false);
-            }
-
-
-
-        });
-        glfwSetCursorPosCallback(m_window, [](GLFWwindow *window, double xpos, double ypos) {
-
-            auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
-
-            if (glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-
-                self.m_input_handler.setCursorPos(xpos,ypos);
-                self.m_input_handler.setIsLeftMouseClicked(true);
-
-
-            }else if(glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE){
-                self.m_input_handler.setCursorPos(xpos,ypos);
-                self.m_input_handler.setIsClickedFirst(true);
-            }
-
-
-        });
-        glfwSetScrollCallback(m_window,[](GLFWwindow* window,double xoffset,double yoffset){
-
-            auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
-            self.m_input_handler.setScrollOffset(xoffset,yoffset);
-
-        });
-//        glfwSetCursorEnterCallback(m_window,
-//                                   [](GLFWwindow *window, int entered){
-//                                       auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
-//                                       if(!entered) {
-//                                           self.m_input_handler.setIsClickedFirst(true);
-//                                       }
-//
-//                                   });
-//        glfwSetWindowFocusCallback(m_window,[](GLFWwindow *window, int is_focused){
-//            auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
-//            if(!is_focused){
-//                self.m_input_handler.setIsClickedFirst(true);
-//            }
-//
-//        });
-
+              m_shader(builder.m_builder_shader), m_vao_id(builder.m_builder_vao_id){
     };
 
 
+    /*
+     *  made with Builder class
+     */
     Camera *m_camera = nullptr; //TODO: multiple camera
     Shader *m_shader = nullptr;
     Light *m_light = nullptr;
@@ -159,8 +108,6 @@ private:
     glm::vec3 m_default_color;
 
     std::vector<GraphicsData> m_graphics_data;
-    InputHandler m_input_handler;
-
 
     //TODO: better if this list can be mapped
 

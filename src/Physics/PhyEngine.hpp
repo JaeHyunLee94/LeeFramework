@@ -20,7 +20,7 @@ namespace Engine {
         void create();
 
         void addEntity(PhysicsEntity *t_p_entity);
-        void setGravity(glm::vec3& t_gravity){this->m_gravity=t_gravity;};
+        void setGravity(glm::vec3&& t_gravity){this->m_gravity=t_gravity;};
         void setTimeStep(float t_time_step){this->m_time_step = t_time_step;};
 
 

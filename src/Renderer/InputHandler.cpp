@@ -2,8 +2,10 @@
 // Created by Lee on 2021-11-04.
 //
 
+
 #include "InputHandler.hpp"
 #include "Renderer.hpp"
+
 
 void InputHandler::handleInput() {
 
@@ -40,11 +42,11 @@ void InputHandler::handleInput() {
 
     //mouse process
 
-    if (is_left_mouse_pressed) {
-        if(is_click_first) {
+    if (is_right_mouse_pressed) {
+        if(is_right_mouse_click_first) {
             m_cursor_previous_x_pos=m_cursor_x_pos;
             m_cursor_previous_y_pos=m_cursor_y_pos;
-            is_click_first=false;
+            is_right_mouse_click_first=false;
         }
 
         double xoffset = m_cursor_previous_x_pos - m_cursor_x_pos;
@@ -57,7 +59,7 @@ void InputHandler::handleInput() {
 
 
     }else{
-        is_click_first=true;
+        is_right_mouse_click_first=true;
     }
 
 
@@ -71,6 +73,69 @@ void InputHandler::handleInput() {
     camera.setFovy(fovy);
     m_scroll_y_offset=0;
 
+
+}
+
+InputHandler::InputHandler(Renderer *renderer,GLFWwindow* m_window):m_pressed(KEYS,false) {
+    this->m_parent_renderer=renderer;
+    this->m_window=m_window;
+
+
+    //set callback function
+    glfwSetWindowUserPointer(m_window, this);
+    glfwSetKeyCallback(m_window, [](GLFWwindow *window, int key, int scancode, int action, int mode) {
+
+        auto &self = *static_cast<InputHandler *>(glfwGetWindowUserPointer(window));
+
+        if (action == GLFW_PRESS) {
+            self.setIsKeyPressed(key,true);
+
+        } else if (action == GLFW_RELEASE) {
+            self.setIsKeyPressed(key,false);
+        }
+
+
+
+    });
+    glfwSetCursorPosCallback(m_window, [](GLFWwindow *window, double xpos, double ypos) {
+
+        auto &self = *static_cast<InputHandler *>(glfwGetWindowUserPointer(window));
+
+        if (glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+
+            self.setCursorPos(xpos,ypos);
+            self.setIsRightMouseClicked(true);
+
+
+        }else if(glfwGetMouseButton(self.m_window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE){
+            self.setCursorPos(xpos,ypos);
+            self.setIsRightMouseClickedFirst(true);
+        }
+
+
+
+    });
+    glfwSetScrollCallback(m_window,[](GLFWwindow* window,double xoffset,double yoffset){
+
+        auto &self = *static_cast<InputHandler *>(glfwGetWindowUserPointer(window));
+        self.setScrollOffset(xoffset,yoffset);
+
+    });
+//        glfwSetCursorEnterCallback(m_window,
+//                                   [](GLFWwindow *window, int entered){
+//                                       auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
+//                                       if(!entered) {
+//                                           self.m_input_handler.setIsClickedFirst(true);
+//                                       }
+//
+//                                   });
+//        glfwSetWindowFocusCallback(m_window,[](GLFWwindow *window, int is_focused){
+//            auto &self = *static_cast<Renderer *>(glfwGetWindowUserPointer(window));
+//            if(!is_focused){
+//                self.m_input_handler.setIsClickedFirst(true);
+//            }
+//
+//        });
 
 }
 
