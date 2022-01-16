@@ -104,6 +104,8 @@ add_executable(sampleScene2
 target_link_libraries(sampleScene2 ${OPENGL_LIBRARIES})
 target_link_libraries(sampleScene2 glfw )
 target_link_libraries(sampleScene2 assimp)
+target_link_libraries(sampleScene2 ${CMAKE_DL_LIBS})
+
 
 get_target_property(OUT sampleScene2 LINK_LIBRARIES)
 message(STATUS ${OUT})
