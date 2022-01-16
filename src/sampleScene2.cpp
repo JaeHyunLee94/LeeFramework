@@ -74,16 +74,15 @@ int main() {
     world.addEntity(&pe4);
     world.setGravity(glm::vec3(0,0,-0.098));
     world.setTimeStep(1.f/600);
+
+
     glBindVertexArray(renderer->getVAO());
-
-
     //TODO: no loop in render function
     while (!glfwWindowShouldClose(renderer->getWindow())) {
         renderer->render();
         world.stepWorld();
 
     }
-
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

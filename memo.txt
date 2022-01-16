@@ -139,5 +139,10 @@ gravity, collision, resolution, ground 부터 짜자
 system 에 따라 일정한 frame으로 하기
 
 
+1월 10일:
+depth testing, light 재설계
+
+
+
 
 
