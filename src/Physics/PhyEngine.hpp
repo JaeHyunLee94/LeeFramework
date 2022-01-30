@@ -7,6 +7,7 @@
 
 #include "../Geometry/PhysicsEntity.hpp"
 #include "../Renderer/GraphicsEntity.hpp"
+#include "Collision/CollisionManager.hpp"
 
 namespace Engine {
 
@@ -15,13 +16,17 @@ namespace Engine {
 
 
     public:
-        World() = default;
+        World()=default;
 
         void create();
 
         void addEntity(PhysicsEntity *t_p_entity);
         void setGravity(glm::vec3&& t_gravity){this->m_gravity=t_gravity;};
         void setTimeStep(float t_time_step){this->m_time_step = t_time_step;};
+        CollisionManager* createCollisionManager();
+        bool isCollisionManagerCreated(){return m_collision_manager != nullptr;};
+        //void addBoundary();
+
 
 
 
@@ -48,6 +53,7 @@ namespace Engine {
 
         //Physics data
         std::vector<PhysicsEntity *> m_entity_list; //Physical entity
+        CollisionManager* m_collision_manager= nullptr;
         glm::vec3 m_gravity;
         float m_time_step{};
 

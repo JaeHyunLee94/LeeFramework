@@ -43,5 +43,10 @@ void Engine::World::resolveCollision() {
 
 }
 
+CollisionManager *Engine::World::createCollisionManager() {
+    m_collision_manager=new CollisionManager(this);
+    return m_collision_manager;
+}
+
 
 
