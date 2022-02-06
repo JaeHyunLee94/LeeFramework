@@ -35,7 +35,7 @@ public:
 
     GUIwrapper& addWidgetColorEdit3(const char* name,float color[3], ImGuiColorEditFlags flags = 0);
     GUIwrapper& addWidgetSliderFloat(const char* label, float* v, float v_min, float v_max, const char* format = "%.3f", ImGuiSliderFlags flags = 0);
-
+    GUIwrapper& addCheckBox(const char* label,bool* v);
     GUIwrapper& endGroup();
     GUIwrapper& build();
 

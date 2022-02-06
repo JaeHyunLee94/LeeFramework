@@ -76,6 +76,8 @@ public:
     Light &getLight();
 
     float m_background_color[4]{0.45f, 0.55f, 0.60f, 1.00f};
+    float m_default_color_diffuse[4]{0.5,0.2,0.1,1.0};
+    bool m_is_draw_wireframe{false};
 
     GLuint getVAO() const { return m_vao_id;};
 

@@ -21,8 +21,10 @@ struct GraphicsData{
     std::vector<glm::vec3>* m_color;
     glm::mat4 m_model_matrix;
     PhysicsEntity* m_mirror_pe;
-    bool m_has_nomal{false};
+    bool m_has_material{false};
+    bool m_has_normal{false};
     bool m_has_texture{false};
+
 
 
     GLuint m_attrib_num;

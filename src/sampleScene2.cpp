@@ -69,10 +69,14 @@ int main() {
 
     guiwrapper
     .init(renderer->getWindow())
-        .startGroup("start group")
+        .startGroup("Application Profile")
         .addWidgetText("Application average %.3f ms/frame (%.1f FPS)",1000.0f/guiwrapper.getIO().Framerate,guiwrapper.getIO().Framerate)
-        .addWidgetColorEdit3("color Edit pallete",renderer->m_background_color)
+        .endGroup()
+        .startGroup("Render Setting")
+        .addWidgetColorEdit3("BackGround Color",renderer->m_background_color)
+        .addWidgetColorEdit3("Default Entity Color",renderer->m_default_color_diffuse)
         .addWidgetSliderFloat("slider float",&slider,0.1,1)
+        .addCheckBox("Draw Wire Frame",&renderer->m_is_draw_wireframe)
         .endGroup()
     .build();
 
@@ -97,7 +101,6 @@ int main() {
     while (!glfwWindowShouldClose(renderer->getWindow())) {
         renderer->render(guiwrapper); //render with GUI
         handler->handleInput();
-
         world.stepWorld();
 
     }

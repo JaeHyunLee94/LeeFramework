@@ -55,7 +55,7 @@ GUIwrapper &GUIwrapper::startGroup(const char *group_name , bool* p_open , ImGui
 
     auto func = [group_name,p_open,flags]{
 
-        ImGui::Begin("Application Profile",p_open,flags);
+        ImGui::Begin(group_name,p_open,flags);
 
     };
     m_callback_list.push_back(func);
@@ -90,6 +90,15 @@ GUIwrapper &GUIwrapper::addWidgetSliderFloat(const char *label, float *v, float 
 
     auto func = [label,v,v_min,v_max,format,flags] {
         ImGui::SliderFloat(label,v,v_min,v_max,format,flags);
+    };
+    m_callback_list.push_back(func);
+    return (*this);
+
+}
+
+GUIwrapper &GUIwrapper::addCheckBox(const char *label,bool* v) {
+    auto func = [label,v] {
+        ImGui::Checkbox(label,v);
     };
     m_callback_list.push_back(func);
     return (*this);

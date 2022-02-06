@@ -20,7 +20,7 @@ void Renderer::render() {
 
     //TODO: no loop in render function
 
-    glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+    glClearColor(m_background_color[0],m_background_color[1],m_background_color[2],1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     for (auto &g_data : m_graphics_data) {
         renderEach(g_data);
@@ -106,7 +106,7 @@ void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
     //TODO: tmp_graphics_data.m_model_matrix is it really need?
     tmp_graphics_data.m_model_matrix = t_translateMatrix * t_rotateMatrix;
     //TODO: Graphics data add more eg) m_has_normal
-    tmp_graphics_data.m_has_nomal = true;
+    tmp_graphics_data.m_has_normal = true;
     tmp_graphics_data.m_has_texture = false;
     m_graphics_data.push_back(tmp_graphics_data);
 
@@ -154,7 +154,9 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
 
     debug_glCheckError("shader light property error");
     //material property
-    m_shader->setUniform("Kd", glm::vec3(0.3, 0.3, 0.5));
+    if(!t_graphics_data.m_has_material){
+        m_shader->setUniform("Kd",glm::vec3(m_default_color_diffuse[0],m_default_color_diffuse[1],m_default_color_diffuse[2]));
+    }
     m_shader->setUniform("Ka", glm::vec3(0., 0., 0.0));
     m_shader->setUniform("Ks", glm::vec3(0.1, 0.1, 0.1));
     m_shader->setUniform("Ke", glm::vec3(0, 0, 0));
@@ -172,7 +174,19 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
     glBindBuffer(GL_ARRAY_BUFFER, t_graphics_data.m_VBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, t_graphics_data.m_EBO);
 
+    //debug_glCheckError("error before draw call");
+    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+    //wire frame color : black
     glDrawElements(GL_TRIANGLES, t_graphics_data.m_indices->size() * 3, GL_UNSIGNED_INT, (void *) 0);
+
+
+    if(m_is_draw_wireframe){
+        m_shader->setUniform("Kd", glm::vec3(0,0,0));
+        glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+        glDrawElements(GL_TRIANGLES, t_graphics_data.m_indices->size() * 3, GL_UNSIGNED_INT, (void *) 0);
+
+    }
+
 
 }
 

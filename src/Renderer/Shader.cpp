@@ -134,6 +134,14 @@ void Shader::setUniform(const char *t_name, glm::vec3 t_v3) {
     GLint loc= glGetUniformLocation(m_program_id,t_name);
     glUniform3f(loc,t_v3.x,t_v3.y,t_v3.z);
 }
+//void Shader::setUniform(const char *t_name, float* t_v3) {
+//    GLint loc= glGetUniformLocation(m_program_id,t_name);
+//    glUniform3f(loc,t_v3[0],t_v3[1],t_v3[2]);
+//}
+//void Shader::setUniform(const char *t_name, glm::vec3 t_v3) {
+//    GLint loc= glGetUniformLocation(m_program_id,t_name);
+//    glUniform3f(loc,t_v3.x,t_v3.y,t_v3.z);
+//}
 
 void Shader::setUniform(const char *t_name, glm::mat4 t_m4) {
     GLint loc= glGetUniformLocation(m_program_id,t_name);
