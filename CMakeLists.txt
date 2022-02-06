@@ -83,9 +83,9 @@ include_directories(${PROJECT_SOURCE_DIR}/external/assimp/include)
 
 file(GLOB_RECURSE RENDERER_SRC "src/Renderer/*.cpp" "src/Renderer/*.hpp" "src/Renderer/*.h")
 file(GLOB_RECURSE PHYSICS_SRC  "src/Physics/*.cpp" "src/Physics/*.hpp" "src/Physics/*.h"  )
-file(GLOB_RECURSE GEOMETRY_SRC  "src/Geometry/*.cpp" "src/Geometry/*.hpp" )
+file(GLOB_RECURSE IO_SRC  "src/IO/*.cpp" "src/IO/*.hpp" )
 file(GLOB_RECURSE UTIL_SRC  "src/utils/*.cpp" "src/utils/*.hpp" )
-file(GLOB  all_src  "src/Geometry/*.cpp" "src/Geometry/*.hpp" "src/Physics/*.hpp" "src/Physics/*.cpp" "src/utils/*.h" "src/utils/*.cpp")
+file(GLOB  all_src  "src/IO/*.cpp" "src/IO/*.hpp" "src/Physics/*.hpp" "src/Physics/*.cpp" "src/utils/*.h" "src/utils/*.cpp")
 
 ## add target
 #add_executable(leeFramework src/sampleScene.cpp  ${imgui_src} ${glew_src} ${all_src} test/CameraTest.cpp src/Physics/Constraint.cpp src/Physics/Constraint.hpp src/Physics/Collision/CollisionHandler.cpp src/Physics/Collision/CollisionHandler.hpp)
@@ -94,7 +94,7 @@ add_executable(sampleScene2
         ${glew_src}
         ${RENDERER_SRC}
         ${PHYSICS_SRC}
-        ${GEOMETRY_SRC}
+        ${IO_SRC}
         ${UTIL_SRC})
 
 #target_link_libraries(leeFramework ${OPENGL_LIBRARIES})

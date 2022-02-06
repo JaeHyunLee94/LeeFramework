@@ -5,10 +5,10 @@
 
 #include "Renderer/Renderer.hpp"
 #include "Renderer/GUIwrapper.hpp"
-#include "Geometry/PhysicsEntity.hpp"
+#include "Physics/PhysicsEntity.hpp"
 #include <iostream>
 #include "utils/UtilHeader.h"
-#include "Geometry/MeshLoader.hpp"
+#include "IO/MeshLoader.hpp"
 #include "Physics/PhyEngine.hpp"
 
 
@@ -71,7 +71,7 @@ int main() {
     .init(renderer->getWindow())
         .startGroup("start group")
         .addWidgetText("Application average %.3f ms/frame (%.1f FPS)",1000.0f/guiwrapper.getIO().Framerate,guiwrapper.getIO().Framerate)
-        .addWidgetColorEdit3("color Edit pallete",col)
+        .addWidgetColorEdit3("color Edit pallete",renderer->m_background_color)
         .addWidgetSliderFloat("slider float",&slider,0.1,1)
         .endGroup()
     .build();

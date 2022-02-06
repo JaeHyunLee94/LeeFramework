@@ -75,6 +75,8 @@ public:
 
     Light &getLight();
 
+    float m_background_color[4]{0.45f, 0.55f, 0.60f, 1.00f};
+
     GLuint getVAO() const { return m_vao_id;};
 
     void render();
@@ -105,7 +107,7 @@ private:
     Shader *m_shader = nullptr;
     Light *m_light = nullptr;
     GLFWwindow *m_window = nullptr;
-    glm::vec3 m_default_color;
+
 
     std::vector<GraphicsData> m_graphics_data;
 

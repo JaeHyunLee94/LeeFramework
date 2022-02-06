@@ -5,7 +5,7 @@
 #ifndef LEEFRAMEWORK_PHYENGINE_HPP
 #define LEEFRAMEWORK_PHYENGINE_HPP
 
-#include "../Geometry/PhysicsEntity.hpp"
+#include "PhysicsEntity.hpp"
 #include "../Renderer/GraphicsEntity.hpp"
 #include "Collision/CollisionManager.hpp"
 

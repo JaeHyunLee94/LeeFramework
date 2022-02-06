@@ -6,7 +6,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "GraphicsEntity.hpp"
-#include "../Geometry/PhysicsEntity.hpp"
+#include "../Physics/PhysicsEntity.hpp"
 #include "GUIwrapper.hpp"
 
 
@@ -44,7 +44,8 @@ void Renderer::render(GUIwrapper& gui) {
 
     //TODO: no loop in render function
 
-    glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+
+    glClearColor(m_background_color[0],m_background_color[1],m_background_color[2],1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     for (auto &g_data : m_graphics_data) {
         renderEach(g_data);

@@ -3,4 +3,4 @@
 //
 
 #include "GraphicsEntity.hpp"
-#include "../Geometry/PhysicsEntity.hpp"
+#include "../Physics/PhysicsEntity.hpp"

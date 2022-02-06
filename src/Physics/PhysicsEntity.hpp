@@ -9,7 +9,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "Shape.hpp"
+#include "../Renderer/Material/Shape.hpp"
 class PhysicsEntity {
 
     //TODO: refactor to Physics directory

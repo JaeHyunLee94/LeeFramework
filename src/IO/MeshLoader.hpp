@@ -8,8 +8,8 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include "Shape.hpp"
-#include "Material.hpp"
+#include "../Renderer/Material/Shape.hpp"
+#include "../Renderer/Material/Material.hpp"
 #include <vector>
 
 

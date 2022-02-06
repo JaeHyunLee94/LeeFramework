@@ -3,7 +3,7 @@
 //
 
 #include "Shape.hpp"
-#include "../utils/UtilHeader.h"
+#include "../../utils/UtilHeader.h"
 void Shape::computeNormal() {
 
     //TODO: bug fix
