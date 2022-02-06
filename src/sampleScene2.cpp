@@ -19,7 +19,7 @@ int main() {
             -1.0f, -1.0f, 0.0f,
             1.0f, -1.0f, 0.0f,
             0.0f,  1.0f, 0.0f
-            );
+    );
 
     PhysicsEntity pe2;
     pe2.setShapeTriangle(
@@ -64,19 +64,14 @@ int main() {
     auto handler = new InputHandler(renderer,renderer->getWindow());
     GUIwrapper guiwrapper;
 
-    float col[3] ={0.2,0.2,0.2};
-    float slider=0.0;
-
     guiwrapper
     .init(renderer->getWindow())
         .startGroup("Application Profile")
-        .addWidgetText("Application average %.3f ms/frame (%.1f FPS)",1000.0f/guiwrapper.getIO().Framerate,guiwrapper.getIO().Framerate)
-        .endGroup()
+            .addWidgetText("Application average %.3f ms/frame (%.1f FPS)",1000.0f/guiwrapper.getIO().Framerate,guiwrapper.getIO().Framerate).endGroup()
         .startGroup("Render Setting")
-        .addWidgetColorEdit3("BackGround Color",renderer->m_background_color)
-        .addWidgetColorEdit3("Default Entity Color",renderer->m_default_color_diffuse)
-        .addWidgetSliderFloat("slider float",&slider,0.1,1)
-        .addCheckBox("Draw Wire Frame",&renderer->m_is_draw_wireframe)
+            .addWidgetColorEdit3("BackGround Color",renderer->m_background_color)
+            .addWidgetColorEdit3("Default Entity Color",renderer->m_default_color_diffuse)
+            .addCheckBox("Draw Wire Frame",&renderer->m_is_draw_wireframe)
         .endGroup()
     .build();
 
@@ -94,7 +89,6 @@ int main() {
     world.addEntity(&pe4);
     world.setGravity(glm::vec3(0,0,-0.098));
     world.setTimeStep(1.f/600);
-    glBindVertexArray(renderer->getVAO());
 
     glBindVertexArray(renderer->getVAO());
     //TODO: no loop in render function
@@ -102,148 +96,10 @@ int main() {
         renderer->render(guiwrapper); //render with GUI
         handler->handleInput();
         world.stepWorld();
-
     }
-    glBindVertexArray(0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-
+    renderer->terminate();
 }
 
 
-
-//
-//// Include standard headers
-//#include <stdio.h>
-//#include <stdlib.h>
-//
-//// Include GLEW
-//#include <GL/glew.h>
-//
-//// Include GLFW
-//#include <GLFW/glfw3.h>
-//
-//
-//// Include GLM
-//#include <glm/glm.hpp>
-//using namespace glm;
-//
-//#include "Renderer/Renderer.hpp"
-//
-//int main( void )
-//{
-//
-//
-//    Renderer *renderer = Renderer::Builder()
-//            .init() //TODO: window parameter
-//            .camera(glm::vec3(3., 2., 3.),glm::vec3(0))
-//            .shader("../shader/VertexShader.glsl",  "../shader/FragmentShader.glsl")
-//            .light(glm::vec3(5.,5.,5.),
-//                   glm::vec3(0.,1.,1.),
-//                   glm::vec3(1.,1.,1.),
-//                   glm::vec3(1.,1.,1.),
-//                   glm::vec3(0,0,0))
-//            .build();
-//
-//    // Create and compile our GLSL program from the shaders
-//
-//
-//    std::vector<glm::vec3> g_vertex_buffer_data;
-//    g_vertex_buffer_data.emplace_back(-1.0f, -1.0f, 0.0f);
-//    g_vertex_buffer_data.emplace_back(1.0f, -1.0f, 0.0f);
-//    g_vertex_buffer_data.emplace_back(0.0f,  1.0f, 0.0f);
-//
-//
-//
-////    GLuint vertexbuffer;
-////    glGenBuffers(1, &vertexbuffer);
-////    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-////    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*g_pointer->size(), g_pointer->data(), GL_STATIC_DRAW);
-//    GLuint vertexbuffer;
-//    {
-//        GLuint _vertexbuffer;
-//        std::vector<glm::vec3>* g_pointer= &g_vertex_buffer_data;
-//        glGenBuffers(1, &_vertexbuffer);
-//        glBindBuffer(GL_ARRAY_BUFFER, _vertexbuffer);
-//        glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*g_pointer->size(), g_pointer->data(), GL_STATIC_DRAW);
-//        vertexbuffer=_vertexbuffer;
-//    }
-//
-//    //glBindVertexArray(renderer->getVAO());
-//    while (!glfwWindowShouldClose(renderer->getWindow())) {
-//
-//        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
-//        glClear(GL_COLOR_BUFFER_BIT);
-//
-//        glEnableVertexAttribArray(0);
-//        glBindBuffer(GL_ARRAY_BUFFER,vertexbuffer);
-//        glVertexAttribPointer(
-//                0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-//                3,                  // size
-//                GL_FLOAT,           // type
-//                GL_FALSE,           // normalized?
-//                0,                  // stride
-//                (void*)0            // array buffer offset
-//        );
-//        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,t_graphics_data.m_EBO);
-//        //std::cout << &(*t_graphics_data.m_position)[0].x << "\n";
-//
-//
-//        glDrawArrays(GL_TRIANGLES, 0, 3);
-//        //glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
-//
-//        glDisableVertexAttribArray(0);
-//
-//        // Swap buffers
-//        glfwSwapBuffers(renderer->getWindow());
-//        glfwPollEvents();
-//        int display_w, display_h;
-//        glfwGetFramebufferSize(renderer->getWindow(), &display_w, &display_h);
-//        glViewport(0, 0, display_w, display_h);
-//    }
-//
-//
-////    do{
-////
-////        // Clear the screen
-////        glClear( GL_COLOR_BUFFER_BIT );
-////
-////        // Use our shader
-////        renderer->getShader().use();
-////
-////        // 1rst attribute buffer : vertices
-////        glEnableVertexAttribArray(0);
-////        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-////        glVertexAttribPointer(
-////                0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-////                3,                  // size
-////                GL_FLOAT,           // type
-////                GL_FALSE,           // normalized?
-////                0,                  // stride
-////                (void*)0            // array buffer offset
-////        );
-////
-////        // Draw the triangle !
-////        glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
-////
-////        glDisableVertexAttribArray(0);
-////
-////        // Swap buffers
-////        glfwSwapBuffers(renderer->getWindow());
-////        glfwPollEvents();
-////
-////    } // Check if the ESC key was pressed or the window was closed
-////    while( glfwGetKey(renderer->getWindow(), GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-////           glfwWindowShouldClose(renderer->getWindow()) == 0 );
-//
-//    // Cleanup VBO
-//    glDeleteBuffers(1, &vertexbuffer);
-//
-//    // Close OpenGL window and terminate GLFW
-//    glfwTerminate();
-//
-//    return 0;
-//}
 
 

@@ -133,7 +133,7 @@ void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
                  tmp_graphics_data.m_indices->data(), GL_STATIC_DRAW);
     //TODO: indice : 1
 
-    debug_glCheckError("107 line");
+    debug_glCheckError("Register Entity");
 
 
 }
@@ -184,9 +184,16 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
         m_shader->setUniform("Kd", glm::vec3(0,0,0));
         glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
         glDrawElements(GL_TRIANGLES, t_graphics_data.m_indices->size() * 3, GL_UNSIGNED_INT, (void *) 0);
-
     }
 
+
+}
+
+void Renderer::terminate() {
+    glBindVertexArray(0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    delete(this);
 
 }
 

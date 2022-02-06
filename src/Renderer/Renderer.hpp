@@ -60,6 +60,7 @@ public:
 
 
     ~Renderer() {
+        std::cout << "Renderer destructor called\n";
         glfwDestroyWindow(m_window);
         delete m_camera; //TODO: 각 클래스는 클래스가 가진 pointer 형 변수에 대해 delete 의 책임을 가질것!!
         delete m_shader;
@@ -83,6 +84,8 @@ public:
 
     void render();
     void render(GUIwrapper& gui);
+
+    void terminate();
 
 
 //    void bindVAO(GLuint vao);
