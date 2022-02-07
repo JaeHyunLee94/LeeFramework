@@ -147,6 +147,14 @@ system 에 따라 일정한 frame으로 하기
 1월 10일:
 depth testing, light 재설계
 
+2월 7일:
+depth testing 해결:
+. clear depth buffer bit 하기!!
+ TODO:
+ 1. Phong light
+ 2. Mesh Loader
+ 3. collision 처리
+
 
 
 
