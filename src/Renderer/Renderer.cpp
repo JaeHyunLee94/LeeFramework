@@ -46,7 +46,7 @@ void Renderer::render(GUIwrapper& gui) {
 
 
     glClearColor(m_background_color[0],m_background_color[1],m_background_color[2],1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (auto &g_data : m_graphics_data) {
         renderEach(g_data);
     }
@@ -175,6 +175,7 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, t_graphics_data.m_EBO);
 
     //debug_glCheckError("error before draw call");
+
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
     //wire frame color : black
     glDrawElements(GL_TRIANGLES, t_graphics_data.m_indices->size() * 3, GL_UNSIGNED_INT, (void *) 0);
@@ -182,6 +183,8 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
 
     if(m_is_draw_wireframe){
         m_shader->setUniform("Kd", glm::vec3(0,0,0));
+
+
         glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
         glDrawElements(GL_TRIANGLES, t_graphics_data.m_indices->size() * 3, GL_UNSIGNED_INT, (void *) 0);
     }
@@ -275,8 +278,10 @@ Renderer::Builder &Renderer::Builder::init() {
     glBindVertexArray(m_builder_vao_id);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
-//    glEnable(GL_DEPTH_TEST);
-//    glDepthFunc(GL_LESS);
+
+
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LESS);
 
 
     return *this;
