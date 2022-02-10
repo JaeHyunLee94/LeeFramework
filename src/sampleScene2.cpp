@@ -73,6 +73,8 @@ int main() {
             .addWidgetColorEdit3("Default Entity Color",renderer->m_default_color_diffuse)
             .addCheckBox("Draw Wire Frame",&renderer->m_is_draw_wireframe)
         .endGroup()
+        .startGroup("Physics setting")
+        .endGroup()
     .build();
 
     renderer->getCamera().logCameraProperty();

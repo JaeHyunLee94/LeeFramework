@@ -73,6 +73,7 @@ void MeshLoader::load(const char *t_file_path) {
 
 
             }
+            t_mat.m_has_diffuse_texture=true;
 
         } else {
             t_mat.m_has_diffuse_texture = false;
@@ -102,7 +103,4 @@ Shape MeshLoader::getShape() {
 Material MeshLoader::getMaterial() {
     return Material();
 }
-//
-//void MeshLoader::processMesh(aiMesh *mesh, const aiScene *pscene) {
-//
-//}
+

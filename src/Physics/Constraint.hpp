@@ -15,4 +15,14 @@ public:
 };
 
 
+
+class CollisionConstraint:Constraint{
+
+public:
+
+private:
+
+};
+
+
 #endif //ASSIMP_CONSTRAINT_HPP
