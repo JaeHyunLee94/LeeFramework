@@ -80,6 +80,7 @@ int main() {
     renderer->getCamera().logCameraProperty();
     renderer->getLight().logLightProperty();
 
+
     renderer->registerGraphicsEntity(&pe1);
     renderer->registerGraphicsEntity(&pe2);
     renderer->registerGraphicsEntity(&pe3);

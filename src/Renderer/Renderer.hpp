@@ -90,14 +90,14 @@ public:
 
 //    void bindVAO(GLuint vao);
 //    void bindVBO();
-    void registerGraphicsEntity(GraphicsData t_graphics_data);
+    void registerGraphicsEntity(GraphicsEntity t_graphics_data);
 
     void registerGraphicsEntity(PhysicsEntity *t_physics_entity);
 
 
 private:
 
-    void renderEach(GraphicsData &t_graphics_data);
+    void renderEach(GraphicsEntity &t_graphics_data);
 
     explicit Renderer(const Builder &builder)
             : m_window(builder.m_builder_window), m_camera(builder.m_builder_camera), m_light(builder.m_builder_light),
@@ -114,7 +114,7 @@ private:
     GLFWwindow *m_window = nullptr;
 
 
-    std::vector<GraphicsData> m_graphics_data;
+    std::vector<GraphicsEntity> m_graphics_data;
 
     //TODO: better if this list can be mapped
 

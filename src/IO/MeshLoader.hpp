@@ -22,18 +22,12 @@ public:
     //TODO: shape 여러개?
     void load(const char* t_file_path);
     void destroy();
-    Shape getShape();
-    Material getMaterial();
 
     std::vector<Shape> m_loaded_shape;
     std::vector<Material> m_loaded_material;
 
-    bool m_is_shape_loaded=false;
-    bool m_is_material_loaded=false;
-
 
 private:
-//    void processMesh(aiMesh* mesh,const aiScene *pscene);
 
 
 };

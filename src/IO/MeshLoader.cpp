@@ -22,7 +22,7 @@ void MeshLoader::load(const char *t_file_path) {
 
 
     auto rootNode = scene->mRootNode;
-    for (int i = 0; i < rootNode->mNumMeshes; i++) {
+    for (int i = 0; i < scene->mNumMeshes; i++) {
         aiMesh *mesh = scene->mMeshes[i];
 
         Shape t_shape;
@@ -95,12 +95,5 @@ void MeshLoader::destroy() {
 
 }
 
-Shape MeshLoader::getShape() {
-    return Shape();
-}
 
-
-Material MeshLoader::getMaterial() {
-    return Material();
-}
 

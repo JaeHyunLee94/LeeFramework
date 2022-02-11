@@ -77,7 +77,7 @@ GLFWwindow *Renderer::getWindow() {
     return m_window;
 }
 
-void Renderer::registerGraphicsEntity(GraphicsData t_graphics_data) {
+void Renderer::registerGraphicsEntity(GraphicsEntity t_graphics_data) {
     m_graphics_data.push_back(t_graphics_data);
     //TODO: bind buffer
 }
@@ -87,15 +87,11 @@ void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
     auto t_translateMatrix = glm::translate(glm::mat4(1.0f), t_physics_entity->getPos());
     auto t_rotateMatrix = glm::mat4(1);//TODO
 
-    GraphicsData tmp_graphics_data;
-    GLuint vbo;
-    GLuint ebo;
+
+
     debug_glCheckError("before register");
     glBindVertexArray(m_vao_id);
-    glGenBuffers(1, &vbo);
-    glGenBuffers(1, &ebo);
-    tmp_graphics_data.m_VBO = vbo;
-    tmp_graphics_data.m_EBO = ebo;
+    GraphicsEntity tmp_graphics_data;
 
     tmp_graphics_data.m_position = t_physics_entity->getShape()->getShapeVertices();
     tmp_graphics_data.m_uv = t_physics_entity->getShape()->getUV();
@@ -115,9 +111,8 @@ void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
     auto v_normal_size = sizeof(glm::vec3) * tmp_graphics_data.m_normal->size();
 
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    tmp_graphics_data.bind();
     glBufferData(GL_ARRAY_BUFFER, v_position_size + v_uv_size + v_normal_size, nullptr, GL_STATIC_DRAW);
-
     glBufferSubData(GL_ARRAY_BUFFER, 0, v_position_size, tmp_graphics_data.m_position->data());
     glBufferSubData(GL_ARRAY_BUFFER, v_position_size, v_uv_size, tmp_graphics_data.m_uv->data());
     glBufferSubData(GL_ARRAY_BUFFER, v_position_size + v_uv_size, v_normal_size, tmp_graphics_data.m_normal->data());
@@ -128,7 +123,7 @@ void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) (v_position_size + v_uv_size));
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::uvec3) * tmp_graphics_data.m_indices->size(),
                  tmp_graphics_data.m_indices->data(), GL_STATIC_DRAW);
     //TODO: indice : 1
@@ -138,7 +133,7 @@ void Renderer::registerGraphicsEntity(PhysicsEntity *t_physics_entity) {
 
 }
 
-void Renderer::renderEach(GraphicsData &t_graphics_data) {
+void Renderer::renderEach(GraphicsEntity &t_graphics_data) {
 
     //t_graphics_data.logGraphicsData();
     //TODO: glbufferdata 로 넣어주기
@@ -174,17 +169,12 @@ void Renderer::renderEach(GraphicsData &t_graphics_data) {
     glBindBuffer(GL_ARRAY_BUFFER, t_graphics_data.m_VBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, t_graphics_data.m_EBO);
 
-    //debug_glCheckError("error before draw call");
 
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-    //wire frame color : black
     glDrawElements(GL_TRIANGLES, t_graphics_data.m_indices->size() * 3, GL_UNSIGNED_INT, (void *) 0);
-
-
     if(m_is_draw_wireframe){
+        //wire frame color : black
         m_shader->setUniform("Kd", glm::vec3(0,0,0));
-
-
         glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
         glDrawElements(GL_TRIANGLES, t_graphics_data.m_indices->size() * 3, GL_UNSIGNED_INT, (void *) 0);
     }
@@ -273,16 +263,14 @@ Renderer::Builder &Renderer::Builder::init() {
     if (err) {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
     }
-
     glGenVertexArrays(1, &m_builder_vao_id);
     glBindVertexArray(m_builder_vao_id);
+
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
 
-
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_LESS);
-
+    glDepthFunc(GL_LESS);
 
     return *this;
 }

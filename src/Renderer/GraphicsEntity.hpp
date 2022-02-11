@@ -11,7 +11,14 @@
 
 class PhysicsEntity;
 
-struct GraphicsData{
+class GraphicsEntity{
+
+public:
+    GraphicsEntity(){
+        glGenBuffers(1, &m_VBO);
+        glGenBuffers(1, &m_EBO);
+    };
+    void bind();
     GLuint m_VBO;
     GLuint m_EBO;
     std::vector<glm::vec3>* m_position;
@@ -25,13 +32,10 @@ struct GraphicsData{
     bool m_has_normal{false};
     bool m_has_texture{false};
 
-
-
     GLuint m_attrib_num;
-//    void logGraphicsData() const{
-//        printf("vertice number: %d\n",m_position->size());
-//        printf("indices number: %d\n",m_indices->size());
-//    };
+
+private:
+
 };
 
 
