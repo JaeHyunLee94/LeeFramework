@@ -156,6 +156,7 @@ depth testing 해결:
  3. collision 처리
 
 
-
+5월 12일 정말 오랜만이다..
+macos 에서 잘 std 못찾을땐 cmake cache 없애기!!
 
 
