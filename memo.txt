@@ -159,4 +159,7 @@ depth testing 해결:
 5월 12일 정말 오랜만이다..
 macos 에서 잘 std 못찾을땐 cmake cache 없애기!!
 
+5월 22 일:
+mpm 짜느라 바쁘다... 물리 코드만 완성해보자
+
 
