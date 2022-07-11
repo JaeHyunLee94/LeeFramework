@@ -93,7 +93,7 @@ int main() {
     world.setGravity(glm::vec3(0,0,-0.098));
     world.setTimeStep(1.f/600);
 
-    glBindVertexArray(renderer->getVAO());
+    //glBindVertexArray(renderer->getVAO());
     //TODO: no loop in render function
     while (!glfwWindowShouldClose(renderer->getWindow())) {
         renderer->render(guiwrapper); //render with GUI
